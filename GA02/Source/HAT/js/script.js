@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, 'HAT'))); // Adjust this path
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'HAT', 'index.html')); // Adjust this path
+    res.sendFile(path.join(__dirname, 'HAT', 'default.html')); // Adjust this path
 });
 
 app.listen(PORT, () => {
