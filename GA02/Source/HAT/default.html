@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="default.css" />
+    <title>Group Information</title>
+</head>
+<body>
+
+<div class="container">
+    <h1>Group Information</h1>
+    
+    <!-- Group Details -->
+    <div class="group-info">
+        <h2>Group Name: HAT</h2>
+        <p>The name "HAT" is derived from the initials of the group members. Our team belongs to the Web Application Development class of the Faculty of Information Technology at the University of Natural Sciences, Ho Chi Minh City.</p>
+    </div>
+    
+    <!-- Members List -->
+    <div class="members-list">
+        <h3>Meet our awesome team members:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>21120065</td>
+                    <td>Nguyễn Trang Mai Hạnh</td>
+                </tr>
+                <tr>
+                    <td>21120148</td>
+                    <td>Trần Tiến</td>
+                </tr>
+                <tr>
+                    <td>21120192</td>
+                    <td>Nguyễn Thiên An</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Group Photo with Image Map -->
+    <div class="group-photo">
+        <h3>Group Photo</h3>
+        <img src="/images/group_image.png" alt="Group Photo" usemap="#groupmap" id="group-photo">
+        
+        <!-- Image Map for clickable areas -->
+        <map name="groupmap" id="groupmap">
+            <area shape="circle" coords="140,310,90" alt="Member 1" href="members/21120065/21120065.html" title="Mai Hạnh">
+            <area shape="circle" coords="350,390,90" alt="Member 2" href="members/21120192/21120192.html" title="Thiên An">
+            <area shape="circle" coords="605,290,95" alt="Member 3" href="members/21120148/21120148.html" title="Trần Tiến">
+        </map>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 HAT Team. All rights reserved.</p>
+</footer>
+
+<!-- JavaScript to Recalculate Coordinates -->
+<script>
+    function resizeMap() {
+        const img = document.getElementById('group-photo');
+        const map = document.getElementById('groupmap');
+        const originalWidth = 720;  // original image width
+        const originalHeight = 538; // original image height
+
+        const currentWidth = img.clientWidth;
+        const scaleFactor = currentWidth / originalWidth; // scale factor based on width
+
+        // Get all areas
+        const areas = map.getElementsByTagName('area');
+        
+        // Original coordinates for each member
+        const originalCoords = [
+            "140,310,90", // Member 1
+            "350,390,90", // Member 2
+            "605,290,95"  // Member 3
+        ];
+
+        // Loop through each area and update coords
+        for (let i = 0; i < areas.length; i++) {
+            const coords = originalCoords[i].split(',');
+            const scaledCoords = coords.map(coord => Math.round(coord * scaleFactor));  // scale each coordinate
+            areas[i].coords = scaledCoords.join(',');
+        }
+    }
+
+    // Call resizeMap when window is resized or image is loaded
+    window.addEventListener('resize', resizeMap);
+    window.addEventListener('load', resizeMap);
+</script>
+
+</body>
+</html>

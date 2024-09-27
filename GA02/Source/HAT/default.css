@@ -1,0 +1,124 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+.group-info {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.members-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.members-list th, .members-list td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.members-list th {
+    background-color: #ecf0f1;
+}
+
+.group-photo {
+    text-align: center;
+    margin: 20px;
+}
+
+.group-photo img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+area:hover {
+    cursor: pointer;
+}
+
+.return-link {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: none;
+    color: #2980b9;
+}
+
+.return-link:hover {
+    text-decoration: underline;
+}
+
+.member-info {
+    margin: 50px 100px;
+    display: flex;
+    align-items: center; /* Align items vertically center */
+    justify-content: space-between; /* Add space between items */
+}
+
+.member-details {
+    width: 300px; /* Take up available space */
+    padding-right: 20px; /* Space between text and image */
+}
+
+.member-photo {
+    flex: 0 0 150px; /* Fixed width for the image container */
+    text-align: center; /* Center the image */
+}
+
+.member-photo img {
+    max-width: 100%; /* Responsive image */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+p {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+    color: #7f8c8d;
+    font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1, h2, h3 {
+        font-size: 1.5em;
+    }
+
+    .member-info {
+        margin: 10px 15px;
+        display: flex;
+        align-items: center; /* Align items vertically center */
+        justify-content: space-between; /* Add space between items */
+    }
+}
