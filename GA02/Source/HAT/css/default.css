@@ -121,4 +121,9 @@ footer {
         align-items: center; /* Align items vertically center */
         justify-content: space-between; /* Add space between items */
     }
+
+    .member-photo {
+        flex: 0 0 100px; /* Fixed width for the image container */
+        text-align: center; /* Center the image */
+    }
 }
