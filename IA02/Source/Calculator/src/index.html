@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="../dist/output.css">
+    <script src="./js/script.js"></script>
+</head>
+<body class="bg-gray-900 text-white">
+    <div class="p-10 lg:px-48 xl:px-80">
+        <h1 class="text-2xl font-semibold text-center mb-10">Bé tập tính</h1>
+        <form>
+            <div class="grid grid-rows-2 lg:grid-cols-[70%_30%] lg:grid-rows-1 lg:gap-x-10">
+                <!-- Form Section -->
+                <div class="grid grid-rows-4 grid-cols-5 gap-y-5 items-center text-lg">
+                    <label class="col-span-2" for="num1">Số thứ nhất</label>
+                    <input class="rounded-md p-2 text-lg text-black col-span-3" type="text" id="num1">
+
+                    <label class="col-span-2" for="num2">Số thứ hai</label>
+                    <input class="rounded-md p-2 text-lg text-black col-span-3" type="text" id="num2">
+
+                    <label class="col-span-2" for="result">Kết quả</label>
+                    <input class="rounded-md p-2 text-lg text-white col-span-3 bg-gray-800 border border-white" type="text" id="result" disabled>
+
+                    <label class="col-span-2 invisible" for="error-message" id="alert">Thông báo</label>
+                    <p class="text-orange-300 col-span-3" id="error-message"></p>
+                </div>
+
+                <!-- Operations Section -->
+                <div class="grid grid-cols-2 grid-rows-4 text-lg gap-y-5 items-center">
+                    <div class="flex items-center justify-center">
+                        <input class="h-5 w-5" type="radio" id="add" name="operation" value="add">
+                        <label for="add" class="ml-2">Cộng</label>
+                    </div>
+
+                    <div class="flex items-center justify-center">
+                        <input class="h-5 w-5" type="radio" id="subtract" name="operation" value="subtract">
+                        <label for="subtract" class="ml-2">Trừ</label>
+                    </div>
+
+                    <div class="flex items-center justify-center">
+                        <input class="h-5 w-5" type="radio" id="multiply" name="operation" value="multiply">
+                        <label for="multiply" class="ml-2">Nhân</label>
+                    </div>
+
+                    <div class="flex items-center justify-center">
+                        <input class="h-5 w-5" type="radio" id="divide" name="operation" value="divide">
+                        <label for="divide" class="ml-2">Chia</label>
+                    </div>
+
+                    <button class="bg-orange-800 font-semibold rounded-lg col-span-2 flex items-center justify-center hover:bg-orange-600 h-full" 
+                        type="button" onclick="calculate()">Tính
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
