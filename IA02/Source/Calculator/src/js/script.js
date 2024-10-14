@@ -4,9 +4,12 @@ function calculate() {
     const errorMessage = document.getElementById('error-message');
     const operation = document.querySelector('input[name="operation"]:checked');
     const alert = document.getElementById('alert');
+    const resultOutput = document.getElementById('result');
+    
     // Clear previous error messages
     errorMessage.innerHTML = '';
-    alert.style.visibility = 'hidden'
+    alert.style.visibility = 'hidden';
+    resultOutput.value = '';
 
     if (!checkValidInput(num1Input, num2Input, operation)) {
         alert.style.visibility = 'visible'
@@ -36,7 +39,7 @@ function calculate() {
             result = num1 / num2;
             break;
     }
-    document.getElementById('result').value = result; // Display the result
+    resultOutput.value = result; // Display the result
 }
 
 function checkValidInput(num1Input, num2Input, operation) {
@@ -61,5 +64,5 @@ function checkValidInput(num1Input, num2Input, operation) {
 }
 
 function isDecimalNumber(num) {
-    return !isNaN(num) && !isNaN(parseFloat(num)); 
+    return !isNaN(num) && !isNaN(parseFloat(num)) && !num.includes(' '); 
 }
