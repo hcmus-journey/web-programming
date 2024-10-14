@@ -61,9 +61,5 @@ function checkValidInput(num1Input, num2Input, operation) {
 }
 
 function isDecimalNumber(num) {
-    // Use the match() method with a regular expression
-    const isDecimal = num.match(/^-?\d*\.?\d+$/);
- 
-    // Return true if it's a valid decimal number, otherwise return false
-    return isDecimal !== null;
+    return !isNaN(num) && !isNaN(parseFloat(num)); 
 }
