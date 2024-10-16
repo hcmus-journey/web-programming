@@ -1,10 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const notification = document.getElementById('notification');
     const errorMessageNum1 = document.getElementById('error-message-num1');
     const errorMessageNum2 = document.getElementById('error-message-num2');
 
-
-    notification.hidden = false;
     errorMessageNum1.hidden = false;
     errorMessageNum1.innerHTML = 'Vui lòng nhập giá trị vào ô <i>Số thứ nhất</i>';
     
@@ -18,13 +15,15 @@ function calculate() {
     const num2Input = document.getElementById('num2');
     const operation = document.querySelector('input[name="operation"]:checked');
     const resultOutput = document.getElementById('result');
-    
+    const errorMessage = document.getElementById('error-message-radio');
 
     if (!validateOperation(operation) || 
     !validateInput('num1', 'Số thứ nhất') || 
     !validateInput('num2', 'Số thứ hai')) {
         return;
     }
+
+    resultOutput.value = '';
 
     const num1 = parseFloat(num1Input.value);
     const num2 = parseFloat(num2Input.value);
@@ -42,8 +41,8 @@ function calculate() {
             break;
         case 'divide':
             if (num2 === 0) {
-                // errorMessage.innerHTML = 'Không thể chia cho 0';
-                // alert.style.visibility = 'visible'
+                errorMessage.hidden = false;
+                errorMessage.innerHTML = 'Không thể chia cho 0';
                 return;
             }
             result = num1 / num2;
@@ -55,23 +54,22 @@ function calculate() {
 function validateInput(inputId, fieldName) {
     const inputElement = document.getElementById(inputId);
     const errorMessage = document.getElementById('error-message-' + inputId);
-    const notification = document.getElementById('notification');
+    const resultOutput = document.getElementById('result');
 
     if (inputElement.value === "") {
-        notification.hidden = false;
         errorMessage.hidden = false;
         errorMessage.innerHTML = `Vui lòng nhập giá trị vào ô <i>${fieldName}</i>`;
+        resultOutput.value = '';
         return false;
     }
 
     if (!isDecimalNumber(inputElement.value)) {
-        notification.hidden = false;
         errorMessage.hidden = false;
         errorMessage.innerHTML = `Giá trị nhập ở ô <i>${fieldName}</i> không phải là số`;
+        resultOutput.value = '';
         return false;
 
     }
-    notification.hidden = true;
     errorMessage.hidden = true;
     errorMessage.innerHTML = '';
     
@@ -81,15 +79,12 @@ function validateInput(inputId, fieldName) {
 
 function validateOperation(operation) {
     const errorMessage = document.getElementById('error-message-radio');
-    const notification = document.getElementById('notification');
 
     if (!operation) {
-        notification.hidden = false;
         errorMessage.hidden = false;
         errorMessage.innerHTML = 'Vui lòng chọn phép toán';
         return false;
     }
-        notification.hidden = true;
         errorMessage.hidden = true;
     return true;
 }
