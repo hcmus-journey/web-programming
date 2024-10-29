@@ -1,391 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login - Ecommerce Tailwind</title>
 
-    <link
-      rel="shortcut icon"
-      href="../assets/images/favicon/favicon.ico"
-      type="image/x-icon"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - HATShop</title>
 
-    <link rel="stylesheet" href="../css/output.css" />
+  <link rel="shortcut icon" href="../assets/images/favicon/favicon.ico" type="image/x-icon" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
+  <link rel="stylesheet" href="../css/output.css" />
 
-    <link
-      rel="stylesheet"
-      href="../../node_modules/@fortawesome/fontawesome-free/css/all.min.css"
-    />
-  </head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
+    rel="stylesheet" />
 
-  <>
-    <!-- header -->
-    <header class="py-4 shadow-sm bg-white">
-        <div class="container flex items-center justify-between">
-            <a class="font-bold text-xl" href="/src/index.html">
-                <span class="text-primary">HAT</span><span class="text-gray-800">Shop</span>
-            </a>
+  <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
+</head>
 
-            <div class="flex items-center space-x-4">
-                <a href="/src/pages/cart.html" class="text-center text-gray-700 hover:text-primary transition relative">
-                    <div class="text-2xl">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                    </div>
-                    <div class="text-xs leading-3">Cart</div>
-                    <div
-                        class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
-                        2</div>
-                </a>
-                <a href="/src/pages/profile.html" class="text-center text-gray-700 hover:text-primary transition relative">
-                    <div class="text-2xl">
-                        <i class="fa-regular fa-user"></i>
-                    </div>
-                    <div class="text-xs leading-3">Account</div>
-                </a>
-            </div>
-            <div class="text-xs leading-3">Wishlist</div>
-            <div
-              class="absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs"
-            >
-              8
-            </div>
-          </a>
-          <a
-            href="#"
-            class="text-center text-gray-700 hover:text-primary transition relative"
-          >
-            <div class="text-2xl">
-              <i class="fa-solid fa-bag-shopping"></i>
-            </div>
-            <div class="text-xs leading-3">Cart</div>
-            <div
-              class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs"
-            >
-              2
-            </div>
-          </a>
-          <a
-            href="#"
-            class="text-center text-gray-700 hover:text-primary transition relative"
-          >
-            <div class="text-2xl">
-              <i class="fa-regular fa-user"></i>
-            </div>
-            <div class="text-xs leading-3">Account</div>
-          </a>
-        </div>
-      </div>
-    </header>
-    <!-- ./header -->
+<body>
+  <!-- header -->
+  <header class="py-4 shadow-sm bg-white">
+    <div class="container flex items-center justify-between">
+      <a class="font-bold text-xl" href="/src/index.html">
+        <span class="text-primary">HAT</span><span class="text-gray-800">Shop</span>
+      </a>
 
-    <!-- navbar -->
-    <nav class="bg-gray-800">
-        <div class="container flex items-center justify-between lg:py-4">
-            <div class=" w-16 py-4 bg-primary lg:hidden flex justify-center cursor-pointer relative group">
-                <span class="text-white">
-                    <i class="fa-solid fa-bars"></i>
-                </span>
-                <div class="absolute w-32 left-0 top-full bg-white z-10
-                divide-y divide-gray-300 divide-dashed transition duration-300 invisible group-hover:visible">
-                    <a href="/src/index.html" class="block px-4 py-4 text-gray-800 hover:bg-gray-800 hover:text-gray-200">Home</a>
-                    <a href="/src/pages/shop.html" class="block px-4 py-4 text-gray-800 hover:bg-gray-800 hover:text-gray-200">Shop</a>
-                    <a href="/src/pages/about_us.html" class="block px-4 py-4 text-gray-800 hover:bg-gray-800 hover:text-gray-200">About us</a>
-                    <a href="/src/pages/contact_us.html" class="block px-4 py-4 text-gray-700 hover:bg-gray-800 hover:text-gray-200">Contact us</a>
-                </div>
-            </div>
-            <div class="flex items-center justify-end lg:justify-between flex-grow">
-                <div class="hidden lg:flex items-center space-x-6 capitalize">
-                    <a href="/src/index.html" class="text-gray-200 hover:text-white transition">Home</a>
-                    <a href="/src/pages/shop.html" class="text-gray-200 hover:text-white transition">Shop</a>
-                    <a href="/src/pages/about_us.html" class="text-gray-200 hover:text-white transition">About us</a>
-                    <a href="/src/pages/contact_us.html" class="text-gray-200 hover:text-white transition">Contact us</a>
-                </div>
-                <div>
-                    <a href="/src/pages/login.html" class="text-gray-200 hover:text-white transition">Login</a>
-                    <a href="/src/pages/register.html" class="text-gray-200 hover:text-white transition">/Register</a>
-                </div>
-            </div>
-        </div>        
-    </nav>
-    <!-- ./navbar -->
-
-    <!-- login -->
-    <div class="contain py-16">
-      <div class="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
-        <h2 class="text-2xl uppercase font-medium mb-1">Login</h2>
-        <p class="text-gray-600 mb-6 text-sm">welcome back customer</p>
-        <form
-          action="#"
-          method="post"
-          autocomplete="off"
-          onsubmit="return login(event)"
-        >
-          <div class="space-y-2">
-            <div>
-              <label for="email" class="text-gray-600 mb-2 block"
-                >Email address</label
-              >
-              <input
-                type="email"
-                name="email"
-                id="email"
-                class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
-                placeholder="youremail.@domain.com"
-              />
-            </div>
-            <div>
-              <label for="password" class="text-gray-600 mb-2 block"
-                >Password</label
-              >
-              <input
-                type="password"
-                name="password"
-                id="password"
-                class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
-                placeholder="*******"
-              />
-            </div>
+      <div class="flex items-center space-x-4">
+        <a href="/src/pages/cart.html" class="text-center text-gray-700 hover:text-primary transition relative">
+          <div class="text-2xl">
+            <i class="fa-solid fa-bag-shopping"></i>
           </div>
-          <div class="flex items-center justify-between mt-6">
-            <div class="flex items-center">
-              <input
-                type="checkbox"
-                name="remember"
-                id="remember"
-                class="text-primary focus:ring-0 rounded-sm cursor-pointer"
-              />
-              <label for="remember" class="text-gray-600 ml-3 cursor-pointer"
-                >Remember me</label
-              >
-            </div>
-            <a href="#" class="text-primary">Forgot password</a>
-          </div>
-          <div class="mt-4">
-            <button
-              type="submit"
-              class="block w-full py-2 text-center text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium"
-            >
-              Login
-            </button>
-          </div>
-        </form>
-
-        <!-- login with -->
-        <div class="mt-6 flex justify-center relative">
-          <div class="text-gray-600 uppercase px-3 bg-white z-10 relative">
-            Or login with
-          </div>
+          <div class="text-xs leading-3">Cart</div>
           <div
-            class="absolute left-0 top-3 w-full border-b-2 border-gray-200"
-          ></div>
-        </div>
-        <div class="mt-4 flex gap-4">
-          <a
-            href="#"
-            class="w-1/2 py-2 text-center text-white bg-blue-800 rounded uppercase font-roboto font-medium text-sm hover:bg-blue-700"
-            >facebook</a
-          >
-          <a
-            href="#"
-            class="w-1/2 py-2 text-center text-white bg-red-600 rounded uppercase font-roboto font-medium text-sm hover:bg-red-500"
-            >google</a
-          >
-        </div>
-        <!-- ./login with -->
-
-        <p class="mt-4 text-center text-gray-600">
-          Don't have account?
-          <a href="register.html" class="text-primary">Register now</a>
-        </p>
+            class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
+            2</div>
+        </a>
+        <a href="/src/pages/account.html" class="text-center text-gray-700 hover:text-primary transition relative">
+          <div class="text-2xl">
+            <i class="fa-regular fa-user"></i>
+          </div>
+          <div class="text-xs leading-3">Account</div>
+        </a>
       </div>
     </div>
-    <!-- ./login -->
+    </div>
+  </header>
+  <!-- ./header -->
 
-    <!-- footer -->
-    <footer class="bg-white pt-16 pb-12 border-t border-gray-100">
-      <div class="container grid grid-cols-1">
-        <div class="col-span-1 space-y-4">
-          <img src="assets/images/logo.svg" alt="logo" class="w-30" />
-          <div class="mr-2">
-            <p class="text-gray-500">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia,
-              hic?
-            </p>
-          </div>
-          <div class="flex space-x-5">
-            <a href="#" class="text-gray-400 hover:text-gray-500"
-              ><i class="fa-brands fa-facebook-square"></i
-            ></a>
-            <a href="#" class="text-gray-400 hover:text-gray-500"
-              ><i class="fa-brands fa-instagram-square"></i
-            ></a>
-            <a href="#" class="text-gray-400 hover:text-gray-500"
-              ><i class="fa-brands fa-twitter-square"></i
-            ></a>
-            <a href="#" class="text-gray-400 hover:text-gray-500">
-              <i class="fa-brands fa-github-square"></i>
-            </a>
-          </div>
-        </div>
-
-        <div class="col-span-2 grid grid-cols-2 gap-4">
-          <div class="grid grid-cols-2 gap-4 md:gap-8">
-            <div>
-              <h3
-                class="text-sm font-semibold text-gray-400 uppercase tracking-wider"
-              >
-                Solutions
-              </h3>
-              <div class="mt-4 space-y-4">
-                <a
-                  href="#"
-                  class="text-base text-gray-500 hover:text-gray-900 block"
-                  >Marketing</a
-                >
-                <a
-                  href="#"
-                  class="text-base text-gray-500 hover:text-gray-900 block"
-                  >Analitycs</a
-                >
-                <a
-                  href="#"
-                  class="text-base text-gray-500 hover:text-gray-900 block"
-                  >Commerce</a
-                >
-                <a
-                  href="#"
-                  class="text-base text-gray-500 hover:text-gray-900 block"
-                  >Insights</a
-                >
-              </div>
-            </div>
-
-            <div>
-              <h3
-                class="text-sm font-semibold text-gray-400 uppercase tracking-wider"
-              >
-                Support
-              </h3>
-              <div class="mt-4 space-y-4">
-                <a
-                  href="#"
-                  class="text-base text-gray-500 hover:text-gray-900 block"
-                  >Pricing</a
-                >
-                <!-- <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Documentation</a> -->
-                <a
-                  href="#"
-                  class="text-base text-gray-500 hover:text-gray-900 block"
-                  >Guides</a
-                >
-                <a
-                  href="#"
-                  class="text-base text-gray-500 hover:text-gray-900 block"
-                  >API Status</a
-                >
-              </div>
-            </div>
-          </div>
-          <div class="grid grid-cols-2 gap-8">
-            <div>
-              <h3
-                class="text-sm font-semibold text-gray-400 uppercase tracking-wider"
-              >
-                Solutions
-              </h3>
-              <div class="mt-4 space-y-4">
-                <a
-                  href="#"
-                  class="text-base text-gray-500 hover:text-gray-900 block"
-                  >Marketing</a
-                >
-                <a
-                  href="#"
-                  class="text-base text-gray-500 hover:text-gray-900 block"
-                  >Analitycs</a
-                >
-                <a
-                  href="#"
-                  class="text-base text-gray-500 hover:text-gray-900 block"
-                  >Commerce</a
-                >
-                <a
-                  href="#"
-                  class="text-base text-gray-500 hover:text-gray-900 block"
-                  >Insights</a
-                >
-              </div>
-            </div>
-
-            <div>
-              <h3
-                class="text-sm font-semibold text-gray-400 uppercase tracking-wider"
-              >
-                Support
-              </h3>
-              <div class="mt-4 space-y-4">
-                <a
-                  href="#"
-                  class="text-base text-gray-500 hover:text-gray-900 block"
-                  >Pricing</a
-                >
-                <!-- <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Documentation</a> -->
-                <a
-                  href="#"
-                  class="text-base text-gray-500 hover:text-gray-900 block"
-                  >Guides</a
-                >
-                <a
-                  href="#"
-                  class="text-base text-gray-500 hover:text-gray-900 block"
-                  >API Status</a
-                >
-              </div>
-            </div>
-          </div>
+  <!-- navbar -->
+  <nav class="bg-gray-800">
+    <div class="container flex items-center justify-between lg:py-4">
+      <div class=" w-16 py-4 bg-primary lg:hidden flex justify-center cursor-pointer relative group">
+        <span class="text-white">
+          <i class="fa-solid fa-bars"></i>
+        </span>
+        <div class="absolute w-32 left-0 top-full bg-gray-800 z-10
+                divide-y divide-gray-300 divide-dashed transition duration-300 invisible group-hover:visible">
+          <a href="/src/index.html" class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Home</a>
+          <a href="/src/pages/shop.html"
+            class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Shop</a>
+          <a href="/src/pages/about_us.html"
+            class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">About us</a>
+          <a href="/src/pages/contact_us.html"
+            class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Contact us</a>
         </div>
       </div>
-    </footer>
-    <!-- ./footer -->
-
-    <!-- copyright -->
-    <div class="bg-gray-800 py-4">
-      <div class="container flex items-center justify-between">
-        <p class="text-white">&copy; TailCommerce - All Right Reserved</p>
+      <div class="flex items-center justify-end lg:justify-between flex-grow">
+        <div class="hidden lg:flex items-center space-x-6 capitalize">
+          <a href="/src/index.html" class="text-gray-200 hover:text-white transition">Home</a>
+          <a href="/src/pages/shop.html" class="text-gray-200 hover:text-white transition">Shop</a>
+          <a href="/src/pages/about_us.html" class="text-gray-200 hover:text-white transition">About us</a>
+          <a href="/src/pages/contact_us.html" class="text-gray-200 hover:text-white transition">Contact us</a>
+        </div>
         <div>
-          <img src="../assets/images/methods.png" alt="methods" class="h-5" />
+          <a href="/src/pages/login.html" class="text-gray-200 hover:text-white transition">Login</a>
+          <a href="/src/pages/register.html" class="text-gray-200 hover:text-white transition">/Register</a>
         </div>
       </div>
     </div>
-    <!-- ./copyright -->
+  </nav>
+  <!-- ./navbar -->
 
-    <!--script-->
-    <script>
-        function login(event) {
-            event.preventDefault(); // Prevent form from being submitted immediately
-    
-            // Get the value of email and password
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-    
-            // Assuming the correct email and password are registeredUsername and registeredPassword
-            if (email === registeredUsername && password === registeredPassword) {
-                // Redirect to homepage
-                window.location.href = "../index.html";
-            } else {
-                alert("Email hoặc mật khẩu không đúng. Vui lòng thử lại.");
-            }
-        }
-    </script>
-    <!--./script-->
-  </body>
+  <!-- login -->
+  <div class="contain py-16">
+    <div class="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
+      <h2 class="text-2xl uppercase font-medium mb-1">Login</h2>
+      <p class="text-gray-600 mb-6 text-sm">welcome back customer</p>
+      <form action="#" method="post" autocomplete="off" onsubmit="return login(event)">
+        <div class="space-y-2">
+          <div>
+            <label for="email" class="text-gray-600 mb-2 block">Email address</label>
+            <input type="email" name="email" id="email"
+              class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
+              placeholder="youremail.@domain.com" />
+          </div>
+          <div>
+            <label for="password" class="text-gray-600 mb-2 block">Password</label>
+            <input type="password" name="password" id="password"
+              class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
+              placeholder="*******" />
+          </div>
+        </div>
+        <div class="flex items-center justify-between mt-6">
+          <div class="flex items-center">
+            <input type="checkbox" name="remember" id="remember"
+              class="text-primary focus:ring-0 rounded-sm cursor-pointer" />
+            <label for="remember" class="text-gray-600 ml-3 cursor-pointer">Remember me</label>
+          </div>
+          <a href="#" class="text-primary">Forgot password</a>
+        </div>
+        <div class="mt-4">
+          <button type="submit"
+            class="block w-full py-2 text-center text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">
+            Login
+          </button>
+        </div>
+      </form>
+
+      <!-- login with -->
+      <div class="mt-6 flex justify-center relative">
+        <div class="text-gray-600 uppercase px-3 bg-white z-10 relative">
+          Or login with
+        </div>
+        <div class="absolute left-0 top-3 w-full border-b-2 border-gray-200"></div>
+      </div>
+      <div class="mt-4 flex gap-4">
+        <a href="#"
+          class="w-1/2 py-2 text-center text-white bg-blue-800 rounded uppercase font-roboto font-medium text-sm hover:bg-blue-700">facebook</a>
+        <a href="#"
+          class="w-1/2 py-2 text-center text-white bg-red-600 rounded uppercase font-roboto font-medium text-sm hover:bg-red-500">google</a>
+      </div>
+      <!-- ./login with -->
+
+      <p class="mt-4 text-center text-gray-600">
+        Don't have account?
+        <a href="register.html" class="text-primary">Register now</a>
+      </p>
+    </div>
+  </div>
+  <!-- ./login -->
+
+  <!-- footer -->
+  <footer class="bg-gray-50 pt-10 pb-8 border-t border-gray-200">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <!-- Brand Link -->
+        <div>
+          <a class="font-bold text-xl" href="/src/index.html">
+            <span class="text-primary">HAT</span><span class="text-gray-800">Shop</span>
+          </a>
+          <p class="text-gray-500 mt-2">
+            Our curated collection features high-quality furniture, textiles, and unique accents, perfect
+            for personalizing your home.
+          </p>
+        </div>
+        <!-- Stay Connected Section -->
+        <div class="space-y-4">
+          <h2 class="text-lg font-semibold text-gray-700">Stay
+            Connected:</h2>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-500 hover:text-gray-700"><i class="fa-brands fa-facebook-square"></i></a>
+            <a href="#" class="text-gray-500 hover:text-gray-700"><i class="fa-brands fa-instagram-square"></i></a>
+            <a href="#" class="text-gray-500 hover:text-gray-700"><i class="fa-brands fa-twitter-square"></i></a>
+          </div>
+        </div>
+        <!-- Quick Links Section -->
+        <div class="space-y-4">
+          <h2 class="text-lg font-semibold text-gray-700">Quick
+            Links:</h2>
+          <ul class="space-y-2">
+            <li><a href="/src/index.html" class="text-gray-500 hover:text-gray-700">Home</a></li>
+            <li><a href="/src/pages/shop.html" class="text-gray-500 hover:text-gray-700">Shop</a></li>
+            <li><a href="/src/pages/about_us.html" class="text-gray-500 hover:text-gray-700">About Us</a>
+            </li>
+            <li><a href="/src/pages/contact_us.html" class="text-gray-500 hover:text-gray-700">Contact
+                Us</a></li>
+            <li><a href="#" class="text-gray-500 hover:text-gray-700">FAQs</a></li>
+            <li><a href="#" class="text-gray-500 hover:text-gray-700">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Us Section -->
+        <div class="space-y-4">
+          <h2 class="text-lg font-semibold text-gray-700">Contact Us:</h2>
+
+          <div class="flex items-center text-gray-500">
+
+            <p><i class="fa-solid fa-envelope mr-2"></i> <a href="mailto:hat.shop@gmail.com"
+                class="text-gray-600 hover:underline">hat.shop@gmail.com</a></p>
+          </div>
+
+          <div class="flex items-center text-gray-500">
+
+            <p><i class="fa-solid fa-phone mr-2"></i> <span class="text-gray-600">+84 399-222-067</span></p>
+          </div>
+
+          <div class="flex items-center text-gray-500">
+
+            <p><i class="fa-solid fa-map-marker-alt mr-2"></i> <span class="text-gray-600">227 Nguyen Van
+                Cu, Ward 4, District 5, Ho Chi Minh City, Vietnam</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- ./footer -->
+
+  <!-- copyright -->
+  <div class="bg-gray-800 py-4">
+    <div class="container flex items-center justify-between">
+      <p class="text-white">&copy; 2024 HATShop. All rights reserved</p>
+      <div>
+        <img src="/src/assets/images/methods.png" alt="methods" class="h-5">
+      </div>
+    </div>
+  </div>
+  <!-- ./copyright -->
+
+  <!--script-->
+  <script>
+    function login(event) {
+      event.preventDefault(); // Prevent form from being submitted immediately
+
+      // Get the value of email and password
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      // Assuming the correct email and password are registeredUsername and registeredPassword
+      if (email === registeredUsername && password === registeredPassword) {
+        // Redirect to homepage
+        window.location.href = "../index.html";
+      } else {
+        alert("Email hoặc mật khẩu không đúng. Vui lòng thử lại.");
+      }
+    }
+  </script>
+  <!--./script-->
+</body>
+
 </html>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart - Ecommerce Tailwind</title>
+    <title>Cart - HATShop</title>
 
     <link rel="shortcut icon" href="../assets/images/favicon/favicon.ico" type="image/x-icon">
 
@@ -38,7 +38,8 @@
                         class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
                         2</div>
                 </a>
-                <a href="/src/pages/profile.html" class="text-center text-gray-700 hover:text-primary transition relative">
+                <a href="/src/pages/account.html"
+                    class="text-center text-gray-700 hover:text-primary transition relative">
                     <div class="text-2xl">
                         <i class="fa-regular fa-user"></i>
                     </div>
@@ -56,12 +57,16 @@
                 <span class="text-white">
                     <i class="fa-solid fa-bars"></i>
                 </span>
-                <div class="absolute w-32 left-0 top-full bg-white z-10
+                <div class="absolute w-32 left-0 top-full bg-gray-800 z-10
                 divide-y divide-gray-300 divide-dashed transition duration-300 invisible group-hover:visible">
-                    <a href="/src/index.html" class="block px-4 py-4 text-gray-800 hover:bg-gray-800 hover:text-gray-200">Home</a>
-                    <a href="/src/pages/shop.html" class="block px-4 py-4 text-gray-800 hover:bg-gray-800 hover:text-gray-200">Shop</a>
-                    <a href="/src/pages/about_us.html" class="block px-4 py-4 text-gray-800 hover:bg-gray-800 hover:text-gray-200">About us</a>
-                    <a href="/src/pages/contact_us.html" class="block px-4 py-4 text-gray-700 hover:bg-gray-800 hover:text-gray-200">Contact us</a>
+                    <a href="/src/index.html"
+                        class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Home</a>
+                    <a href="/src/pages/shop.html"
+                        class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Shop</a>
+                    <a href="/src/pages/about_us.html"
+                        class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">About us</a>
+                    <a href="/src/pages/contact_us.html"
+                        class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Contact us</a>
                 </div>
             </div>
             <div class="flex items-center justify-end lg:justify-between flex-grow">
@@ -69,14 +74,15 @@
                     <a href="/src/index.html" class="text-gray-200 hover:text-white transition">Home</a>
                     <a href="/src/pages/shop.html" class="text-gray-200 hover:text-white transition">Shop</a>
                     <a href="/src/pages/about_us.html" class="text-gray-200 hover:text-white transition">About us</a>
-                    <a href="/src/pages/contact_us.html" class="text-gray-200 hover:text-white transition">Contact us</a>
+                    <a href="/src/pages/contact_us.html" class="text-gray-200 hover:text-white transition">Contact
+                        us</a>
                 </div>
                 <div>
                     <a href="/src/pages/login.html" class="text-gray-200 hover:text-white transition">Login</a>
                     <a href="/src/pages/register.html" class="text-gray-200 hover:text-white transition">/Register</a>
                 </div>
             </div>
-        </div>        
+        </div>
     </nav>
     <!-- ./navbar -->
 
@@ -155,69 +161,67 @@
     <!-- ./wrapper -->
 
     <!-- footer -->
-    <footer class="bg-white pt-16 pb-12 border-t border-gray-100">
-        <div class="container grid grid-cols-3">
-            <div class="col-span-1 space-y-8 mr-2">
-                <img src="../assets/images/logo.svg" alt="logo" class="w-30">
-                <div class="mr-2">
-                    <p class="text-gray-500">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, hic?
+    <footer class="bg-gray-50 pt-10 pb-8 border-t border-gray-200">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <!-- Brand Link -->
+                <div>
+                    <a class="font-bold text-xl" href="/src/index.html">
+                        <span class="text-primary">HAT</span><span class="text-gray-800">Shop</span>
+                    </a>
+                    <p class="text-gray-500 mt-2">
+                        Our curated collection features high-quality furniture, textiles, and unique accents, perfect
+                        for personalizing your home.
                     </p>
                 </div>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-gray-500"><i
-                            class="fa-brands fa-facebook-square"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-gray-500"><i
-                            class="fa-brands fa-instagram-square"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-gray-500"><i
-                            class="fa-brands fa-twitter-square"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-gray-500">
-                        <i class="fa-brands fa-github-square"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-span-2 grid grid-cols-2 gap-8">
-                <div class="grid grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Solutions</h3>
-                        <div class="mt-4 space-y-4">
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Marketing</a>
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Analitycs</a>
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Commerce</a>
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Insights</a>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Support</h3>
-                        <div class="mt-4 space-y-4">
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Pricing</a>
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Documentation</a>
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Guides</a>
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">API Status</a>
-                        </div>
+                <!-- Stay Connected Section -->
+                <div class="space-y-4">
+                    <h2 class="text-lg font-semibold text-gray-700">Stay
+                        Connected:</h2>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-500 hover:text-gray-700"><i
+                                class="fa-brands fa-facebook-square"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-gray-700"><i
+                                class="fa-brands fa-instagram-square"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-gray-700"><i
+                                class="fa-brands fa-twitter-square"></i></a>
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Solutions</h3>
-                        <div class="mt-4 space-y-4">
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Marketing</a>
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Analitycs</a>
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Commerce</a>
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Insights</a>
-                        </div>
+                <!-- Quick Links Section -->
+                <div class="space-y-4">
+                    <h2 class="text-lg font-semibold text-gray-700">Quick
+                        Links:</h2>
+                    <ul class="space-y-2">
+                        <li><a href="/src/index.html" class="text-gray-500 hover:text-gray-700">Home</a></li>
+                        <li><a href="/src/pages/shop.html" class="text-gray-500 hover:text-gray-700">Shop</a></li>
+                        <li><a href="/src/pages/about_us.html" class="text-gray-500 hover:text-gray-700">About Us</a>
+                        </li>
+                        <li><a href="/src/pages/contact_us.html" class="text-gray-500 hover:text-gray-700">Contact
+                                Us</a></li>
+                        <li><a href="#" class="text-gray-500 hover:text-gray-700">FAQs</a></li>
+                        <li><a href="#" class="text-gray-500 hover:text-gray-700">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Us Section -->
+                <div class="space-y-4">
+                    <h2 class="text-lg font-semibold text-gray-700">Contact Us:</h2>
+
+                    <div class="flex items-center text-gray-500">
+
+                        <p><i class="fa-solid fa-envelope mr-2"></i> <a href="mailto:hat.shop@gmail.com"
+                                class="text-gray-600 hover:underline">hat.shop@gmail.com</a></p>
                     </div>
 
-                    <div>
-                        <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Support</h3>
-                        <div class="mt-4 space-y-4">
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Pricing</a>
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Documentation</a>
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">Guides</a>
-                            <a href="#" class="text-base text-gray-500 hover:text-gray-900 block">API Status</a>
-                        </div>
+                    <div class="flex items-center text-gray-500">
+
+                        <p><i class="fa-solid fa-phone mr-2"></i> <span class="text-gray-600">+84 399-222-067</span></p>
+                    </div>
+
+                    <div class="flex items-center text-gray-500">
+
+                        <p><i class="fa-solid fa-map-marker-alt mr-2"></i> <span class="text-gray-600">227 Nguyen Van
+                                Cu, Ward 4, District 5, Ho Chi Minh City, Vietnam</span></p>
                     </div>
                 </div>
             </div>
@@ -228,9 +232,9 @@
     <!-- copyright -->
     <div class="bg-gray-800 py-4">
         <div class="container flex items-center justify-between">
-            <p class="text-white">&copy; TailCommerce - All Right Reserved</p>
+            <p class="text-white">&copy; 2024 HATShop. All rights reserved</p>
             <div>
-                <img src="../assets/images/methods.png" alt="methods" class="h-5">
+                <img src="/src/assets/images/methods.png" alt="methods" class="h-5">
             </div>
         </div>
     </div>
