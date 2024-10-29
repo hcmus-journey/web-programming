@@ -914,6 +914,10 @@ h1,
   top: 0px;
 }
 
+.top-2{
+  top: 0.5rem;
+}
+
 .top-2\.5{
   top: 0.625rem;
 }
@@ -926,18 +930,6 @@ h1,
   top: 100%;
 }
 
-.left-3{
-  left: 0.75rem;
-}
-
-.top-2{
-  top: 0.5rem;
-}
-
-.left-2{
-  left: 0.5rem;
-}
-
 .z-10{
   z-index: 10;
 }
@@ -948,10 +940,6 @@ h1,
 
 .col-span-1{
   grid-column: span 1 / span 1;
-}
-
-.col-span-2{
-  grid-column: span 2 / span 2;
 }
 
 .col-span-3{
@@ -1248,10 +1236,6 @@ h1,
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.grid-cols-3{
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
 .grid-cols-4{
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
@@ -1328,12 +1312,6 @@ h1,
   margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
-.space-x-5 > :not([hidden]) ~ :not([hidden]){
-  --tw-space-x-reverse: 0;
-  margin-right: calc(1.25rem * var(--tw-space-x-reverse));
-  margin-left: calc(1.25rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
 .space-x-6 > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;
   margin-right: calc(1.5rem * var(--tw-space-x-reverse));
@@ -1362,12 +1340,6 @@ h1,
   --tw-space-y-reverse: 0;
   margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
-}
-
-.space-y-8 > :not([hidden]) ~ :not([hidden]){
-  --tw-space-y-reverse: 0;
-  margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(2rem * var(--tw-space-y-reverse));
 }
 
 .divide-x > :not([hidden]) ~ :not([hidden]){
@@ -1457,11 +1429,6 @@ h1,
 
 .border-t{
   border-top-width: 1px;
-}
-
-.border-gray-100{
-  --tw-border-opacity: 1;
-  border-color: rgb(243 244 246 / var(--tw-border-opacity));
 }
 
 .border-gray-200{
@@ -1641,10 +1608,6 @@ h1,
   padding-bottom: 1.75rem;
 }
 
-.pb-12{
-  padding-bottom: 3rem;
-}
-
 .pb-16{
   padding-bottom: 4rem;
 }
@@ -1683,10 +1646,6 @@ h1,
 
 .pt-10{
   padding-top: 2.5rem;
-}
-
-.pt-16{
-  padding-top: 4rem;
 }
 
 .pt-4{
@@ -1775,10 +1734,6 @@ h1,
 
 .leading-3{
   line-height: .75rem;
-}
-
-.tracking-wider{
-  letter-spacing: 0.05em;
 }
 
 .text-gray-200{
@@ -2031,14 +1986,6 @@ h1,
 
   .md\:grid-cols-4{
     grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .md\:justify-end{
-    justify-content: flex-end;
-  }
-
-  .md\:gap-8{
-    gap: 2rem;
   }
 }
 
