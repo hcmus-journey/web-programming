@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - Ecommerce Tailwind</title>
+
+    <link
+      rel="shortcut icon"
+      href="../assets/images/favicon/favicon.ico"
+      type="image/x-icon"
+    />
+
+    <link rel="stylesheet" href="../css/output.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="../../node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <!-- header -->
+    <header class="py-4 shadow-sm bg-white">
+        <div class="container flex items-center justify-between">
+            <a class="font-bold text-xl" href="/src/index.html">
+                <span class="text-primary">HAT</span><span class="text-gray-800">Shop</span>
+            </a>
+
+            <div class="flex items-center space-x-4">
+                <a href="/src/pages/cart.html" class="text-center text-gray-700 hover:text-primary transition relative">
+                    <div class="text-2xl">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                    <div class="text-xs leading-3">Cart</div>
+                    <div
+                        class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
+                        2</div>
+                </a>
+                <a href="/src/pages/profile.html" class="text-center text-gray-700 hover:text-primary transition relative">
+                    <div class="text-2xl">
+                        <i class="fa-regular fa-user"></i>
+                    </div>
+                    <div class="text-xs leading-3">Account</div>
+                </a>
+            </div>
+            <div class="text-xs leading-3">Wishlist</div>
+            <div
+              class="absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs"
+            >
+              8
+            </div>
+          </a>
+          <a
+            href="#"
+            class="text-center text-gray-700 hover:text-primary transition relative"
+          >
+            <div class="text-2xl">
+              <i class="fa-solid fa-bag-shopping"></i>
+            </div>
+            <div class="text-xs leading-3">Cart</div>
+            <div
+              class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs"
+            >
+              2
+            </div>
+          </a>
+          <a
+            href="#"
+            class="text-center text-gray-700 hover:text-primary transition relative"
+          >
+            <div class="text-2xl">
+              <i class="fa-regular fa-user"></i>
+            </div>
+            <div class="text-xs leading-3">Account</div>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- ./header -->
+
+    <!-- navbar -->
+    <nav class="bg-gray-800">
+        <div class="container flex items-center justify-between lg:py-4">
+            <div class=" w-16 py-4 bg-primary lg:hidden flex justify-center cursor-pointer relative group">
+                <span class="text-white">
+                    <i class="fa-solid fa-bars"></i>
+                </span>
+                <div class="absolute w-32 left-0 top-full bg-white z-10
+                divide-y divide-gray-300 divide-dashed transition duration-300 invisible group-hover:visible">
+                    <a href="/src/index.html" class="block px-4 py-4 text-gray-800 hover:bg-gray-800 hover:text-gray-200">Home</a>
+                    <a href="/src/pages/shop.html" class="block px-4 py-4 text-gray-800 hover:bg-gray-800 hover:text-gray-200">Shop</a>
+                    <a href="/src/pages/about_us.html" class="block px-4 py-4 text-gray-800 hover:bg-gray-800 hover:text-gray-200">About us</a>
+                    <a href="/src/pages/contact_us.html" class="block px-4 py-4 text-gray-700 hover:bg-gray-800 hover:text-gray-200">Contact us</a>
+                </div>
+            </div>
+            <div class="flex items-center justify-end lg:justify-between flex-grow">
+                <div class="hidden lg:flex items-center space-x-6 capitalize">
+                    <a href="/src/index.html" class="text-gray-200 hover:text-white transition">Home</a>
+                    <a href="/src/pages/shop.html" class="text-gray-200 hover:text-white transition">Shop</a>
+                    <a href="/src/pages/about_us.html" class="text-gray-200 hover:text-white transition">About us</a>
+                    <a href="/src/pages/contact_us.html" class="text-gray-200 hover:text-white transition">Contact us</a>
+                </div>
+                <div>
+                    <a href="/src/pages/login.html" class="text-gray-200 hover:text-white transition">Login</a>
+                    <a href="/src/pages/register.html" class="text-gray-200 hover:text-white transition">/Register</a>
+                </div>
+            </div>
+        </div>        
+    </nav>
+    <!-- ./navbar -->
+
+
+    <!-- login -->
+    <div class="contain py-16">
+      About us
+    </div>
+    <!-- ./login -->
+
+    <!-- footer -->
+    <footer class="bg-white pt-16 pb-12 border-t border-gray-100">
+      <div class="container grid grid-cols-3">
+        <div class="col-span-1 space-y-8 mr-2">
+          <img src="../assets/images/logo.svg" alt="logo" class="w-30" />
+          <div class="mr-2">
+            <p class="text-gray-500">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia,
+              hic?
+            </p>
+          </div>
+          <div class="flex space-x-6">
+            <a href="#" class="text-gray-400 hover:text-gray-500"
+              ><i class="fa-brands fa-facebook-square"></i
+            ></a>
+            <a href="#" class="text-gray-400 hover:text-gray-500"
+              ><i class="fa-brands fa-instagram-square"></i
+            ></a>
+            <a href="#" class="text-gray-400 hover:text-gray-500"
+              ><i class="fa-brands fa-twitter-square"></i
+            ></a>
+            <a href="#" class="text-gray-400 hover:text-gray-500">
+              <i class="fa-brands fa-github-square"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-span-2 grid grid-cols-2 gap-8">
+          <div class="grid grid-cols-2 gap-8">
+            <div>
+              <h3
+                class="text-sm font-semibold text-gray-400 uppercase tracking-wider"
+              >
+                Solutions
+              </h3>
+              <div class="mt-4 space-y-4">
+                <a
+                  href="#"
+                  class="text-base text-gray-500 hover:text-gray-900 block"
+                  >Marketing</a
+                >
+                <a
+                  href="#"
+                  class="text-base text-gray-500 hover:text-gray-900 block"
+                  >Analitycs</a
+                >
+                <a
+                  href="#"
+                  class="text-base text-gray-500 hover:text-gray-900 block"
+                  >Commerce</a
+                >
+                <a
+                  href="#"
+                  class="text-base text-gray-500 hover:text-gray-900 block"
+                  >Insights</a
+                >
+              </div>
+            </div>
+
+            <div>
+              <h3
+                class="text-sm font-semibold text-gray-400 uppercase tracking-wider"
+              >
+                Support
+              </h3>
+              <div class="mt-4 space-y-4">
+                <a
+                  href="#"
+                  class="text-base text-gray-500 hover:text-gray-900 block"
+                  >Pricing</a
+                >
+                <a
+                  href="#"
+                  class="text-base text-gray-500 hover:text-gray-900 block"
+                  >Documentation</a
+                >
+                <a
+                  href="#"
+                  class="text-base text-gray-500 hover:text-gray-900 block"
+                  >Guides</a
+                >
+                <a
+                  href="#"
+                  class="text-base text-gray-500 hover:text-gray-900 block"
+                  >API Status</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-8">
+            <div>
+              <h3
+                class="text-sm font-semibold text-gray-400 uppercase tracking-wider"
+              >
+                Solutions
+              </h3>
+              <div class="mt-4 space-y-4">
+                <a
+                  href="#"
+                  class="text-base text-gray-500 hover:text-gray-900 block"
+                  >Marketing</a
+                >
+                <a
+                  href="#"
+                  class="text-base text-gray-500 hover:text-gray-900 block"
+                  >Analitycs</a
+                >
+                <a
+                  href="#"
+                  class="text-base text-gray-500 hover:text-gray-900 block"
+                  >Commerce</a
+                >
+                <a
+                  href="#"
+                  class="text-base text-gray-500 hover:text-gray-900 block"
+                  >Insights</a
+                >
+              </div>
+            </div>
+
+            <div>
+              <h3
+                class="text-sm font-semibold text-gray-400 uppercase tracking-wider"
+              >
+                Support
+              </h3>
+              <div class="mt-4 space-y-4">
+                <a
+                  href="#"
+                  class="text-base text-gray-500 hover:text-gray-900 block"
+                  >Pricing</a
+                >
+                <a
+                  href="#"
+                  class="text-base text-gray-500 hover:text-gray-900 block"
+                  >Documentation</a
+                >
+                <a
+                  href="#"
+                  class="text-base text-gray-500 hover:text-gray-900 block"
+                  >Guides</a
+                >
+                <a
+                  href="#"
+                  class="text-base text-gray-500 hover:text-gray-900 block"
+                  >API Status</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- ./footer -->
+
+    <!-- copyright -->
+    <div class="bg-gray-800 py-4">
+      <div class="container flex items-center justify-between">
+        <p class="text-white">&copy; TailCommerce - All Right Reserved</p>
+        <div>
+          <img src="../assets/images/methods.png" alt="methods" class="h-5" />
+        </div>
+      </div>
+    </div>
+    <!-- ./copyright -->
+
+    <!--script-->
+    <script>
+      // Global variables to store user data
+      let registeredUsername = "";
+      let registeredPassword = "";
+
+      // Register user function
+      function registerUser() {
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const confirm = document.getElementById("confirm").value;
+        const agreement = document.getElementById("agreement").checked;
+
+        // Simple validation
+        if (!name || !email || !password || !confirm) {
+          alert("Please fill all fields.");
+          return;
+        }
+        if (password !== confirm) {
+          alert("Passwords do not match.");
+          return;
+        }
+        if (!agreement) {
+          alert("Please agree to the terms and conditions.");
+          return;
+        }
+
+        // Save the data in global variables
+        registeredUsername = email;
+        registeredPassword = password;
+        alert("Account registered successfully!");
+
+        // Navigate to login page
+        window.location.href = "login.html";
+      }
+    </script>
+    <!--./script-->
+  </body>
+</html>
