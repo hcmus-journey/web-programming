@@ -89,7 +89,7 @@
     <div class="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
       <h2 class="text-2xl uppercase font-medium mb-1">Login</h2>
       <p class="text-gray-600 mb-6 text-sm">welcome back customer</p>
-      <form action="#" method="post" autocomplete="off" onsubmit="return login(event)">
+      <form action="#" method="post" autocomplete="off" onsubmit="loginUser(); return false;">
         <div class="space-y-2">
           <div>
             <label for="email" class="text-gray-600 mb-2 block">Email address</label>
@@ -221,23 +221,7 @@
   <!-- ./copyright -->
 
   <!--script-->
-  <script>
-    function login(event) {
-      event.preventDefault(); // Prevent form from being submitted immediately
-
-      // Get the value of email and password
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-
-      // Assuming the correct email and password are registeredUsername and registeredPassword
-      if (email === registeredUsername && password === registeredPassword) {
-        // Redirect to homepage
-        window.location.href = "../index.html";
-      } else {
-        alert("Email hoặc mật khẩu không đúng. Vui lòng thử lại.");
-      }
-    }
-  </script>
+  <script src="../js/auth.js"></script>
   <!--./script-->
 </body>
 
