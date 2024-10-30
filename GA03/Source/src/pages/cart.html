@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - HATShop</title>
+
+    <link rel="shortcut icon" href="../assets/images/favicon/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="../css/output.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+</head>
+
+<body>
+    <!-- header -->
+    <header class="py-4 shadow-sm bg-white">
+        <div class="container flex items-center justify-between">
+            <a class="font-bold text-xl" href="HOME_PAGE_URL">
+                <span class="text-primary">HAT</span><span class="text-gray-800">Shop</span>
+            </a>
+
+            <div class="flex items-center space-x-4">
+                <a href="CART_PAGE_URL" class="text-center text-gray-700 hover:text-primary transition relative">
+                    <div class="text-2xl">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                    <div class="text-xs leading-3">Cart</div>
+                    <div
+                        class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
+                        2</div>
+                </a>
+                <a href="ACCOUNT_PAGE_URL" class="text-center text-gray-700 hover:text-primary transition relative">
+                    <div class="text-2xl">
+                        <i class="fa-regular fa-user"></i>
+                    </div>
+                    <div class="text-xs leading-3">Account</div>
+                </a>
+            </div>
+        </div>
+    </header>
+    <!-- ./header -->
+
+    <!-- navbar -->
+    <nav class="bg-gray-800">
+        <div class="container flex items-center justify-between lg:py-4">
+            <div class=" w-16 py-4 bg-primary lg:hidden flex justify-center cursor-pointer relative group">
+                <span class="text-white">
+                    <i class="fa-solid fa-bars"></i>
+                </span>
+                <div class="absolute w-32 left-0 top-full bg-gray-800 z-10
+                divide-y divide-gray-300 divide-dashed transition duration-300 invisible group-hover:visible">
+                    <a href="HOME_PAGE_URL"
+                        class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Home</a>
+                    <a href="SHOP_PAGE_URL"
+                        class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Shop</a>
+                    <a href="ABOUT_US_PAGE_URL"
+                        class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">About
+                        us</a>
+                    <a href="CONTACT_PAGE_URL"
+                        class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Contact
+                        us</a>
+                </div>
+            </div>
+            <div class="flex items-center justify-end lg:justify-between flex-grow">
+                <div class="hidden lg:flex items-center space-x-6 capitalize">
+                    <a href="HOME_PAGE_URL" class="text-gray-200 hover:text-white transition">Home</a>
+                    <a href="SHOP_PAGE_URL" class="text-gray-200 hover:text-white transition">Shop</a>
+                    <a href="ABOUT_US_PAGE_URL" class="text-gray-200 hover:text-white transition">About
+                        us</a>
+                    <a href="CONTACT_PAGE_URL" class="text-gray-200 hover:text-white transition">Contact
+                        us</a>
+                </div>
+                <div>
+                    <a href="LOGIN_PAGE_URL" class="text-gray-200 hover:text-white transition">Login</a>
+                    <a href="REGISTER_PAGE_URL" class="text-gray-200 hover:text-white transition">/Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- ./navbar -->
+
+
+    <!-- breadcrumb -->
+    <div class="container py-4 flex items-center gap-3">
+        <a href="HOME_PAGE_URL" class="text-primary text-base">
+            <i class="fa-solid fa-house"></i>
+        </a>
+        <span class="text-sm text-gray-400">
+            <i class="fa-solid fa-chevron-right"></i>
+        </span>
+        <p class="text-gray-600 font-medium">Cart</p>
+    </div>
+    <!-- ./breadcrumb -->
+
+    <!-- wrapper -->
+    <div class="container grid grid-cols-12 items-start gap-6 pt-4 pb-16">
+        <!-- Cart -->
+        <div class="col-span-9 space-y-4">
+            <div class="flex items-center justify-between border gap-6 p-4 border-gray-200 rounded">
+                <div class="w-28">
+                    <img src="../assets/images/products/product6.jpg" alt="product 6" class="w-full">
+                </div>
+                <div class="w-1/3">
+                    <h2 class="text-gray-800 text-xl font-medium uppercase">Italian L shape</h2>
+                    <p class="text-gray-500 text-sm">Availability: <span class="text-green-600">In Stock</span></p>
+                </div>
+                <div class="flex border border-gray-300 text-gray-600 divide-x divide-gray-300 w-max">
+                    <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">-</div>
+                    <div class="h-8 w-8 text-base flex items-center justify-center">1</div>
+                    <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">+</div>
+                </div>
+                <div class="text-primary text-lg font-semibold">$320.00</div>
+                <div class="text-gray-600 cursor-pointer hover:text-primary">
+                    <i class="fa-solid fa-trash"></i>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between border gap-6 p-4 border-gray-200 rounded">
+                <div class="w-28">
+                    <img src="../assets/images/products/product5.jpg" alt="product 6" class="w-full">
+                </div>
+                <div class="w-1/3">
+                    <h2 class="text-gray-800 text-xl font-medium uppercase">Dining Table</h2>
+                    <p class="text-gray-500 text-sm">Availability: <span class="text-green-600">In Stock</span></p>
+                </div>
+                <div class="flex border border-gray-300 text-gray-600 divide-x divide-gray-300 w-max">
+                    <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">-</div>
+                    <div class="h-8 w-8 text-base flex items-center justify-center">1</div>
+                    <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">+</div>
+                </div>
+                <div class="text-primary text-lg font-semibold">$320.00</div>
+
+                <div class="text-gray-600 cursor-pointer hover:text-primary">
+                    <i class="fa-solid fa-trash"></i>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between border gap-6 p-4 border-gray-200 rounded">
+                <div class="w-28">
+                    <img src="../assets/images/products/product10.jpg" alt="product 6" class="w-full">
+                </div>
+                <div class="w-1/3">
+                    <h2 class="text-gray-800 text-xl font-medium uppercase">Sofa</h2>
+                    <p class="text-gray-500 text-sm">Availability: <span class="text-red-600">Out of Stock</span></p>
+                </div>
+                <div class="flex border border-gray-300 text-gray-600 divide-x divide-gray-300 w-max">
+                    <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">-</div>
+                    <div class="h-8 w-8 text-base flex items-center justify-center">1</div>
+                    <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">+</div>
+                </div>
+                <div class="text-primary text-lg font-semibold">$320.00</div>
+
+                <div class="text-gray-600 cursor-pointer hover:text-primary">
+                    <i class="fa-solid fa-trash"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- total -->
+        <div class="col-span-3 ">
+            <div class="border border-gray-200 rounded p-6 space-y-3">
+                <h2 class="text-gray-800 text-lg font-semibold">Cart Total</h2>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Subtotal:</span>
+                    <span class="text-primary font-semibold">$960.00</span>
+                </div>
+                <div class="flex justify-between border-b pb-3">
+                    <span class="text-gray-600">Shipping:</span>
+                    <span class="text-primary font-semibold">$20.00</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600 font-semibold">Total:</span>
+                    <span class="text-primary font-semibold">$980.00</span>
+                </div>
+            </div>
+            <a href="CHECKOUT_PAGE_URL" class="block w-full py-3 px-4 mt-6 text-center text-white
+                bg-primary border border-primary rounded-md hover:bg-transparent
+                hover:text-primary transition font-medium">Checkout</a>
+
+        </div>
+        <!-- ./total -->
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- footer -->
+    <footer class="bg-gray-50 pt-10 pb-8 border-t border-gray-200 mt-20">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <!-- Brand Link -->
+                <div>
+                    <a class="font-bold text-xl" href="/src/index.html">
+                        <span class="text-primary">HAT</span><span class="text-gray-800">Shop</span>
+                    </a>
+                    <p class="text-gray-500 mt-2">
+                        Our curated collection features high-quality furniture, textiles, and unique accents, perfect
+                        for personalizing your home.
+                    </p>
+                </div>
+                <!-- Stay Connected Section -->
+                <div class="space-y-4">
+                    <h2 class="text-lg font-semibold text-gray-700">Stay
+                        Connected:</h2>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-500 hover:text-gray-700"><i
+                                class="fa-brands fa-facebook-square"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-gray-700"><i
+                                class="fa-brands fa-instagram-square"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-gray-700"><i
+                                class="fa-brands fa-twitter-square"></i></a>
+                    </div>
+                </div>
+                <!-- Quick Links Section -->
+                <div class="space-y-4">
+                    <h2 class="text-lg font-semibold text-gray-700">Quick
+                        Links:</h2>
+                    <ul class="space-y-2">
+                        <li><a href="HOME_PAGE_URL" class="text-gray-500 hover:text-gray-700">Home</a></li>
+                        <li><a href="SHOP_PAGE_URL" class="text-gray-500 hover:text-gray-700">Shop</a></li>
+                        <li><a href="ABOUT_US_PAGE_URL" class="text-gray-500 hover:text-gray-700">About Us</a>
+                        </li>
+                        <li><a href="CONTACT_PAGE_URL" class="text-gray-500 hover:text-gray-700">Contact
+                                Us</a></li>
+                        <li><a href="PRIVACY_PAGE_URL" class="text-gray-500 hover:text-gray-700">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Us Section -->
+                <div class="space-y-4">
+                    <h2 class="text-lg font-semibold text-gray-700">Contact Us:</h2>
+
+                    <div class="flex items-center text-gray-500">
+
+                        <p><i class="fa-solid fa-envelope mr-2"></i> <a href="mailto:hat.shop@gmail.com"
+                                class="hatshopEmail text-gray-600 hover:underline"
+                                id="hatshopEmail">hat.shop@gmail.com</a></p>
+                    </div>
+
+                    <div class="flex items-center text-gray-500">
+
+                        <p><i class="fa-solid fa-phone mr-2"></i> <span class="hatshopPhoneNumber text-gray-600"></span>
+                        </p>
+                    </div>
+
+                    <div class="flex items-center text-gray-500">
+
+                        <p><i class="fa-solid fa-map-marker-alt mr-2"></i> <span
+                                class="hatshopAddress text-gray-600">227 Nguyen Van
+                                Cu, Ward 4, District 5, Ho Chi Minh City, Vietnam</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ./footer -->
+
+    <!-- copyright -->
+    <div class="bg-gray-800 py-4">
+        <div class="container flex items-center justify-between">
+            <p class="text-white">&copy; 2024 HATShop. All rights reserved</p>
+            <div>
+                <img src="/src/assets/images/methods.png" alt="methods" class="h-5">
+            </div>
+        </div>
+    </div>
+    <!-- ./copyright -->
+    <script type="module" src="/src/js/utils/URL.js"></script>
+</body>
+
+</html>
