@@ -24,12 +24,12 @@
     <!-- header -->
     <header class="py-4 shadow-sm bg-white">
         <div class="container flex items-center justify-between">
-            <a class="font-bold text-xl" href="/src/index.html">
+            <a class="font-bold text-xl" href="HOME_PAGE_URL">
                 <span class="text-primary">HAT</span><span class="text-gray-800">Shop</span>
             </a>
 
             <div class="flex items-center space-x-4">
-                <a href="/src/pages/cart.html" class="text-center text-gray-700 hover:text-primary transition relative">
+                <a href="CART_PAGE_URL" class="text-center text-gray-700 hover:text-primary transition relative">
                     <div class="text-2xl">
                         <i class="fa-solid fa-bag-shopping"></i>
                     </div>
@@ -38,8 +38,7 @@
                         class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
                         2</div>
                 </a>
-                <a href="/src/pages/account.html"
-                    class="text-center text-gray-700 hover:text-primary transition relative">
+                <a href="ACCOUNT_PAGE_URL" class="text-center text-gray-700 hover:text-primary transition relative">
                     <div class="text-2xl">
                         <i class="fa-regular fa-user"></i>
                     </div>
@@ -59,27 +58,30 @@
                 </span>
                 <div class="absolute w-32 left-0 top-full bg-gray-800 z-10
                 divide-y divide-gray-300 divide-dashed transition duration-300 invisible group-hover:visible">
-                    <a href="/src/index.html"
+                    <a href="HOME_PAGE_URL"
                         class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Home</a>
-                    <a href="/src/pages/shop.html"
+                    <a href="SHOP_PAGE_URL"
                         class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Shop</a>
-                    <a href="/src/pages/about_us.html"
-                        class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">About us</a>
-                    <a href="/src/pages/contact_us.html"
-                        class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Contact us</a>
+                    <a href="ABOUT_US_PAGE_URL"
+                        class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">About
+                        us</a>
+                    <a href="CONTACT_PAGE_URL"
+                        class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Contact
+                        us</a>
                 </div>
             </div>
             <div class="flex items-center justify-end lg:justify-between flex-grow">
                 <div class="hidden lg:flex items-center space-x-6 capitalize">
-                    <a href="/src/index.html" class="text-gray-200 hover:text-white transition">Home</a>
-                    <a href="/src/pages/shop.html" class="text-gray-200 hover:text-white transition">Shop</a>
-                    <a href="/src/pages/about_us.html" class="text-gray-200 hover:text-white transition">About us</a>
-                    <a href="/src/pages/contact_us.html" class="text-gray-200 hover:text-white transition">Contact
+                    <a href="HOME_PAGE_URL" class="text-gray-200 hover:text-white transition">Home</a>
+                    <a href="SHOP_PAGE_URL" class="text-gray-200 hover:text-white transition">Shop</a>
+                    <a href="ABOUT_US_PAGE_URL" class="text-gray-200 hover:text-white transition">About
+                        us</a>
+                    <a href="CONTACT_PAGE_URL" class="text-gray-200 hover:text-white transition">Contact
                         us</a>
                 </div>
                 <div>
-                    <a href="/src/pages/login.html" class="text-gray-200 hover:text-white transition">Login</a>
-                    <a href="/src/pages/register.html" class="text-gray-200 hover:text-white transition">/Register</a>
+                    <a href="LOGIN_PAGE_URL" class="text-gray-200 hover:text-white transition">Login</a>
+                    <a href="REGISTER_PAGE_URL" class="text-gray-200 hover:text-white transition">/Register</a>
                 </div>
             </div>
         </div>
@@ -89,7 +91,7 @@
 
     <!-- breadcrumb -->
     <div class="container py-4 flex items-center gap-3">
-        <a href="../index.html" class="text-primary text-base">
+        <a href="HOME_PAGE_URL" class="text-primary text-base">
             <i class="fa-solid fa-house"></i>
         </a>
         <span class="text-sm text-gray-400">
@@ -111,11 +113,12 @@
                     <h2 class="text-gray-800 text-xl font-medium uppercase">Italian L shape</h2>
                     <p class="text-gray-500 text-sm">Availability: <span class="text-green-600">In Stock</span></p>
                 </div>
+                <div class="flex border border-gray-300 text-gray-600 divide-x divide-gray-300 w-max">
+                    <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">-</div>
+                    <div class="h-8 w-8 text-base flex items-center justify-center">1</div>
+                    <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">+</div>
+                </div>
                 <div class="text-primary text-lg font-semibold">$320.00</div>
-                <a href="#"
-                    class="px-6 py-2 text-center text-sm text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">add
-                    to cart</a>
-
                 <div class="text-gray-600 cursor-pointer hover:text-primary">
                     <i class="fa-solid fa-trash"></i>
                 </div>
@@ -129,10 +132,12 @@
                     <h2 class="text-gray-800 text-xl font-medium uppercase">Dining Table</h2>
                     <p class="text-gray-500 text-sm">Availability: <span class="text-green-600">In Stock</span></p>
                 </div>
+                <div class="flex border border-gray-300 text-gray-600 divide-x divide-gray-300 w-max">
+                    <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">-</div>
+                    <div class="h-8 w-8 text-base flex items-center justify-center">1</div>
+                    <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">+</div>
+                </div>
                 <div class="text-primary text-lg font-semibold">$320.00</div>
-                <a href="#"
-                    class="px-6 py-2 text-center text-sm text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">add
-                    to cart</a>
 
                 <div class="text-gray-600 cursor-pointer hover:text-primary">
                     <i class="fa-solid fa-trash"></i>
@@ -147,16 +152,43 @@
                     <h2 class="text-gray-800 text-xl font-medium uppercase">Sofa</h2>
                     <p class="text-gray-500 text-sm">Availability: <span class="text-red-600">Out of Stock</span></p>
                 </div>
+                <div class="flex border border-gray-300 text-gray-600 divide-x divide-gray-300 w-max">
+                    <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">-</div>
+                    <div class="h-8 w-8 text-base flex items-center justify-center">1</div>
+                    <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">+</div>
+                </div>
                 <div class="text-primary text-lg font-semibold">$320.00</div>
-                <a href="#"
-                    class="cursor-not-allowed px-6 py-2 text-center text-sm text-white bg-red-400 border border-red-400 rounded transition uppercase font-roboto font-medium">add
-                    to cart</a>
 
                 <div class="text-gray-600 cursor-pointer hover:text-primary">
                     <i class="fa-solid fa-trash"></i>
                 </div>
             </div>
         </div>
+
+        <!-- total -->
+        <div class="col-span-3 ">
+            <div class="border border-gray-200 rounded p-6 space-y-3">
+                <h2 class="text-gray-800 text-lg font-semibold">Cart Total</h2>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Subtotal:</span>
+                    <span class="text-primary font-semibold">$960.00</span>
+                </div>
+                <div class="flex justify-between border-b pb-3">
+                    <span class="text-gray-600">Shipping:</span>
+                    <span class="text-primary font-semibold">$20.00</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600 font-semibold">Total:</span>
+                    <span class="text-primary font-semibold">$980.00</span>
+                </div>
+            </div>
+            <a href="CHECKOUT_PAGE_URL"
+                class="block w-full py-3 px-4 mt-6 text-center text-white
+                bg-primary border border-primary rounded-md hover:bg-transparent
+                hover:text-primary transition font-medium">Checkout</a>
+
+        </div>
+        <!-- ./total -->
     </div>
     <!-- ./wrapper -->
 
@@ -192,14 +224,13 @@
                     <h2 class="text-lg font-semibold text-gray-700">Quick
                         Links:</h2>
                     <ul class="space-y-2">
-                        <li><a href="/src/index.html" class="text-gray-500 hover:text-gray-700">Home</a></li>
-                        <li><a href="/src/pages/shop.html" class="text-gray-500 hover:text-gray-700">Shop</a></li>
-                        <li><a href="/src/pages/about_us.html" class="text-gray-500 hover:text-gray-700">About Us</a>
+                        <li><a href="HOME_PAGE_URL" class="text-gray-500 hover:text-gray-700">Home</a></li>
+                        <li><a href="SHOP_PAGE_URL" class="text-gray-500 hover:text-gray-700">Shop</a></li>
+                        <li><a href="ABOUT_US_PAGE_URL" class="text-gray-500 hover:text-gray-700">About Us</a>
                         </li>
-                        <li><a href="/src/pages/contact_us.html" class="text-gray-500 hover:text-gray-700">Contact
+                        <li><a href="CONTACT_PAGE_URL" class="text-gray-500 hover:text-gray-700">Contact
                                 Us</a></li>
-                        <li><a href="#" class="text-gray-500 hover:text-gray-700">FAQs</a></li>
-                        <li><a href="#" class="text-gray-500 hover:text-gray-700">Privacy Policy</a></li>
+                        <li><a href="PRIVACY_PAGE_URL" class="text-gray-500 hover:text-gray-700">Privacy Policy</a></li>
                     </ul>
                 </div>
 
@@ -239,7 +270,7 @@
         </div>
     </div>
     <!-- ./copyright -->
-
+    <script type="module" src="/src/js/utils/URL.js"></script>
 </body>
 
 </html>
