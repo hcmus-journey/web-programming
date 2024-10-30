@@ -1,10 +1,10 @@
 {
   "scripts": {
     "install-deps": "npm install",
-    "build": "npx tailwindcss -i ./src/css/input.css -o ./src/css/output.css --watch"
+    "build": "npx tailwindcss -i ./src/css/input.css -o ./src/css/output.css --minify"
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.5.9", 
+    "@tailwindcss/forms": "^0.5.9",
     "tailwindcss": "^3.4.14"
   },
   "dependencies": {
@@ -15,4 +15,3 @@
   "version": "1.0.0",
   "type": "module"
 }
-
