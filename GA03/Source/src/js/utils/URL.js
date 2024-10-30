@@ -1,4 +1,4 @@
-import PageURL from '../constant/PageURL.js';
+import { PageURL, HATShopInfo } from '../constant/constants.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Create a map to associate href values with their corresponding PAGE_URLs
@@ -19,14 +19,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Select all <a> tags in the document that have an href attribute
     const links = document.querySelectorAll('a[href]');
-    
+
     // Loop through each <a> tag
     links.forEach(link => {
         const currentHref = link.getAttribute('href');
-        
+
         // Check if currentHref exists in the hrefMap
         if (hrefMap[currentHref]) {
             link.href = hrefMap[currentHref]; // Update the href attribute with the new URL
         }
     });
+
+    const hatshopEmails = document.querySelectorAll('.hatshopEmail');
+    if (hatshopEmails) {
+        hatshopEmails.forEach(email => {
+            email.href = `mailto:${HATShopInfo.HATSHOP_EMAIL}`;
+            email.textContent = HATShopInfo.HATSHOP_EMAIL;
+        });
+    }
+
+    const hatshopPhoneNumbers = document.querySelectorAll('.hatshopPhoneNumber');
+    if (hatshopPhoneNumbers) {
+        hatshopPhoneNumbers.forEach(phone => {
+            phone.textContent = HATShopInfo.HATSHOP_PHONE_NUMBER;
+        });
+    }
+
+    const hatshopAddresses = document.querySelectorAll('.hatshopAddress');
+    if (hatshopAddresses) {
+        hatshopAddresses.forEach(address => {
+            address.textContent = HATShopInfo.HATSHOP_ADDRESS;
+        });
+    }
+
+    const hatshopFanpages = document.querySelectorAll('.hatshopFanpage'); 
+    if (hatshopFanpages) {
+        hatshopFanpages.forEach(fanpage => {
+            fanpage.href = HATShopInfo.HATSHOP_FANPAGE;
+            fanpage.textContent = HATShopInfo.HATSHOP_FANPAGE;
+        });
+    }
+
+
 });

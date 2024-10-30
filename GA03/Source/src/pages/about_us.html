@@ -127,16 +127,62 @@
     </div>
   </div>
 
-  <script>
-    function changeImage(imagePath) {
-      document.getElementById('mainImage').src = imagePath;
-    }
-  </script>
-  <!-- ./about_us -->
+  <div class="container py-16 px-10 bg-gray-50 rounded-lg">
+    <section class="mb-12">
+      <h2 class="text-xl font-semibold mb-4 text-gray-800">Company Overview</h2>
+      <p class="text-gray-600 leading-relaxed">
+        HATShop is your go-to destination for stylish home decor that transforms any space into a warm and inviting
+        environment.
+        Our curated collection features high-quality furniture, textiles, and unique accents, perfect for personalizing
+        your home.
+      </p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-semibold mb-4 text-gray-800">Mission</h2>
+      <p class="text-gray-600 leading-relaxed">
+        At HATShop, our mission is to provide exceptional home decor solutions that inspire creativity and comfort in
+        every space.
+        We aim to enhance the beauty of homes with carefully selected products that cater to diverse styles and
+        preferences.
+      </p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-xl font-semibold mb-4 text-gray-800">Vision</h2>
+      <p class="text-gray-600 leading-relaxed">
+        Our vision is to be a leading home decor retailer recognized for our unique offerings, outstanding customer
+        service,
+        and commitment to quality. We strive to create a community where every individual can find decor that truly
+        reflects their style and personality.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-6 text-gray-800 ">Team Members</h2>
+      <div class="flex justify-evenly gap-6">
+        <div class="flex flex-col items-center">
+          <img src="/src/assets/images/team_members/21120148_image.jpg" alt="Tran Tien"
+            class="w-40 h-40 rounded-full object-cover shadow-lg transform transition duration-300 hover:scale-125">
+          <p class="mt-2 text-center text-gray-700">Tran Tien</p>
+        </div>
+        <div class="flex flex-col items-center">
+          <img src="/src/assets/images/team_members/21120192_image.jpg" alt="Thien An"
+            class="w-40 h-40 rounded-full object-cover shadow-lg transform transition duration-300 hover:scale-125">
+          <p class="mt-2 text-center text-gray-700 ">Thien An</p>
+        </div>
+        <div class="flex flex-col items-center">
+          <img src="/src/assets/images/team_members/21120065_image.jpg" alt="Mai Hanh"
+            class="w-40 h-40 rounded-full object-cover shadow-lg transform transition duration-300 hover:scale-125">
+          <p class="mt-2 text-center text-gray-700 ">Mai Hanh</p>
+        </div>
+      </div>
+    </section>
+  </div>
 
 
   <!-- footer -->
-  <footer class="bg-gray-50 pt-10 pb-8 border-t border-gray-200">
+  <footer class="bg-gray-50 pt-10 pb-8 border-t border-gray-200 mt-20">
     <div class="container mx-auto">
       <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
         <!-- Brand Link -->
@@ -181,17 +227,17 @@
           <div class="flex items-center text-gray-500">
 
             <p><i class="fa-solid fa-envelope mr-2"></i> <a href="mailto:hat.shop@gmail.com"
-                class="text-gray-600 hover:underline">hat.shop@gmail.com</a></p>
+                class="hatshopEmail text-gray-600 hover:underline" id="hatshopEmail">hat.shop@gmail.com</a></p>
           </div>
 
           <div class="flex items-center text-gray-500">
 
-            <p><i class="fa-solid fa-phone mr-2"></i> <span class="text-gray-600">+84 399-222-067</span></p>
+            <p><i class="fa-solid fa-phone mr-2"></i> <span class="hatshopPhoneNumber text-gray-600"></span></p>
           </div>
 
           <div class="flex items-center text-gray-500">
 
-            <p><i class="fa-solid fa-map-marker-alt mr-2"></i> <span class="text-gray-600">227 Nguyen Van
+            <p><i class="fa-solid fa-map-marker-alt mr-2"></i> <span class="hatshopAddress text-gray-600">227 Nguyen Van
                 Cu, Ward 4, District 5, Ho Chi Minh City, Vietnam</span></p>
           </div>
         </div>
