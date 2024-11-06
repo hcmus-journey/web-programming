@@ -1,11 +1,9 @@
-const PageURL = require("../public/js/constant/constants");
-
 // About Us
 exports.showAboutUs = (req, res) => {
-  res.render(PageURL.ABOUT_US_PAGE_URL);
+  res.render("about_us");
 };
 
 // Contact Us
 exports.showContactUs = (req, res) => {
-  res.render(PageURL.CONTACT_PAGE_URL);
+  res.render("contact_us");
 };

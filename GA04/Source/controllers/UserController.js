@@ -1,28 +1,51 @@
-const PageURL = require("../public/js/constant/constants");
+// Global variable to store user data temporarily (no real database)
+const users = {};
 
 // Register
 exports.showRegisterPage = (req, res) => {
-  res.render(PageURL.REGISTER_PAGE_URL);
+  res.render("user/register");
 };
 
-exports.registerUser = (req, res) => {
+exports.registerUser = async (req, res) => {
   const { username, password } = req.body;
-  // Thêm logic để lưu thông tin người dùng vào database ở đây
 
-  // Sau khi đăng ký thành công, chuyển hướng đến trang đăng nhập
-  res.redirect("/user/login");
+  try {
+    // Logic lưu người dùng vào database
+    const newUser = new users({ username, password });
+    await newUser.save();
+
+    // Redirect sau khi đăng ký thành công
+    res.redirect("user/login"); // Chuyển hướng đến trang login
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred during registration.");
+  }
 };
 
 // Login
 exports.showLoginPage = (req, res) => {
-  res.render(PageURL.LOGIN_PAGE_URL);
+  res.render("user/login");
 };
 
-exports.loginUser = (req, res) => {
+exports.loginUser = async (req, res) => {
   const { username, password } = req.body;
-  // Thêm logic xử lý đăng nhập ở đây
 
-  // Chuyển hướng đến bảng điều khiển nếu đăng nhập thành công
-  res.redirect("/dashboard");
-  // Nếu thông tin đăng nhập không hợp lệ, render lại trang login và thêm thông báo lỗi
+  try {
+    // Find the user in the global users object
+    const user = users[username];
+
+    if (!user) {
+      return res.status(400).send("User not found.");
+    }
+
+    // Check if the entered password matches
+    if (password === user.password) {
+      res.redirect("/dashboard"); // Redirect to dashboard if login is successful
+    } else {
+      res.status(400).send("Invalid password.");
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred during login.");
+  }
 };
