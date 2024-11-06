@@ -1,18 +1,13 @@
-// routes/userRoutes.js
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const userController = require('../controllers/userController');
+const userController = require("../controllers/UserController");
 
-// Route GET để hiển thị trang đăng ký
-router.get('/register', userController.showRegisterPage);
+// Register
+router.get("/user/register", userController.showRegisterPage);
+router.post("/user/register", userController.registerUser);
 
-// Route POST để xử lý form đăng ký
-router.post('/register', userController.registerUser);
-
-// Route GET để hiển thị trang đăng nhập
-router.get('/login', userController.showLoginPage);
-
-// Route POST để xử lý form đăng nhập
-router.post('/login', userController.loginUser);
+// Login
+router.get("/user/login", userController.showLoginPage);
+router.post("/user/login", userController.loginUser);
 
 module.exports = router;

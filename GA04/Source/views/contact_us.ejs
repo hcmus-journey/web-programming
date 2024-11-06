@@ -24,7 +24,7 @@
   <!-- header -->
   <header class="py-4 shadow-sm bg-white">
     <div class="container flex items-center justify-between">
-      <a class="font-bold text-xl" href="HOME_PAGE_URL">
+      <a class="font-bold text-xl" href="/">
         <span class="text-primary">HAT</span><span class="text-gray-800">Shop</span>
       </a>
 
@@ -58,24 +58,24 @@
         </span>
         <div id="mobile-menu"
           class="absolute w-32 left-0 top-full bg-gray-800 z-10 divide-y divide-gray-300 divide-dashed transition duration-300 hidden">
-          <a href="HOME_PAGE_URL" class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Home</a>
+          <a href="/" class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Home</a>
           <a href="SHOP_PAGE_URL" class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Shop</a>
-          <a href="ABOUT_US_PAGE_URL" class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">About
+          <a href="<%=ABOUT_US_PAGE_URL%>" class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">About
             us</a>
-          <a href="CONTACT_PAGE_URL" class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Contact
+          <a href=" <%=CONTACT_PAGE_URL%>" class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Contact
             us</a>
         </div>
       </div>
       <div class="flex items-center justify-end lg:justify-between flex-grow">
         <div class="hidden lg:flex items-center space-x-6 capitalize">
-          <a href="HOME_PAGE_URL" class="text-gray-200 hover:text-white transition">Home</a>
+          <a href="/" class="text-gray-200 hover:text-white transition">Home</a>
           <a href="SHOP_PAGE_URL" class="text-gray-200 hover:text-white transition">Shop</a>
-          <a href="ABOUT_US_PAGE_URL" class="text-gray-200 hover:text-white transition">About us</a>
-          <a href="CONTACT_PAGE_URL" class="text-gray-200 hover:text-white transition">Contact us</a>
+          <a href="<%=ABOUT_US_PAGE_URL%>" class="text-gray-200 hover:text-white transition">About us</a>
+          <a href=" <%=CONTACT_PAGE_URL%>" class="text-gray-200 hover:text-white transition">Contact us</a>
         </div>
         <div>
-          <a href="LOGIN_PAGE_URL" class="text-gray-200 hover:text-white transition">Login</a>
-          <a href="REGISTER_PAGE_URL" class="text-gray-200 hover:text-white transition">/Register</a>
+          <a href="<%=LOGIN_PAGE_URL%>" class="text-gray-200 hover:text-white transition">Login</a>
+          <a href="<%=REGISTER_PAGE_URL%>" class="text-gray-200 hover:text-white transition">/Register</a>
         </div>
       </div>
     </div>
@@ -178,7 +178,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
         <!-- Brand Link -->
         <div>
-          <a class="font-bold text-xl" href="/src/index.html">
+          <a class="font-bold text-xl" href="/">
             <span class="text-primary">HAT</span><span class="text-gray-800">Shop</span>
           </a>
           <p class="text-gray-500 mt-2">
@@ -201,11 +201,11 @@
           <h2 class="text-lg font-semibold text-gray-700">Quick
             Links:</h2>
           <ul class="space-y-2">
-            <li><a href="HOME_PAGE_URL" class="text-gray-500 hover:text-gray-700">Home</a></li>
+            <li><a href="/" class="text-gray-500 hover:text-gray-700">Home</a></li>
             <li><a href="SHOP_PAGE_URL" class="text-gray-500 hover:text-gray-700">Shop</a></li>
-            <li><a href="ABOUT_US_PAGE_URL" class="text-gray-500 hover:text-gray-700">About Us</a>
+            <li><a href="<%=ABOUT_US_PAGE_URL%>" class="text-gray-500 hover:text-gray-700">About Us</a>
             </li>
-            <li><a href="CONTACT_PAGE_URL" class="text-gray-500 hover:text-gray-700">Contact
+            <li><a href=" <%=CONTACT_PAGE_URL%>" class="text-gray-500 hover:text-gray-700">Contact
                 Us</a></li>
             <li><a href="PRIVACY_PAGE_URL" class="text-gray-500 hover:text-gray-700">Privacy Policy</a></li>
           </ul>

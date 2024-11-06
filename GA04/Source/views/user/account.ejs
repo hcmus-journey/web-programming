@@ -1,316 +1,443 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Account - HATShop</title>
 
-    <link rel="shortcut icon" href="../assets/images/favicon/favicon.ico" type="image/x-icon">
-
-    <link rel="stylesheet" href="../css/output.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
-        rel="stylesheet">
+      rel="shortcut icon"
+      href="../assets/images/favicon/favicon.ico"
+      type="image/x-icon"
+    />
 
-    <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.min.css">
-</head>
+    <link rel="stylesheet" href="../css/output.css" />
 
-<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="../../node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+    />
+  </head>
+
+  <body>
     <!-- header -->
     <header class="py-4 shadow-sm bg-white">
-        <div class="container flex items-center justify-between">
-            <a class="font-bold text-xl" href="HOME_PAGE_URL">
-                <span class="text-primary">HAT</span><span class="text-gray-800">Shop</span>
-            </a>
+      <div class="container flex items-center justify-between">
+        <a class="font-bold text-xl" href="HOME_PAGE_URL">
+          <span class="text-primary">HAT</span
+          ><span class="text-gray-800">Shop</span>
+        </a>
 
-            <div class="flex items-center space-x-4">
-                <a href="CART_PAGE_URL" class="text-center text-gray-700 hover:text-primary transition relative">
-                    <div class="text-2xl">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                    </div>
-                    <div class="text-xs leading-3">Cart</div>
-                    <div
-                        class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
-                        2</div>
-                </a>
-                <a href="ACCOUNT_PAGE_URL" class="text-center text-gray-700 hover:text-primary transition relative">
-                    <div class="text-2xl">
-                        <i class="fa-regular fa-user"></i>
-                    </div>
-                    <div class="text-xs leading-3">Account</div>
-                </a>
+        <div class="flex items-center space-x-4">
+          <a
+            href="CART_PAGE_URL"
+            class="text-center text-gray-700 hover:text-primary transition relative"
+          >
+            <div class="text-2xl">
+              <i class="fa-solid fa-bag-shopping"></i>
             </div>
+            <div class="text-xs leading-3">Cart</div>
+            <div
+              class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs"
+            >
+              2
+            </div>
+          </a>
+          <a
+            href="ACCOUNT_PAGE_URL"
+            class="text-center text-gray-700 hover:text-primary transition relative"
+          >
+            <div class="text-2xl">
+              <i class="fa-regular fa-user"></i>
+            </div>
+            <div class="text-xs leading-3">Account</div>
+          </a>
         </div>
+      </div>
     </header>
     <!-- ./header -->
     <!-- navbar -->
     <nav class="bg-gray-800">
-        <div class="container flex items-center justify-between lg:py-4">
-            <div class="w-16 py-4 bg-primary lg:hidden flex justify-center cursor-pointer relative" id="menu-toggle">
-                <span class="text-white">
-                    <i class="fa-solid fa-bars"></i>
-                </span>
-                <div id="mobile-menu"
-                    class="absolute w-32 left-0 top-full bg-gray-800 z-10 divide-y divide-gray-300 divide-dashed transition duration-300 hidden">
-                    <a href="HOME_PAGE_URL"
-                        class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Home</a>
-                    <a href="SHOP_PAGE_URL"
-                        class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Shop</a>
-                    <a href="ABOUT_US_PAGE_URL"
-                        class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">About us</a>
-                    <a href="CONTACT_PAGE_URL"
-                        class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Contact us</a>
-                </div>
-            </div>
-            <div class="flex items-center justify-end lg:justify-between flex-grow">
-                <div class="hidden lg:flex items-center space-x-6 capitalize">
-                    <a href="HOME_PAGE_URL" class="text-gray-200 hover:text-white transition">Home</a>
-                    <a href="SHOP_PAGE_URL" class="text-gray-200 hover:text-white transition">Shop</a>
-                    <a href="ABOUT_US_PAGE_URL" class="text-gray-200 hover:text-white transition">About us</a>
-                    <a href="CONTACT_PAGE_URL" class="text-gray-200 hover:text-white transition">Contact us</a>
-                </div>
-                <div>
-                    <a href="LOGIN_PAGE_URL" class="text-gray-200 hover:text-white transition">Login</a>
-                    <a href="REGISTER_PAGE_URL" class="text-gray-200 hover:text-white transition">/Register</a>
-                </div>
-            </div>
+      <div class="container flex items-center justify-between lg:py-4">
+        <div
+          class="w-16 py-4 bg-primary lg:hidden flex justify-center cursor-pointer relative"
+          id="menu-toggle"
+        >
+          <span class="text-white">
+            <i class="fa-solid fa-bars"></i>
+          </span>
+          <div
+            id="mobile-menu"
+            class="absolute w-32 left-0 top-full bg-gray-800 z-10 divide-y divide-gray-300 divide-dashed transition duration-300 hidden"
+          >
+            <a
+              href="HOME_PAGE_URL"
+              class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200"
+              >Home</a
+            >
+            <a
+              href="SHOP_PAGE_URL"
+              class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200"
+              >Shop</a
+            >
+            <a
+              href="<%=ABOUT_US_PAGE_URL%>"
+              class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200"
+              >About us</a
+            >
+            <a
+              href=" <%=CONTACT_PAGE_URL%>"
+              class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200"
+              >Contact us</a
+            >
+          </div>
         </div>
+        <div class="flex items-center justify-end lg:justify-between flex-grow">
+          <div class="hidden lg:flex items-center space-x-6 capitalize">
+            <a
+              href="HOME_PAGE_URL"
+              class="text-gray-200 hover:text-white transition"
+              >Home</a
+            >
+            <a
+              href="SHOP_PAGE_URL"
+              class="text-gray-200 hover:text-white transition"
+              >Shop</a
+            >
+            <a
+              href="<%=ABOUT_US_PAGE_URL%>"
+              class="text-gray-200 hover:text-white transition"
+              >About us</a
+            >
+            <a
+              href=" <%=CONTACT_PAGE_URL%>"
+              class="text-gray-200 hover:text-white transition"
+              >Contact us</a
+            >
+          </div>
+          <div>
+            <a
+              href="<%=LOGIN_PAGE_URL%>"
+              class="text-gray-200 hover:text-white transition"
+              >Login</a
+            >
+            <a
+              href="<%=REGISTER_PAGE_URL%>"
+              class="text-gray-200 hover:text-white transition"
+              >/Register</a
+            >
+          </div>
+        </div>
+      </div>
     </nav>
     <!-- ./navbar -->
 
     <!-- breadcrumb -->
     <div class="container py-4 flex items-center gap-3">
-        <a href="HOME_PAGE_URL" class="text-primary text-base">
-            <i class="fa-solid fa-house"></i>
-        </a>
-        <span class="text-sm text-gray-400">
-            <i class="fa-solid fa-chevron-right"></i>
-        </span>
-        <p class="text-gray-600 font-medium">Account</p>
+      <a href="HOME_PAGE_URL" class="text-primary text-base">
+        <i class="fa-solid fa-house"></i>
+      </a>
+      <span class="text-sm text-gray-400">
+        <i class="fa-solid fa-chevron-right"></i>
+      </span>
+      <p class="text-gray-600 font-medium">Account</p>
     </div>
     <!-- ./breadcrumb -->
 
     <!-- account wrapper -->
     <div class="container grid grid-cols-11 items-start gap-4 pt-4 pb-16">
-
-        <!-- sidebar -->
-        <div class="col-span-5 lg:col-span-3">
-            <div class="px-4 py-3 shadow flex items-center gap-4">
-                <div class="flex-shrink-0">
-                    <img src="../assets/images/avatar.png" alt="profile"
-                        class="rounded-full w-14 h-14 border border-gray-200 p-1 object-cover">
-                </div>
-                <div class="flex-grow">
-                    <p class="text-gray-600">Hello,</p>
-                    <h4 class="text-gray-800 font-medium">John Doe</h4>
-                </div>
-            </div>
-
-            <div class="mt-4 bg-white shadow rounded p-4 
-            divide-y divide-gray-200 space-y-4 text-gray-600">
-                <div class="space-y-1 lg:pl-8">
-                    <a href="#" class="relative text-primary block font-medium capitalize transition">
-                        <span class="hidden lg:block absolute -left-8 top-0 text-base">
-                            <i class=" fa-regular fa-address-card"></i>
-                        </span>
-                        Manage account
-                    </a>
-                    <a href="#" class="relative hover:text-primary block capitalize transition">
-                        Profile information
-                    </a>
-                    <a href="#" class="relative hover:text-primary block capitalize transition">
-                        Manage addresses
-                    </a>
-                    <a href="#" class="relative hover:text-primary block capitalize transition">
-                        Change password
-                    </a>
-                </div>
-
-                <div class="space-y-2 lg:pl-8 pt-4 ">
-                    <a href="#" class="relative hover:text-primary block font-medium capitalize transition">
-                        <span class="hidden lg:block absolute -left-8 top-0 text-base">
-                            <i class="fa-solid fa-box-archive"></i>
-                        </span>
-                        Order history
-                    </a>
-                    <a href="#" class="relative hover:text-primary block capitalize transition">
-                        Returns
-                    </a>
-                    <a href="#" class="relative hover:text-primary block capitalize transition">
-                        Cancellations
-                    </a>
-                </div>
-
-                <div class="space-y-2 lg:pl-8 pt-4 ">
-                    <a href="#" class="relative hover:text-primary block font-medium capitalize transition">
-                        <span class="hidden lg:block absolute -left-8 top-0 text-base">
-                            <i class="fa-regular fa-credit-card"></i>
-                        </span>
-                        Payment methods
-                    </a>
-                    <a href="#" class="relative hover:text-primary block capitalize transition">
-                        voucher
-                    </a>
-                </div>
-
-                <div class="space-y-2 lg:pl-8 pt-4 ">
-                    <a href="#" class="relative hover:text-primary block font-medium capitalize transition">
-                        <span class="hidden lg:block absolute -left-8 top-0 text-base">
-                            <i class="fa-solid fa-bag-shopping"></i>
-                        </span>
-                        My cart
-                    </a>
-                </div>
-
-                <div class="space-y-2 lg:pl-8 pt-4 ">
-                    <a href="#" class="relative hover:text-primary block font-medium capitalize transition">
-                        <span class="hidden lg:block absolute -left-8 top-0 text-base">
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                        </span>
-                        Logout
-                    </a>
-                </div>
-
-            </div>
+      <!-- sidebar -->
+      <div class="col-span-5 lg:col-span-3">
+        <div class="px-4 py-3 shadow flex items-center gap-4">
+          <div class="flex-shrink-0">
+            <img
+              src="../assets/images/avatar.png"
+              alt="profile"
+              class="rounded-full w-14 h-14 border border-gray-200 p-1 object-cover"
+            />
+          </div>
+          <div class="flex-grow">
+            <p class="text-gray-600">Hello,</p>
+            <h4 class="text-gray-800 font-medium">John Doe</h4>
+          </div>
         </div>
-        <!-- ./sidebar -->
 
-        <!-- info -->
-        <div class="col-span-5 lg:col-span-8 grid grid-rows-3 lg:grid-cols-3 gap-4 ">
-            <div class="shadow rounded bg-white px-4 pt-6 pb-8">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-medium text-gray-800 text-lg">Personal
-                        Profile</h3>
-                    <a href="#" class="text-primary">Edit</a>
-                </div>
-                <div class="space-y-1">
-                    <h4 class="text-gray-700 font-medium">John Doe</h4>
-                    <p class="text-gray-800">example@mail.com</p>
-                    <p class="text-gray-800">0811 8877 988</p>
-                </div>
-            </div>
+        <div
+          class="mt-4 bg-white shadow rounded p-4 divide-y divide-gray-200 space-y-4 text-gray-600"
+        >
+          <div class="space-y-1 lg:pl-8">
+            <a
+              href="#"
+              class="relative text-primary block font-medium capitalize transition"
+            >
+              <span class="hidden lg:block absolute -left-8 top-0 text-base">
+                <i class="fa-regular fa-address-card"></i>
+              </span>
+              Manage account
+            </a>
+            <a
+              href="#"
+              class="relative hover:text-primary block capitalize transition"
+            >
+              Profile information
+            </a>
+            <a
+              href="#"
+              class="relative hover:text-primary block capitalize transition"
+            >
+              Manage addresses
+            </a>
+            <a
+              href="#"
+              class="relative hover:text-primary block capitalize transition"
+            >
+              Change password
+            </a>
+          </div>
 
-            <div class="shadow rounded bg-white px-4 pt-6 pb-8">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-medium text-gray-800 text-lg">Shipping
-                        address</h3>
-                    <a href="#" class="text-primary">Edit</a>
-                </div>
-                <div class="space-y-1">
-                    <h4 class="text-gray-700 font-medium">John Doe</h4>
-                    <p class="text-gray-800">Medan, North Sumatera</p>
-                    <p class="text-gray-800">20371</p>
-                    <p class="text-gray-800">0811 8877 988</p>
-                </div>
-            </div>
+          <div class="space-y-2 lg:pl-8 pt-4">
+            <a
+              href="#"
+              class="relative hover:text-primary block font-medium capitalize transition"
+            >
+              <span class="hidden lg:block absolute -left-8 top-0 text-base">
+                <i class="fa-solid fa-box-archive"></i>
+              </span>
+              Order history
+            </a>
+            <a
+              href="#"
+              class="relative hover:text-primary block capitalize transition"
+            >
+              Returns
+            </a>
+            <a
+              href="#"
+              class="relative hover:text-primary block capitalize transition"
+            >
+              Cancellations
+            </a>
+          </div>
 
-            <div class="shadow rounded bg-white px-4 pt-6 pb-8">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-medium text-gray-800 text-lg">Billing
-                        address</h3>
-                    <a href="#" class="text-primary">Edit</a>
-                </div>
-                <div class="space-y-1">
-                    <h4 class="text-gray-700 font-medium">John Doe</h4>
-                    <p class="text-gray-800">Medan, North Sumatera</p>
-                    <p class="text-gray-800">20317</p>
-                    <p class="text-gray-800">0811 8877 988</p>
-                </div>
-            </div>
+          <div class="space-y-2 lg:pl-8 pt-4">
+            <a
+              href="#"
+              class="relative hover:text-primary block font-medium capitalize transition"
+            >
+              <span class="hidden lg:block absolute -left-8 top-0 text-base">
+                <i class="fa-regular fa-credit-card"></i>
+              </span>
+              Payment methods
+            </a>
+            <a
+              href="#"
+              class="relative hover:text-primary block capitalize transition"
+            >
+              voucher
+            </a>
+          </div>
 
+          <div class="space-y-2 lg:pl-8 pt-4">
+            <a
+              href="#"
+              class="relative hover:text-primary block font-medium capitalize transition"
+            >
+              <span class="hidden lg:block absolute -left-8 top-0 text-base">
+                <i class="fa-solid fa-bag-shopping"></i>
+              </span>
+              My cart
+            </a>
+          </div>
+
+          <div class="space-y-2 lg:pl-8 pt-4">
+            <a
+              href="#"
+              class="relative hover:text-primary block font-medium capitalize transition"
+            >
+              <span class="hidden lg:block absolute -left-8 top-0 text-base">
+                <i class="fa-solid fa-right-from-bracket"></i>
+              </span>
+              Logout
+            </a>
+          </div>
         </div>
-        <!-- ./info -->
+      </div>
+      <!-- ./sidebar -->
 
+      <!-- info -->
+      <div
+        class="col-span-5 lg:col-span-8 grid grid-rows-3 lg:grid-cols-3 gap-4"
+      >
+        <div class="shadow rounded bg-white px-4 pt-6 pb-8">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-medium text-gray-800 text-lg">Personal Profile</h3>
+            <a href="#" class="text-primary">Edit</a>
+          </div>
+          <div class="space-y-1">
+            <h4 class="text-gray-700 font-medium">John Doe</h4>
+            <p class="text-gray-800">example@mail.com</p>
+            <p class="text-gray-800">0811 8877 988</p>
+          </div>
+        </div>
+
+        <div class="shadow rounded bg-white px-4 pt-6 pb-8">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-medium text-gray-800 text-lg">Shipping address</h3>
+            <a href="#" class="text-primary">Edit</a>
+          </div>
+          <div class="space-y-1">
+            <h4 class="text-gray-700 font-medium">John Doe</h4>
+            <p class="text-gray-800">Medan, North Sumatera</p>
+            <p class="text-gray-800">20371</p>
+            <p class="text-gray-800">0811 8877 988</p>
+          </div>
+        </div>
+
+        <div class="shadow rounded bg-white px-4 pt-6 pb-8">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-medium text-gray-800 text-lg">Billing address</h3>
+            <a href="#" class="text-primary">Edit</a>
+          </div>
+          <div class="space-y-1">
+            <h4 class="text-gray-700 font-medium">John Doe</h4>
+            <p class="text-gray-800">Medan, North Sumatera</p>
+            <p class="text-gray-800">20317</p>
+            <p class="text-gray-800">0811 8877 988</p>
+          </div>
+        </div>
+      </div>
+      <!-- ./info -->
     </div>
     <!-- ./account wrapper -->
 
     <!-- footer -->
     <footer class="bg-gray-50 pt-10 pb-8 border-t border-gray-200 mt-20">
-        <div class="container mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                <!-- Brand Link -->
-                <div>
-                    <a class="font-bold text-xl" href="/src/index.html">
-                        <span class="text-primary">HAT</span><span class="text-gray-800">Shop</span>
-                    </a>
-                    <p class="text-gray-500 mt-2">
-                        Our curated collection features high-quality furniture, textiles, and unique accents, perfect
-                        for personalizing your home.
-                    </p>
-                </div>
-                <!-- Stay Connected Section -->
-                <div class="space-y-4">
-                    <h2 class="text-lg font-semibold text-gray-700">Stay
-                        Connected:</h2>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-500 hover:text-gray-700"><i
-                                class="fa-brands fa-facebook-square"></i></a>
-                        <a href="#" class="text-gray-500 hover:text-gray-700"><i
-                                class="fa-brands fa-instagram-square"></i></a>
-                        <a href="#" class="text-gray-500 hover:text-gray-700"><i
-                                class="fa-brands fa-twitter-square"></i></a>
-                    </div>
-                </div>
-                <!-- Quick Links Section -->
-                <div class="space-y-4">
-                    <h2 class="text-lg font-semibold text-gray-700">Quick
-                        Links:</h2>
-                    <ul class="space-y-2">
-                        <li><a href="HOME_PAGE_URL" class="text-gray-500 hover:text-gray-700">Home</a></li>
-                        <li><a href="SHOP_PAGE_URL" class="text-gray-500 hover:text-gray-700">Shop</a></li>
-                        <li><a href="ABOUT_US_PAGE_URL" class="text-gray-500 hover:text-gray-700">About Us</a>
-                        </li>
-                        <li><a href="CONTACT_PAGE_URL" class="text-gray-500 hover:text-gray-700">Contact
-                                Us</a></li>
-                        <li><a href="PRIVACY_PAGE_URL" class="text-gray-500 hover:text-gray-700">Privacy Policy</a></li>
-                    </ul>
-                </div>
-
-                <!-- Contact Us Section -->
-                <div class="space-y-4">
-                    <h2 class="text-lg font-semibold text-gray-700">Contact Us:</h2>
-
-                    <div class="flex items-center text-gray-500">
-
-                        <p><i class="fa-solid fa-envelope mr-2"></i> <a href="mailto:hat.shop@gmail.com"
-                                class="hatshopEmail text-gray-600 hover:underline"
-                                id="hatshopEmail">hat.shop@gmail.com</a></p>
-                    </div>
-
-                    <div class="flex items-center text-gray-500">
-
-                        <p><i class="fa-solid fa-phone mr-2"></i> <span class="hatshopPhoneNumber text-gray-600"></span>
-                        </p>
-                    </div>
-
-                    <div class="flex items-center text-gray-500">
-
-                        <p><i class="fa-solid fa-map-marker-alt mr-2"></i> <span
-                                class="hatshopAddress text-gray-600">227 Nguyen Van
-                                Cu, Ward 4, District 5, Ho Chi Minh City, Vietnam</span></p>
-                    </div>
-                </div>
+      <div class="container mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          <!-- Brand Link -->
+          <div>
+            <a class="font-bold text-xl" href="/src/index.html">
+              <span class="text-primary">HAT</span
+              ><span class="text-gray-800">Shop</span>
+            </a>
+            <p class="text-gray-500 mt-2">
+              Our curated collection features high-quality furniture, textiles,
+              and unique accents, perfect for personalizing your home.
+            </p>
+          </div>
+          <!-- Stay Connected Section -->
+          <div class="space-y-4">
+            <h2 class="text-lg font-semibold text-gray-700">Stay Connected:</h2>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-500 hover:text-gray-700"
+                ><i class="fa-brands fa-facebook-square"></i
+              ></a>
+              <a href="#" class="text-gray-500 hover:text-gray-700"
+                ><i class="fa-brands fa-instagram-square"></i
+              ></a>
+              <a href="#" class="text-gray-500 hover:text-gray-700"
+                ><i class="fa-brands fa-twitter-square"></i
+              ></a>
             </div>
+          </div>
+          <!-- Quick Links Section -->
+          <div class="space-y-4">
+            <h2 class="text-lg font-semibold text-gray-700">Quick Links:</h2>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="HOME_PAGE_URL"
+                  class="text-gray-500 hover:text-gray-700"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="SHOP_PAGE_URL"
+                  class="text-gray-500 hover:text-gray-700"
+                  >Shop</a
+                >
+              </li>
+              <li>
+                <a
+                  href="<%=ABOUT_US_PAGE_URL%>"
+                  class="text-gray-500 hover:text-gray-700"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href=" <%=CONTACT_PAGE_URL%>"
+                  class="text-gray-500 hover:text-gray-700"
+                  >Contact Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="PRIVACY_PAGE_URL"
+                  class="text-gray-500 hover:text-gray-700"
+                  >Privacy Policy</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact Us Section -->
+          <div class="space-y-4">
+            <h2 class="text-lg font-semibold text-gray-700">Contact Us:</h2>
+
+            <div class="flex items-center text-gray-500">
+              <p>
+                <i class="fa-solid fa-envelope mr-2"></i>
+                <a
+                  href="mailto:hat.shop@gmail.com"
+                  class="hatshopEmail text-gray-600 hover:underline"
+                  id="hatshopEmail"
+                  >hat.shop@gmail.com</a
+                >
+              </p>
+            </div>
+
+            <div class="flex items-center text-gray-500">
+              <p>
+                <i class="fa-solid fa-phone mr-2"></i>
+                <span class="hatshopPhoneNumber text-gray-600"></span>
+              </p>
+            </div>
+
+            <div class="flex items-center text-gray-500">
+              <p>
+                <i class="fa-solid fa-map-marker-alt mr-2"></i>
+                <span class="hatshopAddress text-gray-600"
+                  >227 Nguyen Van Cu, Ward 4, District 5, Ho Chi Minh City,
+                  Vietnam</span
+                >
+              </p>
+            </div>
+          </div>
         </div>
+      </div>
     </footer>
     <!-- ./footer -->
 
     <!-- copyright -->
     <div class="bg-gray-800 py-4">
-        <div class="container flex items-center justify-between">
-            <p class="text-white">&copy; 2024 HATShop. All rights reserved</p>
-            <div>
-                <img src="/src/assets/images/methods.png" alt="methods" class="h-5">
-            </div>
+      <div class="container flex items-center justify-between">
+        <p class="text-white">&copy; 2024 HATShop. All rights reserved</p>
+        <div>
+          <img src="/src/assets/images/methods.png" alt="methods" class="h-5" />
         </div>
+      </div>
     </div>
     <!-- ./copyright -->
     <script type="module" src="/src/js/utils/Utils.js"></script>
-</body>
-
+  </body>
 </html>
