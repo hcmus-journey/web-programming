@@ -1,14 +1,14 @@
 const express = require('express');
 const path = require('path');
 
+const routes = require('./routes/index');
+
 const app = express();
 const port = 3000;
 
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
-    res.render('home_page');
-});
+app.use('/', routes);
 
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
