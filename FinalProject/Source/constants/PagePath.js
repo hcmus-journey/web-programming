@@ -15,4 +15,4 @@ class PagePath {
   static PRIVACY_PAGE_PATH = "#";
 }
 
-module.exports = PagePath;
+export default PagePath;

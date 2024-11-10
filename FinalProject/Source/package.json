@@ -7,17 +7,18 @@
         "start": "node app.js",
         "build:css": "npx tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch"
     },
+    "type": "module",
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.0.0",
+        "bcryptjs": "^2.4.3",
         "dotenv": "^16.4.5",
         "ejs": "^3.1.10",
         "express": "^4.17.1",
         "flowbite": "^1.6.5",
-        "supervisor": "^0.12.0",
-        "pg": "^8.7.1",               
-        "sequelize": "^6.30.0",         
-        "pg-hstore": "^2.3.4" 
-
+        "pg": "^8.7.1",
+        "pg-hstore": "^2.3.4",
+        "sequelize": "^6.30.0",
+        "supervisor": "^0.12.0"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.9",

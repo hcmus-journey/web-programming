@@ -1,7 +1,9 @@
 // routes/index.js
-const express = require("express");
+import express from "express";
+import mainController from "../controllers/MainController.js";
+import userRouter from "./UserRouter.js";
+
 const mainRouter = express.Router();
-const mainController = require("../controllers/MainController");
 
 mainRouter.get("/", mainController.showHomePage);
 mainRouter.get("", mainController.showHomePage);
@@ -16,4 +18,7 @@ mainRouter.get("/register", mainController.showRegisterPage);
 mainRouter.get("/account", mainController.showAccountPage);
 mainRouter.get("/profile", mainController.showProfilePage);
 mainRouter.get("/privacy", mainController.showPrivacyPage);
-module.exports = mainRouter;
+
+mainRouter.use("/", userRouter);
+
+export default mainRouter;

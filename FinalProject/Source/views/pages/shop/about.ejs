@@ -26,21 +26,21 @@
 
           <!-- Images List -->
           <div class="flex space-x-2 mt-4">
-            <img src="../assets/images/about_us/1.jpg" alt="Image 1"
+            <img src="/public/assets/images/about_us/1.jpg" alt="Image 1"
               class="w-16 h-16 object-cover rounded cursor-pointer border border-gray-300"
-              onclick="changeImage('../assets/images/about_us/1.jpg')" />
-            <img src="../assets/images/about_us/2.jpg" alt="Image 2"
+              onclick="changeImage('/public/assets/images/about_us/1.jpg')" />
+            <img src="/public/assets/images/about_us/2.jpg" alt="Image 2"
               class="w-16 h-16 object-cover rounded cursor-pointer border border-gray-300"
-              onclick="changeImage('../assets/images/about_us/2.jpg')" />
-            <img src="../assets/images/about_us/3.jpg" alt="Image 3"
+              onclick="changeImage('/public/assets/images/about_us/2.jpg')" />
+            <img src="/public/assets/images/about_us/3.jpg" alt="Image 3"
               class="w-16 h-16 object-cover rounded cursor-pointer border border-gray-300"
-              onclick="changeImage('../assets/images/about_us/3.jpg')" />
-            <img src="../assets/images/about_us/4.jpg" alt="Image 4"
+              onclick="changeImage('/public/assets/images/about_us/3.jpg')" />
+            <img src="/public/assets/images/about_us/4.jpg" alt="Image 4"
               class="w-16 h-16 object-cover rounded cursor-pointer border border-gray-300"
-              onclick="changeImage('../assets/images/about_us/4.jpg')" />
-            <img src="../assets/images/about_us/5.jpg" alt="Image 5"
+              onclick="changeImage('/public/assets/images/about_us/4.jpg')" />
+            <img src="/public/assets/images/about_us/5.jpg" alt="Image 5"
               class="w-16 h-16 object-cover rounded cursor-pointer border border-gray-300"
-              onclick="changeImage('../assets/images/about_us/5.jpg')" />
+              onclick="changeImage('/public/assets/images/about_us/5.jpg')" />
           </div>
           <p class="text-gray-500 pt-2" style="font-size: 11px">
             Click on image to enlarge.
@@ -49,7 +49,7 @@
 
         <!--Main Image -->
         <div class="md:w-1/2 px-5">
-          <img id="mainImage" src="../assets/images/about_us/5.jpg" alt="About Us"
+          <img id="mainImage" src="/public/assets/images/about_us/5.jpg" alt="About Us"
             class="w-full h-auto object-cover rounded-lg shadow-md" />
         </div>
       </div>
@@ -91,17 +91,17 @@
           <h2 class="text-xl font-semibold mb-6 text-gray-800">Team Members</h2>
           <div class="flex justify-evenly gap-6">
             <div class="flex flex-col items-center">
-              <img src="/src/assets/images/team_members/21120148_image.jpg" alt="Tran Tien"
+              <img src="/public/assets/images/team_members/21120148_image.jpg" alt="Tran Tien"
                 class="w-40 h-40 rounded-full object-cover shadow-lg transform transition duration-300 hover:scale-125" />
               <p class="mt-2 text-center text-gray-700">Tran Tien</p>
             </div>
             <div class="flex flex-col items-center">
-              <img src="/src/assets/images/team_members/21120192_image.jpg" alt="Thien An"
+              <img src="/public/assets/images/team_members/21120192_image.jpg" alt="Thien An"
                 class="w-40 h-40 rounded-full object-cover shadow-lg transform transition duration-300 hover:scale-125" />
               <p class="mt-2 text-center text-gray-700">Thien An</p>
             </div>
             <div class="flex flex-col items-center">
-              <img src="/src/assets/images/team_members/21120065_image.jpg" alt="Mai Hanh"
+              <img src="/public/assets/images/team_members/21120065_image.jpg" alt="Mai Hanh"
                 class="w-40 h-40 rounded-full object-cover shadow-lg transform transition duration-300 hover:scale-125" />
               <p class="mt-2 text-center text-gray-700">Mai Hanh</p>
             </div>
@@ -110,6 +110,7 @@
       </div>
 
       <%- include('../../layouts/footer') %>
+      <script src="/public/js/AboutUs.js"></script>
 </body>
 
 </html>

@@ -1,51 +1,43 @@
-// Global variable to store user data temporarily (no real database)
-const users = {};
+// controllers/userController.js
+import { User } from "../models/User.js";
+import bcrypt from 'bcryptjs';
+import PagePath from "../constants/PagePath.js";
 
-// Register
-exports.showRegisterPage = (req, res) => {
-  res.render("user/register");
-};
-
-exports.registerUser = async (req, res) => {
-  const { username, password } = req.body;
-
-  try {
-    // Logic lưu người dùng vào database
-    const newUser = new users({ username, password });
-    await newUser.save();
-
-    // Redirect sau khi đăng ký thành công
-    res.redirect("user/login"); // Chuyển hướng đến trang login
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("An error occurred during registration.");
-  }
-};
-
-// Login
-exports.showLoginPage = (req, res) => {
-  res.render("user/login");
-};
-
-exports.loginUser = async (req, res) => {
-  const { username, password } = req.body;
-
-  try {
-    // Find the user in the global users object
-    const user = users[username];
-
-    if (!user) {
-      return res.status(400).send("User not found.");
+class UserController {
+  async registerUser(req, res) {
+    const { name, email, password, confirm } = req.body;
+    if (password !== confirm) {
+      return res.render(PagePath.REGISTER_PAGE_PATH, { error: 'Mật khẩu và xác nhận mật khẩu không khớp' });
     }
 
-    // Check if the entered password matches
-    if (password === user.password) {
-      res.redirect("/dashboard"); // Redirect to dashboard if login is successful
-    } else {
-      res.status(400).send("Invalid password.");
+    try {
+      const existingUser = await User.findOne({ where: { email: email } });
+      if (existingUser) {
+        return res.render(PagePath.REGISTER_PAGE_PATH, { error: 'Email đã được đăng ký!' });
+      }
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      const dateTimeNow = new Date();
+      const newUser = new User({
+        username: email,
+        email: email,
+        name: name,
+        user_role: 'USER',
+        status: 'ACTIVE',
+        created_at: dateTimeNow,
+        updated_at: dateTimeNow,
+        password: hashedPassword,
+      });
+
+      await newUser.save();
+
+      res.redirect("/login");
+    } catch (error) {
+      console.error(error);
+      res.render(PagePath.REGISTER_PAGE_PATH, { error: 'Đã có lỗi xảy ra!' });
     }
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("An error occurred during login.");
   }
-};
+}
+
+export default new UserController();
