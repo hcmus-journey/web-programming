@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../layouts/head', { title: 'HATShop - Shop' }) %>
+    <link rel="stylesheet" href="/public/css/shop.css">
+</head>
+
+<body>
+  <!-- header -->
+  <header class="py-4 shadow-sm bg-white">
+    <div class="container flex items-center justify-between">
+      <a class="font-bold text-xl" href="/">
+        <span class="text-primary">HAT</span><span class="text-gray-800">Shop</span>
+      </a>
+      <!-- Search bar -->
+      <div class="inline-flex w-full max-w-xl relative mx-5">
+        <span class="absolute left-4 top-2 text-lg text-gray-400">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </span>
+        <input type="text" name="search" id="search"
+          class="w-full border border-primary pl-12 py-2 pr-3 rounded-md focus:outline-none"
+          placeholder="search">
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="/cart" class="text-center text-gray-700 hover:text-primary transition relative">
+          <div class="text-2xl">
+            <i class="fa-solid fa-bag-shopping"></i>
+          </div>
+          <div class="text-xs leading-3">Cart</div>
+          <div
+            class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
+            2
+          </div>
+        </a>
+        <a href="/account" class="text-center text-gray-700 hover:text-primary transition relative">
+          <div class="text-2xl">
+            <i class="fa-regular fa-user"></i>
+          </div>
+          <div class="text-xs leading-3">Account</div>
+        </a>
+      </div>
+    </div>
+  </header>
+  <!-- ./header -->
+  <%- include('../../layouts/navbar') %>
+
+    <!-- breadcrumb -->
+    <div class="container py-4 flex items-center gap-3">
+      <a href="/" class="text-primary text-base">
+        <i class="fa-solid fa-house"></i>
+      </a>
+      <span class="text-sm text-gray-400">
+        <i class="fa-solid fa-chevron-right"></i>
+      </span>
+      <p class="text-gray-600 font-medium">Shop</p>
+    </div>
+    <!-- ./breadcrumb -->
+
+    <!-- filter section -->
+    <div class="bg-white px-4 pb-6 shadow rounded" id="filterSection">
+      <div class="flex justify-between items-center py-3">
+        <h3 class="text-xl text-gray-800 uppercase font-medium">Filters</h3>
+        <button id="filterClose" class="text-gray-600 hover:text-primary">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+      <div class="divide-y divide-gray-200 space-y-5">
+        <div>
+          <h3 class="text-lg text-gray-800 my-3 font-medium">
+            Categories
+          </h3>
+          <div class="space-y-2">
+            <div class="flex items-center">
+              <input type="checkbox" name="cat-1" id="cat-1"
+                class="text-primary focus:ring-0 rounded-sm cursor-pointer" />
+              <label for="cat-1" class="text-gray-600 ml-3 cursor-pointer">Bedroom</label>
+              <div class="ml-auto text-gray-600 text-sm">(15)</div>
+            </div>
+            <div class="flex items-center">
+              <input type="checkbox" name="cat-2" id="cat-2"
+                class="text-primary focus:ring-0 rounded-sm cursor-pointer" />
+              <label for="cat-2" class="text-gray-600 ml-3 cursor-pointer">Sofa</label>
+              <div class="ml-auto text-gray-600 text-sm">(9)</div>
+            </div>
+            <div class="flex items-center">
+              <input type="checkbox" name="cat-3" id="cat-3"
+                class="text-primary focus:ring-0 rounded-sm cursor-pointer" />
+              <label for="cat-3" class="text-gray-600 ml-3 cursor-pointer">Office</label>
+              <div class="ml-auto text-gray-600 text-sm">(21)</div>
+            </div>
+            <div class="flex items-center">
+              <input type="checkbox" name="cat-4" id="cat-4"
+                class="text-primary focus:ring-0 rounded-sm cursor-pointer" />
+              <label for="cat-4" class="text-gray-600 ml-3 cursor-pointer">Outdoor</label>
+              <div class="ml-auto text-gray-600 text-sm">(10)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4">
+          <h3 class="text-lg text-gray-800 mb-3 font-medium">
+            Manufacturers
+          </h3>
+          <div class="space-y-2">
+            <div class="flex items-center">
+              <input type="checkbox" name="brand-1" id="brand-1"
+                class="text-primary focus:ring-0 rounded-sm cursor-pointer" />
+              <label for="brand-1" class="text-gray-600 ml-3 cursor-pointer">Cooking Color</label>
+              <div class="ml-auto text-gray-600 text-sm">(15)</div>
+            </div>
+            <div class="flex items-center">
+              <input type="checkbox" name="brand-2" id="brand-2"
+                class="text-primary focus:ring-0 rounded-sm cursor-pointer" />
+              <label for="brand-2" class="text-gray-600 ml-3 cursor-pointer">Magniflex</label>
+              <div class="ml-auto text-gray-600 text-sm">(9)</div>
+            </div>
+            <div class="flex items-center">
+              <input type="checkbox" name="brand-3" id="brand-3"
+                class="text-primary focus:ring-0 rounded-sm cursor-pointer" />
+              <label for="brand-3" class="text-gray-600 ml-3 cursor-pointer">Ashley</label>
+              <div class="ml-auto text-gray-600 text-sm">(21)</div>
+            </div>
+            <div class="flex items-center">
+              <input type="checkbox" name="brand-4" id="brand-4"
+                class="text-primary focus:ring-0 rounded-sm cursor-pointer" />
+              <label for="brand-4" class="text-gray-600 ml-3 cursor-pointer">M&D</label>
+              <div class="ml-auto text-gray-600 text-sm">(10)</div>
+            </div>
+            <div class="flex items-center">
+              <input type="checkbox" name="brand-5" id="brand-5"
+                class="text-primary focus:ring-0 rounded-sm cursor-pointer" />
+              <label for="brand-5" class="text-gray-600 ml-3 cursor-pointer">Olympic</label>
+              <div class="ml-auto text-gray-600 text-sm">(10)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4">
+          <h3 class="text-xl text-gray-800 mb-3 uppercase font-medium">
+            Price
+          </h3>
+          <div class="mt-4 flex items-center">
+            <input type="text" name="min" id="min"
+              class="w-full border-gray-300 focus:border-primary rounded focus:ring-0 px-3 py-1 text-gray-600 shadow-sm"
+              placeholder="min" />
+            <span class="mx-3 text-gray-500">-</span>
+            <input type="text" name="max" id="max"
+              class="w-full border-gray-300 focus:border-primary rounded focus:ring-0 px-3 py-1 text-gray-600 shadow-sm"
+              placeholder="max" />
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-4 flex justify-between">
+        <button id="resetFilter" class="bg-gray-200 text-gray-600 px-4 py-2 rounded hover:bg-gray-300">
+          Reset Filters
+        </button>
+        <button id="applyFilter" class="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark">
+          Apply Filters
+        </button>
+      </div>
+
+    </div>
+    <!-- filter section -->
+
+    <!-- shop -->
+    <div class="container gap-6 pt-4 pb-16 items-start">
+
+      <!-- products -->
+      <div class="flex flex-row justify-between">
+        <div class="flex items-center ">
+          <select name="sort" id="sort"
+            class="w-44 h-12 text-sm text-gray-600 py-3 px-4 border-gray-300 shadow-sm rounded focus:ring-primary focus:border-primary">
+            <option value="">Default sorting</option>
+            <option value="price-low-to-high">Price low to high</option>
+            <option value="price-high-to-low">Price high to low</option>
+            <option value="latest">Latest product</option>
+          </select>
+
+          <div class="flex gap-2 ml-auto"></div>
+        </div>
+        <button id="filterToggle" class="bg-primary text-white px-4 py-2 rounded h-12">
+          <i class="fa-solid fa-filter"></i>
+        </button>
+      </div>
+      <div class="grid md:grid-cols-3 grid-cols-2 gap-6" id="productList"></div>
+      <!-- ./products -->
+
+      <!-- pagination -->
+      <div class="mt-5 container flex justify-center items-center gap-4">
+        <a href="" class="text-gray-600 hover:text-primary">
+          <i class="fa-solid fa-chevron-left"></i>
+        </a>
+        <a href="" class="text-primary">1</a>
+        <a href="" class="text-gray-600 hover:text-primary">2</a>
+        <a href="" class="text-gray-600 hover:text-primary">3</a>
+        <a href="" class="text-gray-600 hover:text-primary">4</a>
+        <a href="" class="text-gray-600 hover:text-primary">5</a>
+        <a href="" class="text-gray-600 hover:text-primary">
+          <i class="fa-solid fa-chevron-right"></i>
+        </a>
+      </div>
+      <!-- ./shop wrapper -->
+    </div>
+    <%- include('../../layouts/footer') %>
+      <script src="/public/js/shop.js"></script>
+</body>
+
+</html>
