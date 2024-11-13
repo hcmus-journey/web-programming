@@ -66,7 +66,9 @@
         <h2 class="text-2xl font-medium text-gray-800 uppercase mb-6">
           Top new arrivals
         </h2>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6" id="topNewArrivalsList"></div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6" id="topNewArrivalsList">
+          <%- include('../../layouts/productList', { productList: topNewArrivals }) %>
+        </div>
       </div>
       <!-- ./new arrivals -->
 
@@ -83,7 +85,9 @@
         <h2 class="text-2xl font-medium text-gray-800 uppercase mb-6">
           recomended for you
         </h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="productList"></div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="productList">
+          <%- include('../../layouts/productList', { productList: recommendedProducts }) %>
+        </div>
       </div>
       <!-- ./product -->
 

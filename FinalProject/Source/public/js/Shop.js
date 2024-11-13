@@ -1,3 +1,4 @@
+
 function createProductHTML(product) {
     let encodedProduct = encodeURIComponent(JSON.stringify(product));
 
@@ -25,14 +26,26 @@ function createProductHTML(product) {
     `;
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+  const filterToggle = document.getElementById("filterToggle");
+  const filterSection = document.getElementById("filterSection");
+  const filterClose = document.getElementById("filterClose");
 
-document.getElementById('filterToggle').addEventListener('click', function () {
-  const filterSection = document.getElementById('filterSection');
-  filterSection.classList.toggle('show');
-});
-
-document.getElementById('filterClose').addEventListener('click', function () {
-    const filterSection = document.getElementById('filterSection');
-    filterSection.classList.remove('show'); 
+  // Open the filter section
+  filterToggle.addEventListener("click", () => {
+    filterSection.classList.add("show");
   });
+
+  // Close the filter section
+  filterClose.addEventListener("click", () => {
+    filterSection.classList.remove("show");
+  });
+
+  // Optional: Close filter if clicking outside of it
+  document.addEventListener("click", (e) => {
+    if (!filterSection.contains(e.target) && !filterToggle.contains(e.target)) {
+      filterSection.classList.remove("show");
+    }
+  });
+});
 
