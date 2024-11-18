@@ -7,6 +7,9 @@ import UserService from "../services/UserService.js";
 class UserController {
   constructor() {
     this.userService = new UserService(User); // Pass the User model to UserService
+    this.registerUser = this.registerUser.bind(this);
+    this.showLoginPage = this.showLoginPage.bind(this);
+    this.showRegisterPage = this.showRegisterPage.bind(this);
   }
 
   async registerUser(req, res) {
