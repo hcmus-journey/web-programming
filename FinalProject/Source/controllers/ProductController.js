@@ -7,7 +7,9 @@ class ProductController {
     const productId = req.query.id;
     try {
       const product = await ProductService.getProductById(productId);
-      const relatedProducts = await ProductService.getRelatedProducts(productId);
+      const relatedProducts = await ProductService.getRelatedProducts(
+        productId
+      );
 
       if (!product) {
         console.error("Product not found");
@@ -15,7 +17,8 @@ class ProductController {
       }
 
       res.render(PagePath.PRODUCT_PAGE_PATH, {
-        product, relatedProducts,
+        product,
+        relatedProducts,
       });
     } catch (error) {
       console.error("Error fetching product:", error);

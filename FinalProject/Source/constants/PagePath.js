@@ -6,6 +6,7 @@ class PagePath {
   static ABOUT_US_PAGE_PATH = "pages/shop/about";
   static CONTACT_PAGE_PATH = "pages/shop/contact";
   static SHOP_PAGE_PATH = "pages/shop/shop";
+  static SEARCH_PAGE_PATH = "pages/shop/search";
 
   static LOGIN_PAGE_PATH = "pages/user/login";
   static REGISTER_PAGE_PATH = "pages/user/register";
