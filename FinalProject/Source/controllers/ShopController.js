@@ -9,29 +9,16 @@ class ShopController {
     const query = req.query.query || ""; // Lấy từ khóa tìm kiếm
 
     try {
-      if (query == "") {
-        const totalProducts = await ProductService.countProducts(); // Đếm toàn bộ sản phẩm
-        const products = await ProductService.getProductsPaginated(page, limit); // Lấy sản phẩm theo trang
-        const totalPages = Math.ceil(totalProducts / limit); // Tính tổng số trang
-        res.render(PagePath.SHOP_PAGE_PATH, {
-          products,
-          currentPage: page,
-          limit,
-          totalPages,
-          query: "", // Gửi query rỗng
-        });
-      } else {
-        // Tìm kiếm theo tên sản phẩm
-        const { products, total, totalPages } =
-          await ProductService.searchProducts(query, page, limit);
-        res.render(PagePath.SHOP_PAGE_PATH, {
-          products,
-          currentPage: page,
-          limit,
-          totalPages,
-          query,
-        });
-      }
+      // Tìm kiếm theo tên sản phẩm
+      const { products, total, totalPages } =
+      await ProductService.searchProducts(query, page, limit);
+      res.render(PagePath.SHOP_PAGE_PATH, {
+      products,
+      currentPage: page,
+      limit,
+      totalPages,
+      query,
+      });
     } catch (error) {
       console.error("Error fetching products:", error);
       res.render(PagePath.SHOP_PAGE_PATH, {
