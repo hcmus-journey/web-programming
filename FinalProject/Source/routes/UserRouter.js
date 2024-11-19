@@ -7,10 +7,11 @@ router.get("/login", userController.showLoginPage);
 
 router.get("/register", userController.showRegisterPage);
 
+router.get("/logout", userController.logoutUser);
+
 router.post("/register", userController.registerUser);
 
-// POST request for login
-//router.post("/login", userController.loginUser);
-
+router.post("/login", userController.loginUser);
+  
 export default router;
 

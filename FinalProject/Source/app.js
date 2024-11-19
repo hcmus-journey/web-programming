@@ -3,16 +3,38 @@ import mainRoutes from './routes/MainRouter.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import session from 'express-session';
+import bodyParser from 'body-parser';
+import passport from 'passport';
+import PassportConfig from './config/PassportConfig.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
+const expressSession = session;
 const port = 3000;
+
 
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
+
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.use(bodyParser.json());
+
+
+app.use(expressSession({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 60 * 60 * 1000 }
+}));
+
+
+new PassportConfig(app);
+
 
 app.set('view engine', 'ejs');
 

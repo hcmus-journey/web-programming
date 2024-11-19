@@ -22,9 +22,13 @@
                 <a href="/about_us" class="text-gray-200 hover:text-white transition">About us</a>
                 <a href="/contact_us" class="text-gray-200 hover:text-white transition">Contact us</a>
             </div>
-            <div>
+            <div id="auth-links">
+            <% if(!isLoggedIn) { %>
                 <a href="/login" class="text-gray-200 hover:text-white transition">Login</a>
                 <a href="/register" class="text-gray-200 hover:text-white transition">/Register</a>
+            <% } else { %>
+                <a href="/logout" class="text-gray-200 hover:text-white transition">Logout</a>
+            <% } %>
             </div>
         </div>
     </div>

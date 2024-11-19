@@ -33,6 +33,15 @@ class UserService {
         throw new Error('Error retrieving user: ' + error.message);
       }
     }
+
+    async getUserByUsername(username) {
+      try {
+        const user = await this.userModel.findOne({ where: { username } });
+        return user;
+      } catch (error) {
+        throw new Error('Error fetching user by email: ' + error.message);
+      }
+    }
   
     async updateUser(userId, updateData) {
       try {

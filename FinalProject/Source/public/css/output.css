@@ -1231,12 +1231,12 @@ h1,
   justify-content: space-evenly;
 }
 
-.gap-2{
-  gap: 0.5rem;
+.gap-10{
+  gap: 2.5rem;
 }
 
-.gap-20{
-  gap: 5rem;
+.gap-2{
+  gap: 0.5rem;
 }
 
 .gap-3{
@@ -1257,10 +1257,6 @@ h1,
 
 .gap-8{
   gap: 2rem;
-}
-
-.gap-10{
-  gap: 2.5rem;
 }
 
 .space-x-2 > :not([hidden]) ~ :not([hidden]){
