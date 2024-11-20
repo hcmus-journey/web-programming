@@ -74,9 +74,13 @@
       <div class="divide-y divide-gray-200 space-y-5">
         <!-- Categories Filter -->
         <div>
-          <h3 class="text-lg text-gray-800 my-3 font-medium cursor-pointer" id="toggleCategories">
+          <h3 class="text-lg text-gray-800 my-3 font-medium cursor-pointer flex items-center justify-between" id="toggleCategories">
             Categories
+            <span id="categoriesIcon" class="ml-2 text-gray-500">
+              <i class="fa-solid fa-plus"> </i>
+            </span>
           </h3>
+          
           <div class="space-y-2 hidden" id="categoriesList">
             <% categories.forEach(category=> { %>
               <div class="flex items-center">
@@ -97,8 +101,11 @@
 
         <!-- Manufacturers Filter -->
         <div class="pt-4">
-          <h3 class="text-lg text-gray-800 mb-3 font-medium cursor-pointer" id="toggleManufacturers">
+          <h3 class="text-lg text-gray-800 my-3 font-medium cursor-pointer flex items-center justify-between" id="toggleManufacturers">
             Manufacturers
+            <span id="manufacturersIcon" class="text-gray-500">
+            <i class="fa-solid fa-plus"></i>
+            </span>
           </h3>
           <div class="space-y-2 hidden" id="manufacturersList">
             <% manufacturers.forEach(manufacturer=> { %>
@@ -186,7 +193,7 @@
       <div class="flex items-center">
         <select name="sort" id="sort"
           class="w-44 h-12 text-sm text-gray-600 py-3 px-4 border-gray-300 shadow-sm rounded focus:ring-primary focus:border-primary">
-          <option value="" <%= selectedSort === '' ? 'selected' : '' %>>Default sorting</option>
+          <option value=""" <%= selectedSort === '' ? 'selected' : '' %>>Default sorting</option>
           <option value="price-low-to-high" <%= selectedSort === 'price-low-to-high' ? 'selected' : '' %>>Price low to high</option>
           <option value="price-high-to-low" <%= selectedSort === 'price-high-to-low' ? 'selected' : '' %>>Price high to low</option>
           <option value="latest" <%= selectedSort === 'latest' ? 'selected' : '' %>>Latest product</option>

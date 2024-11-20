@@ -13,3 +13,12 @@
 #filterSection.show {
   right: 0;
 }
+
+button#resetFilter,
+button#applyFilter {
+  width: 150px;
+  height: 40px;
+  text-align: center;
+  line-height: 1.5;
+  white-space: nowrap;
+}
