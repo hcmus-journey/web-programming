@@ -91,9 +91,6 @@
                 <label for="cat+<%=category.category_id%>" class="text-gray-600 ml-3 cursor-pointer">
                   <%= category.category_name %>
                 </label>
-                <div class="ml-auto text-gray-600 text-sm">
-                  (<%= category.product_count || 0 %>)
-                </div>
               </div>
             <% }); %>            
           </div>
@@ -117,9 +114,6 @@
                 <label for="brand+<%=manufacturer.manufacturer_id%>" class="text-gray-600 ml-3 cursor-pointer">
                   <%= manufacturer.manufacturer_name %>
                 </label>
-                <div class="ml-auto text-gray-600 text-sm">
-                  (<%= manufacturer.product_count || 0 %>)
-                </div>
               </div>
             <% }); %>            
           </div>

@@ -290,60 +290,6 @@ class ProductService {
       throw new Error("Error fetching manufacturers: " + error.message);
     }
   }
-
-  async countProductsByCategory() {
-    try {
-      return await ProductCategory.findAll({
-        attributes: [
-          "category_id",
-          "category_name",
-          [
-            sequelize.fn("COUNT", sequelize.col("products.product_id")),
-            "product_count",
-          ],
-        ],
-        include: [
-          {
-            model: Product,
-            as: "products",
-            attributes: [],
-          },
-        ],
-        group: ["ProductCategory.category_id"],
-        raw: true,
-      });
-    } catch (error) {
-      throw new Error("Error counting products by category: " + error.message);
-    }
-  }
-
-  async countProductsByManufacturer() {
-    try {
-      return await ProductManufacturer.findAll({
-        attributes: [
-          "manufacturer_id",
-          "manufacturer_name",
-          [
-            sequelize.fn("COUNT", sequelize.col("products.product_id")),
-            "product_count",
-          ],
-        ],
-        include: [
-          {
-            model: Product,
-            as: "products",
-            attributes: [],
-          },
-        ],
-        group: ["ProductManufacturer.manufacturer_id"],
-        raw: true,
-      });
-    } catch (error) {
-      throw new Error(
-        "Error counting products by manufacturer: " + error.message
-      );
-    }
-  }
 }
 
 export default new ProductService();
