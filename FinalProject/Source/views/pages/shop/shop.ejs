@@ -18,13 +18,32 @@
         <form method="GET" action="/shop" class="search-form w-full">
           <!-- Icon -->
           <label for="search" class="absolute left-4 top-2 transform text-lg text-gray-400">
-            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-            <span class="sr-only">Search</span>
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <span class="sr-only">Search</span>
           </label>
           <!-- Search Input -->
           <input type="text" name="query" id="search" placeholder="Search products..."
-            class="w-full border border-primary pl-12 py-2 pr-3 rounded-md focus:ring-primary focus:border-primary"
-            value="<%= typeof query !== 'undefined' ? query : '' %>" aria-label="Search products" />
+        class="w-full border border-primary pl-12 py-2 pr-3 rounded-md focus:ring-primary focus:border-primary"
+        value="<%= typeof query !== 'undefined' ? query : '' %>" aria-label="Search products" />
+            <!-- Hidden Inputs for Filters -->
+            <% if (selectedFilters.categories && selectedFilters.categories.length > 0) { %>
+            <input type="hidden" name="categories" value="<%= selectedFilters.categories.join(',') %>">
+            <% } %>
+            <% if (selectedFilters.manufacturers && selectedFilters.manufacturers.length > 0) { %>
+            <input type="hidden" name="manufacturers" value="<%= selectedFilters.manufacturers.join(',') %>">
+            <% } %>
+            <% if (selectedFilters.minPrice) { %>
+            <input type="hidden" name="minPrice" value="<%= selectedFilters.minPrice %>">
+            <% } %>
+            <% if (selectedFilters.maxPrice) { %>
+            <input type="hidden" name="maxPrice" value="<%= selectedFilters.maxPrice %>">
+            <% } %>
+            <% if (selectedFilters.status) { %>
+            <input type="hidden" name="status" value="<%= selectedFilters.status %>">
+            <% } %>
+            <% if (selectedSort) { %>
+            <input type="hidden" name="sort" value="<%= selectedSort %>">
+            <% } %>
         </form>
       </div>
 
@@ -173,7 +192,7 @@
         <button id="resetFilter" class="bg-gray-200 text-gray-600 px-4 py-2 rounded hover:bg-gray-300">
           Reset Filters
         </button>
-        <button id="applyFilter" class="bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark">
+        <button id="applyFilter" class="bg-primary text-white px-4 py-2 ml-4 rounded hover:bg-primary-dark">
           Apply Filters
         </button>
       </div>

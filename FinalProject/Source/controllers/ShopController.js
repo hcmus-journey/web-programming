@@ -34,7 +34,6 @@ class ShopController {
       // Tìm kiếm theo tên sản phẩm
       const products = await ProductService.searchProducts(
         query,
-        "product_name",
         sort
       );
 
