@@ -5,7 +5,6 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import session from 'express-session';
 import bodyParser from 'body-parser';
-import passport from 'passport';
 import PassportConfig from './config/PassportConfig.js';
 
 const __filename = fileURLToPath(import.meta.url);

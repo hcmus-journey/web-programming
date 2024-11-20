@@ -8,8 +8,10 @@ import { User } from "../models/User.js";
 class PassportConfig {
     constructor(app) {
         this.userService = new UserService(User);
-        app.use(passport.initialize());
-        app.use(passport.session());
+        if (app) {
+            app.use(passport.initialize());
+            app.use(passport.session());
+        }
 
         passport.use(
             new LocalStrategy(
@@ -46,6 +48,20 @@ class PassportConfig {
             done(err, null);
         }
         });
+    }
+
+    verifyRole(allowedRoles) {
+        return (req, res, next) => {
+            if (req.isAuthenticated()) {
+                const userRole = req.user.user_role; // Assuming role is stored in req.user
+
+                if (!allowedRoles.includes(userRole)) {
+                    return res.status(403).send('Access Denied'); // Forbidden for unauthorized roles
+                }
+            }
+
+            next(); // Proceed if the role is valid
+        };
     }
 }
 
