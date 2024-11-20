@@ -101,4 +101,24 @@ document.addEventListener("DOMContentLoaded", function () {
     // Redirect to shop page without filters
     window.location.href = `/shop`;
   });
+
+  const sortDropdown = document.getElementById("sort");
+
+  if (sortDropdown) {
+    sortDropdown.addEventListener("change", function () {
+      const selectedSort = sortDropdown.value; // Lấy giá trị đã chọn
+      console.log("Selected Sort:", selectedSort);
+
+      // Xử lý điều hướng với sort
+      const currentUrl = new URL(window.location.href);
+      if (selectedSort) {
+        currentUrl.searchParams.set("sort", selectedSort); // Thêm/ghi đè giá trị sort
+      } else {
+        currentUrl.searchParams.delete("sort"); // Nếu không có sort, xóa tham số
+      }
+
+      // Điều hướng lại trang
+      window.location.href = currentUrl.toString();
+    });
+  }
 });

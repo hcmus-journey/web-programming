@@ -9,6 +9,7 @@ class ShopController {
     const query = req.query.query || ""; // Lấy từ khóa tìm kiếm
     const brandVal = req.query.brandVal || "";
     const catVal = req.query.catVal || "";
+    const sort = req.query.sort || ""; // Lấy giá trị sort
 
     try {
       // Lọc theo Category & Manufacturer
@@ -33,6 +34,7 @@ class ShopController {
         query,
         categories: filteredCategories,
         manufacturers: filteredManufacturers,
+        sort,
       });
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -44,6 +46,7 @@ class ShopController {
         query: "",
         categories: [],
         manufacturers: [],
+        sort,
       });
     }
   }

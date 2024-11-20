@@ -224,9 +224,18 @@ class ProductService {
     page = 1,
     limit = 9,
     orderBy = "product_name",
-    orderDirection = "ASC"
+    sort
   ) {
     const offset = (page - 1) * limit;
+
+    let orderClause = [];
+    if (sort === "price-low-to-high") {
+      orderClause = [["price", "ASC"]];
+    } else if (sort === "price-high-to-low") {
+      orderClause = [["price", "DESC"]];
+    } else if (sort === "latest") {
+      orderClause = [["createdAt", "DESC"]];
+    }
 
     try {
       query = query?.trim();
@@ -247,7 +256,7 @@ class ProductService {
         ],
         limit,
         offset,
-        order: [[orderBy, orderDirection]], // Sắp xếp kết quả
+        order: [[orderBy, orderClause]], // Sắp xếp kết quả
       });
 
       return { products, total: count, totalPages: Math.ceil(count / limit) };
