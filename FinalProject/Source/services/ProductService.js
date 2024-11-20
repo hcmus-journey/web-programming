@@ -237,6 +237,7 @@ class ProductService {
       const { count, rows: products } = await Product.findAndCountAll({
         where: {
           product_name: { [Op.iLike]: `%${query}%` },
+          detail: { [Op.iLike]: `%${query}%` },
         },
         include: [
           { model: ProductImage, as: "images" },
@@ -253,6 +254,50 @@ class ProductService {
     } catch (error) {
       console.error("Error searching products:", error.message);
       throw new Error("Failed to search products.");
+    }
+  }
+
+  async getAllCategory() {
+    try {
+      return await ProductCategory.findAll();
+    } catch (error) {
+      throw new Error("Error fetching categories: " + error.message);
+    }
+  }
+
+  async filterByCategory(catVals) {
+    try {
+      if (!catVals || catVals.length === 0) {
+        return await this.getAllCategory();
+      } else {
+        return await ProductCategory.findAll({
+          where: { category_id: catVals }, // Lọc theo danh sách ID
+        });
+      }
+    } catch (error) {
+      throw new Error("Error filtering by Categories: " + error.message);
+    }
+  }
+
+  async getAllManufacturer() {
+    try {
+      return await ProductManufacturer.findAll();
+    } catch (error) {
+      throw new Error("Error fetching manufacturers: " + error.message);
+    }
+  }
+
+  async filterByManufacturer(brandVals) {
+    try {
+      if (!brandVals || brandVals.length === 0) {
+        return await this.getAllManufacturer();
+      } else {
+        return await ProductManufacturer.findAll({
+          where: { manufacturer_id: brandVals }, // Lọc theo danh sách ID
+        });
+      }
+    } catch (error) {
+      throw new Error("Error filtering by Manufacturers: " + error.message);
     }
   }
 }

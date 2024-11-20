@@ -1,13 +1,16 @@
-
 function createProductHTML(product) {
-    let encodedProduct = encodeURIComponent(JSON.stringify(product));
+  let encodedProduct = encodeURIComponent(JSON.stringify(product));
 
-    return `
+  return `
         <div class="${productDivClass}" id="${product.id}">
             <div class="relative imgLink">
-                <img src="${product.imgLink}" alt="${product.id}" class="w-full">
+                <img src="${product.imgLink}" alt="${
+    product.id
+  }" class="w-full">
                 <div class="${imgHoverClass}">
-                    <a class="${imgAClass}" title="view product" href="${PageURL.PRODUCT_PAGE_URL}?index=${encodedProduct}">
+                    <a class="${imgAClass}" title="view product" href="${
+    PageURL.PRODUCT_PAGE_URL
+  }?index=${encodedProduct}">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </a>
                 </div>
@@ -18,7 +21,9 @@ function createProductHTML(product) {
                 </a>
                 <div class="${pricesDivClass}">
                     <p class="${pricePClass}">$${product.price.toFixed(2)}</p>
-                    <p class="${ogPricePClass}">$${product.ogPrice.toFixed(2)}</p>
+                    <p class="${ogPricePClass}">$${product.ogPrice.toFixed(
+    2
+  )}</p>
                 </div>
             </div>
             <a class="${addToCartClass}">Add to cart</a>
@@ -26,7 +31,7 @@ function createProductHTML(product) {
     `;
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   const filterToggle = document.getElementById("filterToggle");
   const filterSection = document.getElementById("filterSection");
   const filterClose = document.getElementById("filterClose");
@@ -47,5 +52,53 @@ document.addEventListener("DOMContentLoaded", function() {
       filterSection.classList.remove("show");
     }
   });
-});
 
+  // Toggle visibility of categories
+  document
+    .getElementById("toggleCategories")
+    .addEventListener("click", function () {
+      const categoriesList = document.getElementById("categoriesList");
+      categoriesList.classList.toggle("hidden");
+    });
+
+  // Toggle visibility of manufacturers
+  document
+    .getElementById("toggleManufacturers")
+    .addEventListener("click", function () {
+      const manufacturersList = document.getElementById("manufacturersList");
+      manufacturersList.classList.toggle("hidden");
+    });
+
+  // Apply Filters functionality
+  document.getElementById("applyFilter").addEventListener("click", function () {
+    // Get selected manufacturers
+    const selectedBrands = Array.from(
+      document.querySelectorAll('input[name="brandVal"]:checked')
+    ).map((checkbox) => checkbox.id.split("+")[1]); // Get brand IDs
+
+    // Get selected categories
+    const selectedCategories = Array.from(
+      document.querySelectorAll('input[name="catVal"]:checked')
+    ).map((checkbox) => checkbox.id.split("+")[1]); // Get category IDs
+
+    // Create query string for filters
+    const queryParams = new URLSearchParams({
+      brandVal: selectedBrands.join(","), // Join IDs into a string
+      catVal: selectedCategories.join(","),
+    }).toString();
+
+    // Redirect to shop page with query string
+    window.location.href = `/shop?${queryParams}`;
+  });
+
+  // Reset Filters functionality
+  document.getElementById("resetFilter").addEventListener("click", function () {
+    // Uncheck all checkboxes
+    document
+      .querySelectorAll('input[type="checkbox"]')
+      .forEach((checkbox) => (checkbox.checked = false));
+
+    // Redirect to shop page without filters
+    window.location.href = `/shop`;
+  });
+});
