@@ -5,7 +5,8 @@
     "main": "app.js",
     "scripts": {
         "start": "node app.js",
-        "build:css": "npx tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch"
+        "build:css": "npx tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch",
+        "build:css:prod": "NODE_ENV=production npx tailwindcss -i ./public/css/input.css -o ./public/css/output.css --minify"
     },
     "type": "module",
     "dependencies": {
