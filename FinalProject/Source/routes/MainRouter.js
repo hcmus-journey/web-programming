@@ -22,12 +22,12 @@ mainRouter.get("/admin", passportConfig.verifyRole(['ADMIN']), AdminController.s
 
 mainRouter.use("/", userRouter);
 
-mainRouter.use("/user", passportConfig.verifyRole(['USER']), shopRouter);
+mainRouter.use("/", passportConfig.verifyRole(['USER']), shopRouter);
 
-mainRouter.use("/user", passportConfig.verifyRole(['USER']), productRouter);
+mainRouter.use("/", passportConfig.verifyRole(['USER']), productRouter);
 
-mainRouter.use("/user", passportConfig.verifyRole(['USER']), accountRouter);
+mainRouter.use("/", passportConfig.verifyRole(['USER']), accountRouter);
 
-mainRouter.use("/user", passportConfig.verifyRole(['USER']), cartRouter);
+mainRouter.use("/", passportConfig.verifyRole(['USER']), cartRouter);
 
 export default mainRouter;
