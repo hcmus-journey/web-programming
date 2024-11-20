@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
       query
     });
 
-    window.location.href = `/shop?${queryParams.toString()}`;
+    window.location.href = `/user/shop?${queryParams.toString()}`;
   });
 
   // Reset Filters functionality

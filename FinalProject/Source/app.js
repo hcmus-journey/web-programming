@@ -14,7 +14,6 @@ const app = express();
 const expressSession = session;
 const port = 3000;
 
-
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
@@ -33,7 +32,6 @@ app.use(expressSession({
 
 
 new PassportConfig(app);
-
 
 app.set('view engine', 'ejs');
 
