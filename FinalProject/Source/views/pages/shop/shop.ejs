@@ -82,20 +82,20 @@
           </h3>
           
           <div class="space-y-2 hidden" id="categoriesList">
-            <% categories.forEach(category=> { %>
+            <% categories.forEach(category => { %>
               <div class="flex items-center">
                 <input type="checkbox" name="catVal" id="cat+<%=category.category_id%>"
                   class="text-primary focus:ring-0 rounded-sm cursor-pointer"
-                  <%=selectedFilters.categories.includes(category.category_id) ? 'checked' : '' %>
+                  <%= selectedFilters.categories.includes(category.category_id) ? 'checked' : '' %>
                 />
                 <label for="cat+<%=category.category_id%>" class="text-gray-600 ml-3 cursor-pointer">
                   <%= category.category_name %>
                 </label>
                 <div class="ml-auto text-gray-600 text-sm">
-                  (<%= category.dataValues.product_count || 0 %>)
+                  (<%= category.product_count || 0 %>)
                 </div>
               </div>
-              <% }); %>
+            <% }); %>            
           </div>
         </div>
 
@@ -108,20 +108,20 @@
             </span>
           </h3>
           <div class="space-y-2 hidden" id="manufacturersList">
-            <% manufacturers.forEach(manufacturer=> { %>
+            <% manufacturers.forEach(manufacturer => { %>
               <div class="flex items-center">
                 <input type="checkbox" name="brandVal" id="brand+<%=manufacturer.manufacturer_id%>"
                   class="text-primary focus:ring-0 rounded-sm cursor-pointer"
-                  <%=selectedFilters.manufacturers.includes(manufacturer.manufacturer_id) ? 'checked' : '' %>
+                  <%= selectedFilters.manufacturers.includes(manufacturer.manufacturer_id) ? 'checked' : '' %>
                 />
                 <label for="brand+<%=manufacturer.manufacturer_id%>" class="text-gray-600 ml-3 cursor-pointer">
                   <%= manufacturer.manufacturer_name %>
                 </label>
                 <div class="ml-auto text-gray-600 text-sm">
-                  (<%= manufacturer.dataValues.product_count || 0 %>)
+                  (<%= manufacturer.product_count || 0 %>)
                 </div>
               </div>
-              <% }); %>
+            <% }); %>            
           </div>
         </div>
 

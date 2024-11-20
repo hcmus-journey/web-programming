@@ -23,13 +23,13 @@ class ShopController {
     const status = req.query.status || undefined;
 
     try {
-      const categoryCounts = await ProductService.countProductsByCategory();
-      const manufacturerCounts =
-        await ProductService.countProductsByManufacturer();
-
       // Lọc theo Category & Manufacturer
       const categories = await ProductService.getAllCategories(); // Lấy toàn bộ Category
       const manufacturers = await ProductService.getAllManufacturer(); // Lấy toàn bộ Manufacturer
+
+      const categoryCounts = await ProductService.countProductsByCategory();
+      const manufacturerCounts =
+        await ProductService.countProductsByManufacturer();
 
       // Tìm kiếm theo tên sản phẩm
       const products = await ProductService.searchProducts(
@@ -115,6 +115,8 @@ class ShopController {
           maxPrice: undefined,
           status: undefined,
         },
+        categoryCounts: [],
+        manufacturerCounts: [],
       });
     }
   }

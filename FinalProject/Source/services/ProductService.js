@@ -291,7 +291,6 @@ class ProductService {
     }
   }
 
-  // Count products by category
   async countProductsByCategory() {
     try {
       return await ProductCategory.findAll({
@@ -311,13 +310,13 @@ class ProductService {
           },
         ],
         group: ["ProductCategory.category_id"],
+        raw: true,
       });
     } catch (error) {
       throw new Error("Error counting products by category: " + error.message);
     }
   }
 
-  // Count products by manufacturer
   async countProductsByManufacturer() {
     try {
       return await ProductManufacturer.findAll({
@@ -337,6 +336,7 @@ class ProductService {
           },
         ],
         group: ["ProductManufacturer.manufacturer_id"],
+        raw: true,
       });
     } catch (error) {
       throw new Error(
