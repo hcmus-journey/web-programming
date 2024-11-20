@@ -250,11 +250,11 @@ class ProductService {
 
       const whereClause = query
         ? {
-          [Op.or]: [
-            { product_name: { [Op.iLike]: `%${query}%` } },
-            { detail: { [Op.iLike]: `%${query}%` } },
-          ],
-        }
+            [Op.or]: [
+              { product_name: { [Op.iLike]: `%${query}%` } },
+              { detail: { [Op.iLike]: `%${query}%` } },
+            ],
+          }
         : {};
 
       const products = await Product.findAll({
@@ -282,7 +282,6 @@ class ProductService {
       throw new Error("Error fetching categories: " + error.message);
     }
   }
-
 
   async getAllManufacturer() {
     try {

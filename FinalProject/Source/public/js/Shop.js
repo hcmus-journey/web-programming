@@ -16,44 +16,69 @@ document.addEventListener("DOMContentLoaded", function () {
   // Optional: Close filter if clicking outside of it
   document.addEventListener("click", (e) => {
     if (!filterSection.contains(e.target) && !filterToggle.contains(e.target)) {
-      filterSection.classList.remove("show");
+      filterSection.classList.remove("show"); // Đóng filter section
     }
   });
 
   // Toggle visibility of categories
-  document
-    .getElementById("toggleCategories")
-    .addEventListener("click", function () {
-      const categoriesList = document.getElementById("categoriesList");
-      categoriesList.classList.toggle("hidden");
-    });
+  const toggleCategories = document.getElementById("toggleCategories");
+  const categoriesList = document.getElementById("categoriesList");
+  const categoriesIcon = document.getElementById("categoriesIcon");
+
+  toggleCategories.addEventListener("click", (e) => {
+    // Đảm bảo click từ toggle hoặc icon
+    if (e.target.closest("#categoriesIcon") || e.target === toggleCategories) {
+      const isHidden = categoriesList.classList.toggle("hidden"); // Toggle hiển thị dropdown
+      categoriesIcon.innerHTML = isHidden
+        ? '<i class="fa-solid fa-plus"></i>' // Icon +
+        : '<i class="fa-solid fa-minus"></i>'; // Icon -
+    }
+    e.stopPropagation(); // Ngăn sự kiện click lan ra document
+  });
 
   // Toggle visibility of manufacturers
-  document
-    .getElementById("toggleManufacturers")
-    .addEventListener("click", function () {
-      const manufacturersList = document.getElementById("manufacturersList");
-      manufacturersList.classList.toggle("hidden");
-    });
+  const toggleManufacturers = document.getElementById("toggleManufacturers");
+  const manufacturersList = document.getElementById("manufacturersList");
+  const manufacturersIcon = document.getElementById("manufacturersIcon");
+
+  toggleManufacturers.addEventListener("click", (e) => {
+    // Đảm bảo click từ toggle hoặc icon
+    if (
+      e.target.closest("#manufacturersIcon") ||
+      e.target === toggleManufacturers
+    ) {
+      const isHidden = manufacturersList.classList.toggle("hidden"); // Toggle hiển thị dropdown
+      manufacturersIcon.innerHTML = isHidden
+        ? '<i class="fa-solid fa-plus"></i>' // Icon +
+        : '<i class="fa-solid fa-minus"></i>'; // Icon -
+    }
+    e.stopPropagation(); // Ngăn sự kiện click lan ra document
+  });
 
   // Apply Filters functionality
   document.getElementById("applyFilter").addEventListener("click", function () {
-    const categories = Array.from(document.querySelectorAll('input[name="catVal"]:checked')).map(el => el.id.split('+')[1]);
-    const manufacturers = Array.from(document.querySelectorAll('input[name="brandVal"]:checked')).map(el => el.id.split('+')[1]);
-    const minPrice = document.getElementById('min').value;
-    const maxPrice = document.getElementById('max').value;
-    const status = document.querySelector('input[name="status"]:checked') ? document.querySelector('input[name="status"]:checked').value : '';
-    const sort = document.getElementById('sort').value;
-    const query = document.getElementById('search').value;
+    const categories = Array.from(
+      document.querySelectorAll('input[name="catVal"]:checked')
+    ).map((el) => el.id.split("+")[1]);
+    const manufacturers = Array.from(
+      document.querySelectorAll('input[name="brandVal"]:checked')
+    ).map((el) => el.id.split("+")[1]);
+    const minPrice = document.getElementById("min").value;
+    const maxPrice = document.getElementById("max").value;
+    const status = document.querySelector('input[name="status"]:checked')
+      ? document.querySelector('input[name="status"]:checked').value
+      : "";
+    const sort = document.getElementById("sort").value;
+    const query = document.getElementById("search").value;
 
     const queryParams = new URLSearchParams({
-      categories: categories.join(','),
-      manufacturers: manufacturers.join(','),
+      categories: categories.join(","),
+      manufacturers: manufacturers.join(","),
       minPrice,
       maxPrice,
       status,
       sort,
-      query
+      query,
     });
 
     window.location.href = `/user/shop?${queryParams.toString()}`;
@@ -61,13 +86,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Reset Filters functionality
   document.getElementById("resetFilter").addEventListener("click", function () {
-    document.querySelectorAll('input[name="catVal"]:checked').forEach(el => el.checked = false);
-    document.querySelectorAll('input[name="brandVal"]:checked').forEach(el => el.checked = false);
-    document.getElementById('min').value = '';
-    document.getElementById('max').value = '';
-    document.querySelectorAll('input[name="status"]:checked').forEach(el => el.checked = false);
-    document.getElementById('sort').value = '';
-    document.getElementById('search').value = '';
+    document
+      .querySelectorAll('input[name="catVal"]:checked')
+      .forEach((el) => (el.checked = false));
+    document
+      .querySelectorAll('input[name="brandVal"]:checked')
+      .forEach((el) => (el.checked = false));
+    document.getElementById("min").value = "";
+    document.getElementById("max").value = "";
+    document
+      .querySelectorAll('input[name="status"]:checked')
+      .forEach((el) => (el.checked = false));
+    document.getElementById("sort").value = "";
+    document.getElementById("search").value = "";
   });
 
   const sortDropdown = document.getElementById("sort");
