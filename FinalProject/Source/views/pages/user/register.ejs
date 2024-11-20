@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../../layouts/head', { title: 'HATShop - Register' }) %>
+  </head>
+
+  <body>
+    <%- include('../../layouts/header') %>
+
+    <%- include('../../layouts/navbar', {isLoggedIn: isLoggedIn}) %>
+
+    <!-- register -->
+    <div class="contain py-16">
+      <div class="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
+        <h2 class="text-2xl uppercase font-medium mb-1">Create an account</h2>
+        <p class="text-gray-600 mb-6 text-sm">Register for new customer</p>
+        
+        <% if (typeof error !== 'undefined') { %>
+          <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <strong class="font-bold">Error!</strong>
+            <span class="block sm:inline"><%= error %></span>
+          </div>
+        <% } %>
+
+        <form id="registerForm" autocomplete="off" action="/register" method="POST">
+          <div class="space-y-2">
+            <div>
+              <label for="name" class="text-gray-600 mb-2 block">Full Name</label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
+                placeholder="Full Name"
+                required
+              />
+            </div>
+            <div>
+              <label for="email" class="text-gray-600 mb-2 block">Email address</label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
+                placeholder="youremail.@domain.com"
+                required
+              />
+            </div>
+            <div>
+              <label for="password" class="text-gray-600 mb-2 block">Password</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
+                placeholder="*******"
+                required
+              />
+            </div>
+            <div>
+              <label for="confirm" class="text-gray-600 mb-2 block">Confirm password</label>
+              <input
+                type="password"
+                name="confirm"
+                id="confirm"
+                class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
+                placeholder="*******"
+                required
+              />
+            </div>
+          </div>
+          <div class="mt-4">
+            <button
+              type="submit"
+              class="block w-full py-2 text-center text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium"
+            >
+              Create Account
+            </button>
+          </div>
+        </form>
+        <p class="mt-4 text-center text-gray-600">
+          Already have an account?
+          <a href="/login" class="text-primary">Login now</a>
+        </p>
+      </div>
+    </div>
+    <!-- ./register -->
+
+    <%- include('../../layouts/footer') %>
+  </body>
+</html>
