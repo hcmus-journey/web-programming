@@ -10,6 +10,9 @@ class ShopController {
     const brandVal = req.query.brandVal || "";
     const catVal = req.query.catVal || "";
     const sort = req.query.sort || ""; // Lấy giá trị sort
+    const minPrice = req.query.min || undefined;
+    const maxPrice = req.query.max || undefined;
+    const status = req.query.status || undefined;
 
     try {
       // Lọc theo Category & Manufacturer
@@ -17,17 +20,25 @@ class ShopController {
       const manufacturers = await ProductService.getAllManufacturer(); // Lấy toàn bộ Manufacturer
 
       const filteredCategories = catVal
-        ? await ProductService.filterByCategory(catVal.split(","))
+        ? await ProductService.filterByCategory(catVal)
         : categories;
 
       const filteredManufacturers = brandVal
-        ? await ProductService.filterByManufacturer(brandVal.split(","))
+        ? await ProductService.filterByManufacturer(brandVal)
         : manufacturers;
+
+      // Lấy danh sách sản phẩm dựa trên bộ lọc
+      const filteredProducts = await ProductService.filterByPriceAndStatus(
+        minPrice,
+        maxPrice,
+        status
+      );
+
       // Tìm kiếm theo tên sản phẩm
       const { products, total, totalPages } =
         await ProductService.searchProducts(query, page, limit);
       res.render(PagePath.SHOP_PAGE_PATH, {
-        products,
+        products: filteredProducts,
         currentPage: page,
         limit,
         totalPages,

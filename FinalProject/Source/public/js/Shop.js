@@ -121,4 +121,28 @@ document.addEventListener("DOMContentLoaded", function () {
       window.location.href = currentUrl.toString();
     });
   }
+
+  const applyFilterButton = document.getElementById("applyFilter");
+
+  applyFilterButton.addEventListener("click", () => {
+    const minPrice = document.getElementById("min").value;
+    const maxPrice = document.getElementById("max").value;
+    const status = document.querySelector(
+      'input[name="status"]:checked'
+    )?.value;
+
+    // Tạo URL với các tham số lọc
+    const url = new URL(window.location.href);
+    if (minPrice) url.searchParams.set("min", minPrice);
+    else url.searchParams.delete("min");
+
+    if (maxPrice) url.searchParams.set("max", maxPrice);
+    else url.searchParams.delete("max");
+
+    if (status) url.searchParams.set("status", status);
+    else url.searchParams.delete("status");
+
+    // Reload trang với URL mới
+    window.location.href = url.toString();
+  });
 });

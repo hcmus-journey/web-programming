@@ -110,7 +110,10 @@
               >
                 <%=category.category_name%>
               </label>
-              <div class="ml-auto text-gray-600 text-sm">(15)</div>
+              <div class="ml-auto text-gray-600 text-sm">
+                <!-- Số lượng sản phẩm -->
+                (<%=category.productCount || 0 %>)
+              </div>
             </div>
             <% }); %>
           </div>
@@ -138,7 +141,10 @@
               >
                 <%=manufacturer.manufacturer_name%>
               </label>
-              <div class="ml-auto text-gray-600 text-sm">(15)</div>
+              <div class="ml-auto text-gray-600 text-sm">
+                <!-- Số lượng sản phẩm -->
+                (<%=manufacturer.productCount || 0 %>)
+              </div>
             </div>
             <% }); %>
           </div>
