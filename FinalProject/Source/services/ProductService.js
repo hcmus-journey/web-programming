@@ -39,6 +39,22 @@ class ProductService {
     }
   }
 
+  // Get all products
+  async getAllProducts() {
+    try {
+      return await Product.findAll({
+        include: [
+          { model: ProductImage, as: "images" },
+          { model: ProductCategory, as: "category" },
+          { model: ProductManufacturer, as: "manufacturer" },
+          { model: ProductReview, as: "reviews" },
+        ],
+      });
+    } catch (error) {
+      throw new Error("Error fetching all products: " + error.message);
+    }
+  }
+
   // Find a product by its ID
   async getProductById(productId) {
     try {
@@ -219,15 +235,7 @@ class ProductService {
   }
 
   // Tìm kiếm sản phẩm dựa trên tên và mô tả
-  async searchProducts(
-    query,
-    page = 1,
-    limit = 9,
-    orderBy = "product_name",
-    sort
-  ) {
-    const offset = (page - 1) * limit;
-
+  async searchProducts(query, orderBy = "product_name", sort) {
     let orderClause = [];
     if (sort === "price-low-to-high") {
       orderClause = [["price", "ASC"]];
@@ -239,34 +247,35 @@ class ProductService {
 
     try {
       query = query?.trim();
-      if (!query) {
-        return await this.getProductsPaginated(page, limit);
-      }
 
-      const { count, rows: products } = await Product.findAndCountAll({
-        where: {
-          product_name: { [Op.iLike]: `%${query}%` },
-          detail: { [Op.iLike]: `%${query}%` },
-        },
+      const whereClause = query
+        ? {
+          [Op.or]: [
+            { product_name: { [Op.iLike]: `%${query}%` } },
+            { detail: { [Op.iLike]: `%${query}%` } },
+          ],
+        }
+        : {};
+
+      const products = await Product.findAll({
+        where: whereClause,
         include: [
           { model: ProductImage, as: "images" },
           { model: ProductCategory, as: "category" },
           { model: ProductManufacturer, as: "manufacturer" },
           { model: ProductReview, as: "reviews" },
         ],
-        limit,
-        offset,
-        order: [[orderBy, orderClause]], // Sắp xếp kết quả
+        order: orderClause, // Sắp xếp kết quả
       });
 
-      return { products, total: count, totalPages: Math.ceil(count / limit) };
+      return products;
     } catch (error) {
       console.error("Error searching products:", error.message);
       throw new Error("Failed to search products.");
     }
   }
 
-  async getAllCategory() {
+  async getAllCategories() {
     try {
       return await ProductCategory.findAll();
     } catch (error) {
@@ -274,133 +283,12 @@ class ProductService {
     }
   }
 
-  async filterByCategory(catVals) {
-    try {
-      if (!catVals || catVals.length === 0) {
-        // Lấy tất cả danh mục kèm số lượng sản phẩm
-        return await ProductCategory.findAll({
-          attributes: [
-            "category_id",
-            "category_name",
-            [
-              Sequelize.fn("COUNT", Sequelize.col("Products.product_id")),
-              "productCount",
-            ],
-          ],
-          include: [
-            {
-              model: Product,
-              attributes: [],
-            },
-          ],
-          group: ["ProductCategory.category_id"],
-        });
-      } else {
-        // Lọc danh mục theo ID và đếm số lượng sản phẩm
-        return await ProductCategory.findAll({
-          where: { category_id: catVals },
-          attributes: [
-            "category_id",
-            "category_name",
-            [
-              Sequelize.fn("COUNT", Sequelize.col("Products.product_id")),
-              "productCount",
-            ],
-          ],
-          include: [
-            {
-              model: Product,
-              attributes: [],
-            },
-          ],
-          group: ["ProductCategory.category_id"],
-        });
-      }
-    } catch (error) {
-      throw new Error("Error filtering by Categories: " + error.message);
-    }
-  }
 
   async getAllManufacturer() {
     try {
       return await ProductManufacturer.findAll();
     } catch (error) {
       throw new Error("Error fetching manufacturers: " + error.message);
-    }
-  }
-
-  async filterByManufacturer(brandVals) {
-    try {
-      if (!brandVals || brandVals.length === 0) {
-        // Lấy tất cả nhà sản xuất kèm số lượng sản phẩm
-        return await ProductManufacturer.findAll({
-          attributes: [
-            "manufacturer_id",
-            "manufacturer_name",
-            [
-              Sequelize.fn("COUNT", Sequelize.col("Products.product_id")),
-              "productCount",
-            ],
-          ],
-          include: [
-            {
-              model: Product,
-              attributes: [],
-            },
-          ],
-          group: ["ProductManufacturer.manufacturer_id"],
-        });
-      } else {
-        // Lọc theo danh sách manufacturer_id và đếm số lượng sản phẩm
-        return await ProductManufacturer.findAll({
-          where: { manufacturer_id: brandVals },
-          attributes: [
-            "manufacturer_id",
-            "manufacturer_name",
-            [
-              Sequelize.fn("COUNT", Sequelize.col("Products.product_id")),
-              "productCount",
-            ],
-          ],
-          include: [
-            {
-              model: Product,
-              attributes: [],
-            },
-          ],
-          group: ["ProductManufacturer.manufacturer_id"],
-        });
-      }
-    } catch (error) {
-      throw new Error("Error filtering by Manufacturers: " + error.message);
-    }
-  }
-
-  async filterByPriceAndStatus(minPrice, maxPrice, status) {
-    try {
-      const whereConditions = {};
-
-      // Điều kiện lọc theo giá
-      if (minPrice !== undefined)
-        whereConditions.price = { [Sequelize.Op.gte]: minPrice };
-      if (maxPrice !== undefined)
-        whereConditions.price = {
-          ...(whereConditions.price || {}),
-          [Sequelize.Op.lte]: maxPrice,
-        };
-
-      // Điều kiện lọc theo trạng thái
-      if (status) {
-        whereConditions.status =
-          status === "in_stock" ? "In Stock" : "Sold Out";
-      }
-
-      // Lấy danh sách sản phẩm thỏa mãn điều kiện
-      return await Product.findAll({
-        where: whereConditions,
-      });
-    } catch (error) {
-      throw new Error("Error filtering by price and status: " + error.message);
     }
   }
 }

@@ -7,11 +7,11 @@ class ShopController {
     const page = parseInt(req.query.page) || 1;
     const limit = 9;
     const query = req.query.query || ""; // Lấy từ khóa tìm kiếm
-    const brandVal = req.query.brandVal || "";
-    const catVal = req.query.catVal || "";
+    const brandVal = req.query.manufacturers ? req.query.manufacturers.split(',') : [];
+    const catVal = req.query.categories ? req.query.categories.split(',') : [];
     const sort = req.query.sort || ""; // Lấy giá trị sort
-    const minPrice = req.query.min || undefined;
-    const maxPrice = req.query.max || undefined;
+    const minPrice = req.query.minPrice !== undefined ? parseFloat(req.query.minPrice) : undefined;
+    const maxPrice = req.query.maxPrice !== undefined ? parseFloat(req.query.maxPrice) : undefined;
     const status = req.query.status || undefined;
 
     try {
@@ -19,34 +19,54 @@ class ShopController {
       const categories = await ProductService.getAllCategories(); // Lấy toàn bộ Category
       const manufacturers = await ProductService.getAllManufacturer(); // Lấy toàn bộ Manufacturer
 
-      const filteredCategories = catVal
-        ? await ProductService.filterByCategory(catVal)
-        : categories;
-
-      const filteredManufacturers = brandVal
-        ? await ProductService.filterByManufacturer(brandVal)
-        : manufacturers;
-
-      // Lấy danh sách sản phẩm dựa trên bộ lọc
-      const filteredProducts = await ProductService.filterByPriceAndStatus(
-        minPrice,
-        maxPrice,
-        status
-      );
-
       // Tìm kiếm theo tên sản phẩm
-      const { products, total, totalPages } =
-        await ProductService.searchProducts(query, page, limit);
+      const products = await ProductService.searchProducts(query, "product_name", sort);
+      
+      // Lọc sản phẩm theo các tiêu chí
+      let filteredProducts = products;
+
+      if (catVal.length > 0) {
+        filteredProducts = filteredProducts.filter(product => catVal.includes(product.category_id.toString()));
+      }
+
+      if (brandVal.length > 0) {
+        filteredProducts = filteredProducts.filter(product => brandVal.includes(product.manufacturer_id.toString()));
+      }
+
+      if (!isNaN(minPrice)) {
+        filteredProducts = filteredProducts.filter(product => product.price >= minPrice);
+      }
+
+      if (!isNaN(maxPrice)) {
+        filteredProducts = filteredProducts.filter(product => product.price <= maxPrice);
+      }
+
+      if (status !== undefined) {
+        filteredProducts = filteredProducts.filter(product => product.status === status);
+      }
+
+      // Phân trang
+      const totalFilteredPages = Math.ceil(filteredProducts.length / limit);
+      const paginatedProducts = filteredProducts.slice((page - 1) * limit, page * limit);
+
       res.render(PagePath.SHOP_PAGE_PATH, {
-        products: filteredProducts,
+        products: paginatedProducts,
         currentPage: page,
         limit,
-        totalPages,
+        totalPages: totalFilteredPages,
         query,
-        categories: filteredCategories,
-        manufacturers: filteredManufacturers,
-        sort,
+        categories: categories,
+        manufacturers: manufacturers,
+        selectedSort: sort,
+        selectedFilters: {
+          categories: catVal,
+          manufacturers: brandVal,
+          minPrice,
+          maxPrice,
+          status,
+        },
       });
+      
     } catch (error) {
       console.error("Error fetching products:", error);
       res.render(PagePath.SHOP_PAGE_PATH, {
@@ -57,7 +77,14 @@ class ShopController {
         query: "",
         categories: [],
         manufacturers: [],
-        sort,
+        selectedSort: sort,
+        selectedFilters: {
+          categories: [],
+          manufacturers: [],
+          minPrice: undefined,
+          maxPrice: undefined,
+          status: undefined,
+        },
       });
     }
   }

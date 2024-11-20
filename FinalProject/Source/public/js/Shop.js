@@ -1,36 +1,3 @@
-function createProductHTML(product) {
-  let encodedProduct = encodeURIComponent(JSON.stringify(product));
-
-  return `
-        <div class="${productDivClass}" id="${product.id}">
-            <div class="relative imgLink">
-                <img src="${product.imgLink}" alt="${
-    product.id
-  }" class="w-full">
-                <div class="${imgHoverClass}">
-                    <a class="${imgAClass}" title="view product" href="${
-    PageURL.PRODUCT_PAGE_URL
-  }?index=${encodedProduct}">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="pt-4 pb-3 px-4 name">
-                <a href="${PageURL.PRODUCT_PAGE_URL}?index=${encodedProduct}">
-                    <h4 class="${nameH4Class}">${product.name}</h4>
-                </a>
-                <div class="${pricesDivClass}">
-                    <p class="${pricePClass}">$${product.price.toFixed(2)}</p>
-                    <p class="${ogPricePClass}">$${product.ogPrice.toFixed(
-    2
-  )}</p>
-                </div>
-            </div>
-            <a class="${addToCartClass}">Add to cart</a>
-        </div>
-    `;
-}
-
 document.addEventListener("DOMContentLoaded", function () {
   const filterToggle = document.getElementById("filterToggle");
   const filterSection = document.getElementById("filterSection");
@@ -71,78 +38,50 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Apply Filters functionality
   document.getElementById("applyFilter").addEventListener("click", function () {
-    // Get selected manufacturers
-    const selectedBrands = Array.from(
-      document.querySelectorAll('input[name="brandVal"]:checked')
-    ).map((checkbox) => checkbox.id.split("+")[1]); // Get brand IDs
+    const categories = Array.from(document.querySelectorAll('input[name="catVal"]:checked')).map(el => el.id.split('+')[1]);
+    const manufacturers = Array.from(document.querySelectorAll('input[name="brandVal"]:checked')).map(el => el.id.split('+')[1]);
+    const minPrice = document.getElementById('min').value;
+    const maxPrice = document.getElementById('max').value;
+    const status = document.querySelector('input[name="status"]:checked') ? document.querySelector('input[name="status"]:checked').value : '';
+    const sort = document.getElementById('sort').value;
+    const query = document.getElementById('search').value;
 
-    // Get selected categories
-    const selectedCategories = Array.from(
-      document.querySelectorAll('input[name="catVal"]:checked')
-    ).map((checkbox) => checkbox.id.split("+")[1]); // Get category IDs
-
-    // Create query string for filters
     const queryParams = new URLSearchParams({
-      brandVal: selectedBrands.join(","), // Join IDs into a string
-      catVal: selectedCategories.join(","),
-    }).toString();
+      categories: categories.join(','),
+      manufacturers: manufacturers.join(','),
+      minPrice,
+      maxPrice,
+      status,
+      sort,
+      query
+    });
 
-    // Redirect to shop page with query string
-    window.location.href = `/shop?${queryParams}`;
+    window.location.href = `/shop?${queryParams.toString()}`;
   });
 
   // Reset Filters functionality
   document.getElementById("resetFilter").addEventListener("click", function () {
-    // Uncheck all checkboxes
-    document
-      .querySelectorAll('input[type="checkbox"]')
-      .forEach((checkbox) => (checkbox.checked = false));
-
-    // Redirect to shop page without filters
-    window.location.href = `/shop`;
+    document.querySelectorAll('input[name="catVal"]:checked').forEach(el => el.checked = false);
+    document.querySelectorAll('input[name="brandVal"]:checked').forEach(el => el.checked = false);
+    document.getElementById('min').value = '';
+    document.getElementById('max').value = '';
+    document.querySelectorAll('input[name="status"]:checked').forEach(el => el.checked = false);
+    document.getElementById('sort').value = '';
+    document.getElementById('search').value = '';
   });
 
   const sortDropdown = document.getElementById("sort");
 
   if (sortDropdown) {
     sortDropdown.addEventListener("change", function () {
-      const selectedSort = sortDropdown.value; // Lấy giá trị đã chọn
-      console.log("Selected Sort:", selectedSort);
-
-      // Xử lý điều hướng với sort
+      const selectedSort = sortDropdown.value;
       const currentUrl = new URL(window.location.href);
       if (selectedSort) {
-        currentUrl.searchParams.set("sort", selectedSort); // Thêm/ghi đè giá trị sort
+        currentUrl.searchParams.set("sort", selectedSort);
       } else {
-        currentUrl.searchParams.delete("sort"); // Nếu không có sort, xóa tham số
+        currentUrl.searchParams.delete("sort");
       }
-
-      // Điều hướng lại trang
       window.location.href = currentUrl.toString();
     });
   }
-
-  const applyFilterButton = document.getElementById("applyFilter");
-
-  applyFilterButton.addEventListener("click", () => {
-    const minPrice = document.getElementById("min").value;
-    const maxPrice = document.getElementById("max").value;
-    const status = document.querySelector(
-      'input[name="status"]:checked'
-    )?.value;
-
-    // Tạo URL với các tham số lọc
-    const url = new URL(window.location.href);
-    if (minPrice) url.searchParams.set("min", minPrice);
-    else url.searchParams.delete("min");
-
-    if (maxPrice) url.searchParams.set("max", maxPrice);
-    else url.searchParams.delete("max");
-
-    if (status) url.searchParams.set("status", status);
-    else url.searchParams.delete("status");
-
-    // Reload trang với URL mới
-    window.location.href = url.toString();
-  });
 });
