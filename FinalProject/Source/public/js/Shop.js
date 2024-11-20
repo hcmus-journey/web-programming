@@ -15,14 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Optional: Close filter if clicking outside of it
   document.addEventListener("click", (e) => {
-    if (
-      !filterSection.contains(e.target) &&
-      !filterToggle.contains(e.target) &&
-      !toggleCategories.contains(e.target) &&
-      !categoriesIcon.contains(e.target) &&
-      !toggleManufacturers.contains(e.target) &&
-      !manufacturersIcon.contains(e.target)
-    ) {
+    if (!filterSection.contains(e.target) && !filterToggle.contains(e.target)) {
       filterSection.classList.remove("show"); // Đóng filter section
     }
   });
@@ -33,13 +26,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const categoriesIcon = document.getElementById("categoriesIcon");
 
   toggleCategories.addEventListener("click", (e) => {
-    // Đảm bảo sự kiện xảy ra khi click vào tiêu đề hoặc icon
+    // Đảm bảo click từ toggle hoặc icon
     if (e.target.closest("#categoriesIcon") || e.target === toggleCategories) {
       const isHidden = categoriesList.classList.toggle("hidden"); // Toggle hiển thị dropdown
       categoriesIcon.innerHTML = isHidden
         ? '<i class="fa-solid fa-plus"></i>' // Icon +
         : '<i class="fa-solid fa-minus"></i>'; // Icon -
     }
+    e.stopPropagation(); // Ngăn sự kiện click lan ra document
   });
 
   // Toggle visibility of manufacturers
@@ -48,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const manufacturersIcon = document.getElementById("manufacturersIcon");
 
   toggleManufacturers.addEventListener("click", (e) => {
-    // Đảm bảo sự kiện xảy ra khi click vào tiêu đề hoặc icon
+    // Đảm bảo click từ toggle hoặc icon
     if (
       e.target.closest("#manufacturersIcon") ||
       e.target === toggleManufacturers
@@ -58,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ? '<i class="fa-solid fa-plus"></i>' // Icon +
         : '<i class="fa-solid fa-minus"></i>'; // Icon -
     }
+    e.stopPropagation(); // Ngăn sự kiện click lan ra document
   });
 
   // Apply Filters functionality

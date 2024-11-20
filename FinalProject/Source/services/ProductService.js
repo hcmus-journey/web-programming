@@ -250,11 +250,11 @@ class ProductService {
 
       const whereClause = query
         ? {
-          [Op.or]: [
-            { product_name: { [Op.iLike]: `%${query}%` } },
-            { detail: { [Op.iLike]: `%${query}%` } },
-          ],
-        }
+            [Op.or]: [
+              { product_name: { [Op.iLike]: `%${query}%` } },
+              { detail: { [Op.iLike]: `%${query}%` } },
+            ],
+          }
         : {};
 
       const products = await Product.findAll({
@@ -283,12 +283,65 @@ class ProductService {
     }
   }
 
-
   async getAllManufacturer() {
     try {
       return await ProductManufacturer.findAll();
     } catch (error) {
       throw new Error("Error fetching manufacturers: " + error.message);
+    }
+  }
+
+  // Count products by category
+  async countProductsByCategory() {
+    try {
+      return await ProductCategory.findAll({
+        attributes: [
+          "category_id",
+          "category_name",
+          [
+            sequelize.fn("COUNT", sequelize.col("products.product_id")),
+            "product_count",
+          ],
+        ],
+        include: [
+          {
+            model: Product,
+            as: "products",
+            attributes: [],
+          },
+        ],
+        group: ["ProductCategory.category_id"],
+      });
+    } catch (error) {
+      throw new Error("Error counting products by category: " + error.message);
+    }
+  }
+
+  // Count products by manufacturer
+  async countProductsByManufacturer() {
+    try {
+      return await ProductManufacturer.findAll({
+        attributes: [
+          "manufacturer_id",
+          "manufacturer_name",
+          [
+            sequelize.fn("COUNT", sequelize.col("products.product_id")),
+            "product_count",
+          ],
+        ],
+        include: [
+          {
+            model: Product,
+            as: "products",
+            attributes: [],
+          },
+        ],
+        group: ["ProductManufacturer.manufacturer_id"],
+      });
+    } catch (error) {
+      throw new Error(
+        "Error counting products by manufacturer: " + error.message
+      );
     }
   }
 }

@@ -92,7 +92,7 @@
                   <%= category.category_name %>
                 </label>
                 <div class="ml-auto text-gray-600 text-sm">
-                  (<%= category.productCount || 0 %>)
+                  (<%= category.dataValues.product_count || 0 %>)
                 </div>
               </div>
               <% }); %>
@@ -118,7 +118,7 @@
                   <%= manufacturer.manufacturer_name %>
                 </label>
                 <div class="ml-auto text-gray-600 text-sm">
-                  (<%= manufacturer.productCount || 0 %>)
+                  (<%= manufacturer.dataValues.product_count || 0 %>)
                 </div>
               </div>
               <% }); %>
