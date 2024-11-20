@@ -21,7 +21,6 @@
         "passport": "^0.6.0",
         "passport-local": "^1.0.0",
         "hat-shop": "file:",
-        "node-module": "^1.0.1",
         "pg": "^8.11.0",
         "pg-hstore": "^2.3.4",
         "sequelize": "^6.32.1",
