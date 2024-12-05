@@ -6,6 +6,7 @@ import shopRouter from "./ShopRouter.js";
 import productRouter from "./ProductRouter.js";
 import accountRouter from "./AccountRouter.js";
 import cartRouter from "./CartRouter.js";
+import orderRouter from "./OrderRouter.js";
 import PassportConfig from "../config/PassportConfig.js";
 import AdminController from "../controllers/AdminController.js";
 
@@ -27,6 +28,8 @@ mainRouter.use("/", passportConfig.verifyRole(['USER']), shopRouter);
 mainRouter.use("/", passportConfig.verifyRole(['USER']), productRouter);
 
 mainRouter.use("/", passportConfig.verifyRole(['USER']), accountRouter);
+
+mainRouter.use("/", passportConfig.verifyRole(['USER']), orderRouter);
 
 mainRouter.use("/", passportConfig.verifyRole(['USER']), cartRouter);
 

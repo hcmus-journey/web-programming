@@ -32,10 +32,7 @@ class ShopController {
       const manufacturers = await ProductService.getAllManufacturer(); // Lấy toàn bộ Manufacturer
 
       // Tìm kiếm theo tên sản phẩm
-      const products = await ProductService.searchProducts(
-        query,
-        sort
-      );
+      const products = await ProductService.searchProducts(query, sort);
 
       // Lọc sản phẩm theo các tiêu chí
       let filteredProducts = products;
@@ -78,6 +75,8 @@ class ShopController {
       );
 
       res.render(PagePath.SHOP_PAGE_PATH, {
+        successMessage: req.flash("success"),
+        errorMessage: req.flash("error"),
         products: paginatedProducts,
         currentPage: page,
         limit,
@@ -96,9 +95,11 @@ class ShopController {
         },
       });
     } catch (error) {
-      console.error('Error fetching products:', error);
-      res.render(PagePath.SHOP_PAGE_PATH, { 
-        error: 'An error occurred while fetching products.',
+      console.error("Error fetching products:", error);
+      res.render(PagePath.SHOP_PAGE_PATH, {
+        successMessage: req.flash("success"),
+        errorMessage: req.flash("error"),
+        error: "An error occurred while fetching products.",
         isLoggedIn: isLoggedIn,
         products: [],
         currentPage: 1,

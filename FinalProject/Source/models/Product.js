@@ -74,3 +74,4 @@ Product.hasMany(ProductReview, {
   foreignKey: "product_id",
   as: "reviews",
 });
+

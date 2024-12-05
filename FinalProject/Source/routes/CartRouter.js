@@ -7,6 +7,12 @@ const router = express.Router();
 
 router.get("/cart", cartController.showCartPage);
 
-router.get("/checkout", cartController.showCheckoutPage);
+router.post("/cart", cartController.addProductToCart);
+
+router.put('/cart', cartController.updateQuantity);
+
+router.delete('/cart/:id', cartController.removeProductFromCart);
+
+
 
 export default router;

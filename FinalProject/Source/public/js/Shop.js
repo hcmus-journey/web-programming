@@ -2,117 +2,65 @@ document.addEventListener("DOMContentLoaded", function () {
   const filterToggle = document.getElementById("filterToggle");
   const filterSection = document.getElementById("filterSection");
   const filterClose = document.getElementById("filterClose");
+  const applyFilterBtn = document.getElementById("applyFilter");
+  const resetFilterBtn = document.getElementById("resetFilter");
+  const sortSelect = document.getElementById("sort");
+  const paginationButtons = document.querySelectorAll(".pagination-controls button");
 
-  // Open the filter section
-  filterToggle.addEventListener("click", () => {
-    filterSection.classList.add("show");
-  });
+  const getCurrentPage = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    return parseInt(urlParams.get('page')) || 1;
+  };
 
-  // Close the filter section
-  filterClose.addEventListener("click", () => {
-    filterSection.classList.remove("show");
-  });
-
-  // Optional: Close filter if clicking outside of it
-  document.addEventListener("click", (e) => {
-    if (!filterSection.contains(e.target) && !filterToggle.contains(e.target)) {
-      filterSection.classList.remove("show"); // Đóng filter section
-    }
-  });
-
-  // Toggle visibility of categories
-  const toggleCategories = document.getElementById("toggleCategories");
-  const categoriesList = document.getElementById("categoriesList");
-  const categoriesIcon = document.getElementById("categoriesIcon");
-
-  toggleCategories.addEventListener("click", (e) => {
-    // Đảm bảo click từ toggle hoặc icon
-    if (e.target.closest("#categoriesIcon") || e.target === toggleCategories) {
-      const isHidden = categoriesList.classList.toggle("hidden"); // Toggle hiển thị dropdown
-      categoriesIcon.innerHTML = isHidden
-        ? '<i class="fa-solid fa-plus"></i>' // Icon +
-        : '<i class="fa-solid fa-minus"></i>'; // Icon -
-    }
-    e.stopPropagation(); // Ngăn sự kiện click lan ra document
-  });
-
-  // Toggle visibility of manufacturers
-  const toggleManufacturers = document.getElementById("toggleManufacturers");
-  const manufacturersList = document.getElementById("manufacturersList");
-  const manufacturersIcon = document.getElementById("manufacturersIcon");
-
-  toggleManufacturers.addEventListener("click", (e) => {
-    // Đảm bảo click từ toggle hoặc icon
-    if (
-      e.target.closest("#manufacturersIcon") ||
-      e.target === toggleManufacturers
-    ) {
-      const isHidden = manufacturersList.classList.toggle("hidden"); // Toggle hiển thị dropdown
-      manufacturersIcon.innerHTML = isHidden
-        ? '<i class="fa-solid fa-plus"></i>' // Icon +
-        : '<i class="fa-solid fa-minus"></i>'; // Icon -
-    }
-    e.stopPropagation(); // Ngăn sự kiện click lan ra document
-  });
-
-  // Apply Filters functionality
-  document.getElementById("applyFilter").addEventListener("click", function () {
-    const categories = Array.from(
-      document.querySelectorAll('input[name="catVal"]:checked')
-    ).map((el) => el.id.split("+")[1]);
-    const manufacturers = Array.from(
-      document.querySelectorAll('input[name="brandVal"]:checked')
-    ).map((el) => el.id.split("+")[1]);
+  const getCurrentFilters = () => {
+    const categories = Array.from(document.querySelectorAll('input[name="catVal"]:checked')).map(el => el.id.split("+")[1]);
+    const manufacturers = Array.from(document.querySelectorAll('input[name="brandVal"]:checked')).map(el => el.id.split("+")[1]);
     const minPrice = document.getElementById("min").value;
     const maxPrice = document.getElementById("max").value;
-    const status = document.querySelector('input[name="status"]:checked')
-      ? document.querySelector('input[name="status"]:checked').value
-      : "";
-    const sort = document.getElementById("sort").value;
+    const status = document.querySelector('input[name="status"]:checked')?.value || "";
+    const sort = sortSelect.value;
     const query = document.getElementById("search").value;
+    return { categories, manufacturers, minPrice, maxPrice, status, sort, query };
+  };
 
-    const queryParams = new URLSearchParams({
-      categories: categories.join(","),
-      manufacturers: manufacturers.join(","),
-      minPrice,
-      maxPrice,
-      status,
-      sort,
-      query,
-    });
-
+  const updateURL = (filters, page = 1) => {
+    const queryParams = new URLSearchParams({ ...filters, page });
     window.location.href = `/shop?${queryParams.toString()}`;
+  };
+
+  filterToggle.addEventListener("click", () => filterSection.classList.add("show"));
+  filterClose.addEventListener("click", () => filterSection.classList.remove("show"));
+
+  document.addEventListener("click", (e) => {
+    if (!filterSection.contains(e.target) && !filterToggle.contains(e.target)) {
+      filterSection.classList.remove("show");
+    }
   });
 
-  // Reset Filters functionality
-  document.getElementById("resetFilter").addEventListener("click", function () {
-    document
-      .querySelectorAll('input[name="catVal"]:checked')
-      .forEach((el) => (el.checked = false));
-    document
-      .querySelectorAll('input[name="brandVal"]:checked')
-      .forEach((el) => (el.checked = false));
+  applyFilterBtn.addEventListener("click", () => {
+    const filters = getCurrentFilters();
+    updateURL(filters);
+  });
+
+  resetFilterBtn.addEventListener("click", () => {
+    document.querySelectorAll('input[name="catVal"]:checked, input[name="brandVal"]:checked, input[name="status"]:checked').forEach(el => el.checked = false);
     document.getElementById("min").value = "";
     document.getElementById("max").value = "";
-    document
-      .querySelectorAll('input[name="status"]:checked')
-      .forEach((el) => (el.checked = false));
-    document.getElementById("sort").value = "";
+    sortSelect.value = "";
     document.getElementById("search").value = "";
+    window.location.href = "/shop";
   });
 
-  const sortDropdown = document.getElementById("sort");
-
-  if (sortDropdown) {
-    sortDropdown.addEventListener("change", function () {
-      const selectedSort = sortDropdown.value;
-      const currentUrl = new URL(window.location.href);
-      if (selectedSort) {
-        currentUrl.searchParams.set("sort", selectedSort);
-      } else {
-        currentUrl.searchParams.delete("sort");
-      }
-      window.location.href = currentUrl.toString();
+  paginationButtons.forEach(button => {
+    button.addEventListener("click", function () {
+      const page = this.dataset.page || (this.id === "prevPage" ? getCurrentPage() - 1 : getCurrentPage() + 1);
+      const filters = getCurrentFilters();
+      updateURL(filters, page);
     });
-  }
+  });
+
+  sortSelect.addEventListener("change", function () {
+    const filters = getCurrentFilters();
+    updateURL(filters);
+  });
 });

@@ -22,14 +22,6 @@ class MainController {
 
   }
 
-  showProductPage(req, res) {
-    let isLoggedIn = true;
-    if (!req.isAuthenticated()) {
-      isLoggedIn = false;
-    }
-    res.render(pagePath.PRODUCT_PAGE_PATH, {isLoggedIn: isLoggedIn});
-  }
-
   showAboutUsPage(req, res) {
     let isLoggedIn = true;
     if (!req.isAuthenticated()) {
@@ -44,14 +36,6 @@ class MainController {
       isLoggedIn = false;
     }
     res.render(pagePath.CONTACT_PAGE_PATH, {isLoggedIn: isLoggedIn});
-  }
-
-  showShopPage(req, res) {
-    let isLoggedIn = true;
-    if (!req.isAuthenticated()) {
-      isLoggedIn = false;
-    }
-    res.render(pagePath.SHOP_PAGE_PATH, {isLoggedIn: isLoggedIn});
   }
 
   showPrivacyPage(req, res) {

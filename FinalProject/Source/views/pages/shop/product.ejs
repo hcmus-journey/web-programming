@@ -8,108 +8,115 @@
 <body>
   <%- include('../../layouts/header') %>
     <%- include('../../layouts/navbar', {isLoggedIn: isLoggedIn}) %>
-
-      <!-- breadcrumb -->
-      <div class="container py-4 flex items-center gap-3">
-        <a href="/" class="text-primary text-base">
-          <i class="fa-solid fa-house"></i>
-        </a>
-        <span class="text-sm text-gray-400">
-          <i class="fa-solid fa-chevron-right"></i>
-        </span>
-        <p class="text-gray-600 font-medium">
-          <%= product.product_name %>
-        </p>
-      </div>
-
-      <!-- product-detail -->
-      <div class="container grid lg:grid-cols-2 gap-10">
-        <div class="flex flex-col items-center">
-          <!--Main Image -->
-          <% if (product.images.length > 0) { %>
-            <img id="mainImage" src="<%= product.images[0].img_src %>" alt="Product's image"
-              class="w-full  rounded-lg shadow-md" />
-          <% } %>
-          <!-- Images List -->
-          <div class="flex space-x-2 mt-4">
-            <% product.images.forEach(function(image) { %>
-              <img src="<%= image.img_src %>" alt="product image"
-                class="w-16 h-16 object-cover rounded cursor-pointer border border-gray-300"
-                onclick="changeImage('<%= image.img_src %>')" />
-              <% }); %>
-          </div>
-        </div>
-
-        <div>
-          <h2 class="text-xl font-medium uppercase mb-2">
+      <!-- Include flash messages -->
+      <%- include('../../layouts/notification') %>
+        <!-- breadcrumb -->
+        <div class="container py-4 flex items-center gap-3">
+          <a href="/" class="text-primary text-base">
+            <i class="fa-solid fa-house"></i>
+          </a>
+          <span class="text-sm text-gray-400">
+            <i class="fa-solid fa-chevron-right"></i>
+          </span>
+          <p class="text-gray-600 font-medium">
             <%= product.product_name %>
-          </h2>
-          <div class="space-y-2">
-            <p class="text-gray-800 font-medium space-x-2">
-              <span>Availability: </span>
-              <span class="text-green-600">
-                <%= product.quantity> 0 ? 'In Stock' : 'Out of Stock' %>
-              </span>
-            </p>
-            <p class="space-x-2">
-              <span class="text-gray-800 font-medium">Manufacturer: </span>
-              <span class="text-gray-600">
-                <%= product.manufacturer.manufacturer_name %>
-              </span>
-            </p>
-            <p class="space-x-2">
-              <span class="text-gray-800 font-medium">Category: </span>
-              <span class="text-gray-600">
-                <%= product.category.category_name %>
-              </span>
-            </p>
+          </p>
+        </div>
+
+        <!-- product-detail -->
+        <div class="container grid lg:grid-cols-2 gap-10">
+          <div class="flex flex-col items-center">
+            <!--Main Image -->
+            <% if (product.images.length> 0) { %>
+              <img id="mainImage" src="<%= product.images[0].img_src %>" alt="Product's image"
+                class="w-full  rounded-lg shadow-md" />
+              <% } %>
+                <!-- Images List -->
+                <div class="flex space-x-2 mt-4">
+                  <% product.images.forEach(function(image) { %>
+                    <img src="<%= image.img_src %>" alt="product image"
+                      class="w-16 h-16 object-cover rounded cursor-pointer border border-gray-300"
+                      onclick="changeImage('<%= image.img_src %>')" />
+                    <% }); %>
+                </div>
           </div>
-          <div class="flex items-baseline mb-1 space-x-2 font-roboto mt-4">
-            <p class="text-xl text-primary font-semibold">
-              <%= `$${product.price.toFixed(2)}` %>
-            </p>
-          </div>
-          <div class="mt-4">
-            <p class="text-gray-800 font-medium space-x-2 mb-2">Quantity</p>
-            <div class="flex border border-gray-300 text-gray-600 divide-x divide-gray-300 w-max">
-              <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">-</div>
-              <div class="h-8 w-8 text-base flex items-center justify-center">4</div>
-              <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">+</div>
+
+          <div>
+            <h2 class="text-xl font-medium uppercase mb-2">
+              <%= product.product_name %>
+            </h2>
+            <div class="space-y-2">
+              <p class="text-gray-800 font-medium space-x-2">
+                <span>Availability: </span>
+                <span class="text-green-600">
+                  <%= product.quantity> 0 ? 'In Stock: ' + product.quantity  : 'Out of Stock' %>
+                </span>
+              </p>
+              <p class="space-x-2">
+                <span class="text-gray-800 font-medium">Manufacturer: </span>
+                <span class="text-gray-600">
+                  <%= product.manufacturer.manufacturer_name %>
+                </span>
+              </p>
+              <p class="space-x-2">
+                <span class="text-gray-800 font-medium">Category: </span>
+                <span class="text-gray-600">
+                  <%= product.category.category_name %>
+                </span>
+              </p>
             </div>
-          </div>
-          <div class="mt-6 flex gap-3 pb-5 pt-5">
-            <a href="#"
-              class="bg-primary border border-primary text-white px-8 py-2 font-medium rounded uppercase flex items-center gap-2 hover:bg-transparent hover:text-primary transition">
-              <i class="fa-solid fa-bag-shopping"></i> Add to cart
-            </a>
+            <div class="flex items-baseline mb-1 space-x-2 font-roboto mt-4">
+              <p class="text-xl text-primary font-semibold">
+                <%= `$${product.price.toFixed(2)}` %>
+              </p>
+            </div>
+            <form id="addToCartForm" action="/cart/add" method="POST">
+              <div class="mt-4">
+                <p class="text-gray-800 font-medium space-x-2 mb-2">Quantity</p>
+                <div class="flex border border-gray-300 text-gray-600 divide-x divide-gray-300 w-max">
+                  <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none"
+                    id="decreaseQuantity">-</div>
+                  <div class="h-8 w-8 text-base flex items-center justify-center" id="quantityValue">1</div>
+                  <div class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none"
+                    id="increaseQuantity">+</div>
+                </div>
+              </div>
+              <input type="hidden" name="productId" value="<%= product.product_id %>">
+              <input type="hidden" name="quantity" id="quantityInput" value="1">
+              <div class="mt-6 flex gap-3 pb-5 pt-5">
+                <button type="submit" id="addToCartButton"
+                  class="bg-primary border border-primary text-white px-8 py-2 font-medium rounded uppercase flex items-center gap-2 hover:bg-transparent hover:text-primary transition">
+                  <i class="fa-solid fa-bag-shopping"></i> Add to cart
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-      </div>
-      <!-- ./product-detail -->
+        <!-- ./product-detail -->
 
-      <!-- description -->
-      <div class="container pt-5">
-        <h3 class="border-b border-gray-200 font-roboto text-gray-800 pb-3 font-medium">
-          Product details
-        </h3>
-        <p class="text-gray-600 pt-4">
-          <%= product.detail %>
-        </p>
-      </div>
-      <!-- ./description -->
-
-      <!-- related product -->
-      <div class="container pt-5">
-        <h2 class="text-2xl font-medium text-gray-800 uppercase mb-6">
-          Related products
-        </h2>
-        <div class="grid grid-cols-4 gap-6">
-          <%- include('../../layouts/productList' , {productList : relatedProducts}) %>
+        <!-- description -->
+        <div class="container pt-5">
+          <h3 class="border-b border-gray-200 font-roboto text-gray-800 pb-3 font-medium">
+            Product details
+          </h3>
+          <p class="text-gray-600 pt-4">
+            <%= product.detail %>
+          </p>
         </div>
-      </div>
-      <!-- ./related product -->
-      <%- include('../../layouts/footer') %>
-        <script src="/public/js/Product.js"></script>
+        <!-- ./description -->
+
+        <!-- related product -->
+        <div class="container pt-5">
+          <h2 class="text-2xl font-medium text-gray-800 uppercase mb-6">
+            Related products
+          </h2>
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            <%- include('../../layouts/productList' , {productList : relatedProducts}) %>
+          </div>
+        </div>
+        <!-- ./related product -->
+        <%- include('../../layouts/footer') %>
+          <script type="module" src="/public/js/Product.js"></script>
 </body>
 
 </html>
