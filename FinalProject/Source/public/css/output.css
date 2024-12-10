@@ -1120,8 +1120,16 @@ h1,
   width: 4rem;
 }
 
+.w-2\/5{
+  width: 40%;
+}
+
 .w-28{
   width: 7rem;
+}
+
+.w-3\/4{
+  width: 75%;
 }
 
 .w-32{
@@ -1155,22 +1163,6 @@ h1,
 .w-max{
   width: -moz-max-content;
   width: max-content;
-}
-
-.w-auto{
-  width: auto;
-}
-
-.w-3\/4{
-  width: 75%;
-}
-
-.w-1{
-  width: 0.25rem;
-}
-
-.w-2\/5{
-  width: 40%;
 }
 
 .max-w-4xl{

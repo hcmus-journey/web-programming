@@ -33,7 +33,7 @@
             </div>
             <div class="flex-grow">
               <p class="text-gray-600">Hello,</p>
-              <h4 class="text-gray-800 font-medium"> 
+              <h4 class="text-gray-800 font-medium name"> 
                 <%= user.name %>
             </h4>
             </div>
@@ -90,7 +90,7 @@
           </div>
 
           <div class="space-y-1">
-            <p class="text-gray-800"><span class="font-bold">Name: </span><span><%= user.name%></span></p>
+            <p class="text-gray-800"><span class="font-bold">Name: </span><span class="name"><%= user.name%></span></p>
             <p class="text-gray-800"><span class="font-bold">Email: </span> <span><%= user.email%></span></p>
           </div>
         </div>
@@ -104,24 +104,16 @@
                 placeholder="Your Name" value="<%= user.name %>"
                 required />
             </div>
-
-            <!-- Email -->
-            <div>
-              <label class="font-bold">Email:</label>
-              <input type="email" id="userEmail" class=" p-3 border border-gray-300 rounded w-3/4" 
-                placeholder="Your Email" value="<%=user.email %>" required />
-            </div>
-
             <!-- Submit Button -->
             <div>
               <button type="submit" class="bg-primary w-2/5 border border-primary text-white px-8 py-3 font-medium 
-            rounded-md hover:bg-transparent hover:text-primary" id="apply-btn">
+            rounded-md hover:bg-transparent hover:text-primary" id="apply-btn" onclick="edit()">
                 Apply
               </button>
               <button type="cancel" class="bg-white w-2/5 border border-primary text-primary px-8 py-3 font-medium 
               rounded-md hover:bg-transparent hover:text-primary" id="cancel-btn">
                   Cancel
-                </button>
+              </button>
             </div>
           </form>
         </div>

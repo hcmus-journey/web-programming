@@ -18,42 +18,40 @@ document.addEventListener("DOMContentLoaded", function () {
         editProfile.classList.toggle("hidden");
       });
   });
+
+  function edit() {
+    const name = userName.value;
+    const data = {name};
+    const profile = document.getElementById("profile");
+    const editProfile = document.getElementById("edit-profile");
   
-  document.addEventListener("DOMContentLoaded", function () {
-    const applyBtn = document.getElementById("apply-btn");
-
-    applyBtn.addEventListener("click", function () {
-
-        profile.classList.toggle("hidden");
-        editProfile.classList.toggle("hidden");
+    fetch("/dashboard", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to edit profile");
+        }
+        return response.json(); // Only parse JSON if the response is successful
+      })
+      .then((data) => {
+        if (data.success) {
+          displayNotification(data.message, "success"); // Show success notification
+        } else {
+          displayNotification(data.message, "error"); // Show error notification
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        displayNotification("An error occurred while editing profile.", "error");
       });
-
-      function editProfile(name, email) {
-        const data = { name, email };
-      
-        fetch("/dashboard", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Failed to edit profile");
-            }
-            return response.json(); // Only parse JSON if the response is successful
-          })
-          .then((data) => {
-            if (data.success) {
-              displayNotification(data.message, "success"); // Show success notification
-            } else {
-              displayNotification(data.message, "error"); // Show error notification
-            }
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-            displayNotification("An error occurred while editing profile.", "error");
-          });
-  
-        };
-  });
+      profile.classList.toggle("hidden");
+      editProfile.classList.toggle("hidden");
+      let nameFields = document.querySelectorAll(".name")
+      for (let field of nameFields) {
+        field.textContent = name;
+      }
+    };
   
