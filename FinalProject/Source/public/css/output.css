@@ -1157,6 +1157,22 @@ h1,
   width: max-content;
 }
 
+.w-auto{
+  width: auto;
+}
+
+.w-3\/4{
+  width: 75%;
+}
+
+.w-1{
+  width: 0.25rem;
+}
+
+.w-2\/5{
+  width: 40%;
+}
+
 .max-w-4xl{
   max-width: 56rem;
 }
