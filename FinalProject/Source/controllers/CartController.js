@@ -12,6 +12,7 @@ class CartController {
     this.updateQuantity = this.updateQuantity.bind(this);
     this.removeProductFromCart = this.removeProductFromCart.bind(this);
   }
+  
   async showCartPage(req, res) {
     if (req.isAuthenticated()) {
       const cart = await this.cartService.getCart(req.user.user_id);
