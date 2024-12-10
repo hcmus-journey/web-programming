@@ -9,14 +9,27 @@
     %>
 
     <!-- breadcrumb -->
-    <div class="container py-4 flex items-center gap-3">
-      <a href="/" class="text-primary text-base">
-        <i class="fa-solid fa-house"></i>
+    <div class="container py-4 flex items-center justify-between gap-3">
+      <!-- Breadcrumb Content -->
+      <div class="flex items-center gap-3">
+        <a href="/" class="text-primary text-base">
+          <i class="fa-solid fa-house"></i>
+        </a>
+        <span class="text-sm text-gray-400">
+          <i class="fa-solid fa-chevron-right"></i>
+        </span>
+        <p class="text-gray-600 font-medium"><%= product.product_name %></p>
+      </div>
+
+      <!-- Edit Product Button -->
+      <a
+        href="/edit_product"
+        id="editProduct"
+        class="flex items-center bg-primary text-white px-4 py-2 rounded h-12 hover:bg-transparent hover:text-primary transition"
+      >
+        <i class="fa-solid fa-edit mr-2"></i>
+        Edit Product
       </a>
-      <span class="text-sm text-gray-400">
-        <i class="fa-solid fa-chevron-right"></i>
-      </span>
-      <p class="text-gray-600 font-medium"><%= product.product_name %></p>
     </div>
 
     <!-- product-detail -->

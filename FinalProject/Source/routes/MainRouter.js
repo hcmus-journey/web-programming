@@ -4,6 +4,7 @@ import mainController from "../controllers/MainController.js";
 import userRouter from "./UserRouter.js";
 import shopRouter from "./ShopRouter.js";
 import productRouter from "./ProductRouter.js";
+import adminRouter from "./AdminRouter.js";
 
 const mainRouter = express.Router();
 
@@ -22,5 +23,7 @@ mainRouter.use("/", userRouter);
 mainRouter.use("/", shopRouter);
 
 mainRouter.use("/", productRouter);
+
+mainRouter.use("/", adminRouter);
 
 export default mainRouter;
