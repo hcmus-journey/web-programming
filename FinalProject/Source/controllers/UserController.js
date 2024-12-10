@@ -69,12 +69,7 @@ class UserController {
           req.session.cookie.expires = false; // Session expires at browser close
         }
   
-        if (user.user_role == "ADMIN") {
-          res.redirect("/admin");
-        }
-        else {
-          res.redirect("/");
-        }
+        res.redirect("/");
 
       });
     })(req, res, next);

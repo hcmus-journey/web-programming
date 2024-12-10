@@ -31,6 +31,11 @@ app.use(expressSession({
 // Flash setup - place this after session middleware
 app.use(flash());  // Add this line to enable flash messages
 
+// Static files
+app.use('/node_modules', express.static('node_modules'));
+app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/constants', express.static(path.join(__dirname, 'constants')));
+
 new PassportConfig(app);
 
 app.set('view engine', 'ejs');
@@ -38,11 +43,6 @@ app.set('views', './views');
 
 // Routes
 app.use('/', mainRoutes);
-
-// Static files
-app.use('/node_modules', express.static('node_modules'));
-app.use('/public', express.static(path.join(__dirname, 'public')));
-app.use('/constants', express.static(path.join(__dirname, 'constants')));
 
 // Start the server
 app.listen(port, () => {
