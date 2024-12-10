@@ -1,6 +1,7 @@
 // routes/index.js
 import express from "express";
 import mainController from "../controllers/MainController.js";
+import adminRouter from "./AdminRouter.js";
 import userRouter from "./UserRouter.js";
 import shopRouter from "./ShopRouter.js";
 import productRouter from "./ProductRouter.js";
@@ -8,7 +9,7 @@ import accountRouter from "./AccountRouter.js";
 import cartRouter from "./CartRouter.js";
 import orderRouter from "./OrderRouter.js";
 import PassportConfig from "../config/PassportConfig.js";
-import AdminController from "../controllers/AdminController.js";
+import adminController from "../controllers/AdminController.js";
 
 const mainRouter = express.Router();
 
@@ -19,9 +20,11 @@ mainRouter.get("", passportConfig.verifyRole(['USER']), mainController.showHomeP
 mainRouter.get("/about_us", passportConfig.verifyRole(['USER']), mainController.showAboutUsPage);
 mainRouter.get("/contact_us", passportConfig.verifyRole(['USER']), mainController.showContactPage);
 mainRouter.get("/privacy", passportConfig.verifyRole(['USER']), mainController.showPrivacyPage);
-mainRouter.get("/admin", passportConfig.verifyRole(['ADMIN']), AdminController.showAdminPage);
+//mainRouter.get("/admin", passportConfig.verifyRole(['ADMIN']), adminController.showAdminPage);
 
 mainRouter.use("/", userRouter);
+
+mainRouter.use("/", passportConfig.verifyRole(['ADMIN']), adminRouter);
 
 mainRouter.use("/", passportConfig.verifyRole(['USER']), shopRouter);
 

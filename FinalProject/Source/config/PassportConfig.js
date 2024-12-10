@@ -56,7 +56,12 @@ class PassportConfig {
                 const userRole = req.user.user_role; // Assuming role is stored in req.user
 
                 if (!allowedRoles.includes(userRole)) {
-                    return res.status(403).send('Access Denied'); // Forbidden for unauthorized roles
+                    if (userRole == 'ADMIN') {
+                        return res.redirect('/dashboard'); 
+                    }
+                    else {
+                        return res.redirect('/');
+                    }
                 }
             }
 
