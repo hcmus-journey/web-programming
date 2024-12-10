@@ -33,13 +33,16 @@ class ShopController {
         return res.json({ html, pagination });
       }
 
+      const categories = await ProductService.getAllCategories(); 
+      const manufacturers = await ProductService.getAllManufacturer();
+
       res.render(PagePath.SHOP_PAGE_PATH, {
         products: paginatedProducts,
         totalPages: totalFilteredPages,
         currentPage: page,
         selectedSort: sort,
-        categories: [],
-        manufacturers: [],
+        categories: categories,
+        manufacturers: manufacturers,
         isLoggedIn: req.isAuthenticated(),
         selectedFilters: { categories: catVal, manufacturers: brandVal, minPrice, maxPrice, status },
       });
