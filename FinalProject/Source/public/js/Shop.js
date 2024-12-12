@@ -1,62 +1,40 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const filterToggle = document.getElementById("filterToggle");
-  const filterSection = document.getElementById("filterSection");
-  const filterClose = document.getElementById("filterClose");
-
-  // Open the filter section
-  filterToggle.addEventListener("click", () => {
-    filterSection.classList.add("show");
-  });
-
-  // Close the filter section
-  filterClose.addEventListener("click", () => {
-    filterSection.classList.remove("show");
-  });
-
-  // Optional: Close filter if clicking outside of it
-  document.addEventListener("click", (e) => {
-    if (!filterSection.contains(e.target) && !filterToggle.contains(e.target)) {
-      filterSection.classList.remove("show"); // Đóng filter section
-    }
-  });
-
-  // Toggle visibility of categories
   const toggleCategories = document.getElementById("toggleCategories");
   const categoriesList = document.getElementById("categoriesList");
   const categoriesIcon = document.getElementById("categoriesIcon");
 
-  toggleCategories.addEventListener("click", (e) => {
-    // Đảm bảo click từ toggle hoặc icon
-    if (e.target.closest("#categoriesIcon") || e.target === toggleCategories) {
-      const isHidden = categoriesList.classList.toggle("hidden"); // Toggle hiển thị dropdown
-      categoriesIcon.innerHTML = isHidden
-        ? '<i class="fa-solid fa-plus"></i>' // Icon +
-        : '<i class="fa-solid fa-minus"></i>'; // Icon -
-    }
-    e.stopPropagation(); // Ngăn sự kiện click lan ra document
-  });
-
-  // Toggle visibility of manufacturers
   const toggleManufacturers = document.getElementById("toggleManufacturers");
   const manufacturersList = document.getElementById("manufacturersList");
   const manufacturersIcon = document.getElementById("manufacturersIcon");
 
-  toggleManufacturers.addEventListener("click", (e) => {
-    // Đảm bảo click từ toggle hoặc icon
-    if (
-      e.target.closest("#manufacturersIcon") ||
-      e.target === toggleManufacturers
-    ) {
-      const isHidden = manufacturersList.classList.toggle("hidden"); // Toggle hiển thị dropdown
-      manufacturersIcon.innerHTML = isHidden
-        ? '<i class="fa-solid fa-plus"></i>' // Icon +
-        : '<i class="fa-solid fa-minus"></i>'; // Icon -
-    }
-    e.stopPropagation(); // Ngăn sự kiện click lan ra document
+  // Toggle categories filter
+  toggleCategories.addEventListener("click", function () {
+    categoriesList.classList.toggle("hidden");
+    const isHidden = categoriesList.classList.contains("hidden");
+    categoriesIcon.innerHTML = isHidden ? '<i class="fa-solid fa-plus"></i>' : '<i class="fa-solid fa-minus"></i>';
   });
 
-  // Apply Filters functionality
-  document.getElementById("applyFilter").addEventListener("click", function () {
+  // Toggle manufacturers filter
+  toggleManufacturers.addEventListener("click", function () {
+    manufacturersList.classList.toggle("hidden");
+    const isHidden = manufacturersList.classList.contains("hidden");
+    manufacturersIcon.innerHTML = isHidden ? '<i class="fa-solid fa-plus"></i>' : '<i class="fa-solid fa-minus"></i>';
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const filterSection = document.getElementById("filterSection");
+  const filterToggle = document.getElementById("filterToggle");
+  const filterClose = document.getElementById("filterClose");
+  const applyFilterBtn = document.getElementById("applyFilter");
+  const resetFilterBtn = document.getElementById("resetFilter");
+  const sortSelect = document.getElementById("sort");
+  const paginationContainer = document.querySelector(".pagination-controls");
+  const searchForm = document.querySelector(".search-form");
+
+  let currentPage = 1; // Track the current page
+  
+  const getCurrentFilters = () => {
     const categories = Array.from(
       document.querySelectorAll('input[name="catVal"]:checked')
     ).map((el) => el.id.split("+")[1]);
@@ -65,54 +43,94 @@ document.addEventListener("DOMContentLoaded", function () {
     ).map((el) => el.id.split("+")[1]);
     const minPrice = document.getElementById("min").value;
     const maxPrice = document.getElementById("max").value;
-    const status = document.querySelector('input[name="status"]:checked')
-      ? document.querySelector('input[name="status"]:checked').value
-      : "";
-    const sort = document.getElementById("sort").value;
+    const status =
+      document.querySelector('input[name="status"]:checked')?.value || "";
+    const sort = sortSelect.value;
     const query = document.getElementById("search").value;
-
-    const queryParams = new URLSearchParams({
-      categories: categories.join(","),
-      manufacturers: manufacturers.join(","),
+    return {
+      categories,
+      manufacturers,
       minPrice,
       maxPrice,
       status,
       sort,
       query,
-    });
+    };
+  };
 
-    window.location.href = `/shop?${queryParams.toString()}`;
+  const fetchProducts = (filters, page = 1) => {
+    currentPage = page; // Update the current page
+    const params = new URLSearchParams({ ...filters, page });
+    const url = `/shop?${params.toString()}`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        document.getElementById("productList").innerHTML = data.html;
+        paginationContainer.innerHTML = data.pagination;
+      })
+      .catch((error) => console.error("Error fetching products:", error));
+  };
+
+
+  // Event listeners for pagination
+  paginationContainer.addEventListener("click", (e) => {
+    const target = e.target.closest("button");
+    if (!target) return;
+
+    const page = target.dataset.page;
+
+    if (page === "prev") {
+      if (currentPage > 1) {
+        fetchProducts(getCurrentFilters(), currentPage - 1);
+      }
+    } else if (page === "next") {
+      fetchProducts(getCurrentFilters(), currentPage + 1);
+    } else {
+      const pageNum = parseInt(page, 10);
+      if (!isNaN(pageNum)) {
+        fetchProducts(getCurrentFilters(), pageNum);
+      }
+    }
   });
 
-  // Reset Filters functionality
-  document.getElementById("resetFilter").addEventListener("click", function () {
+  // Filter and reset functionality
+  filterToggle.addEventListener("click", () =>
+    filterSection.classList.add("show")
+  );
+  filterClose.addEventListener("click", () =>
+    filterSection.classList.remove("show")
+  );
+
+  applyFilterBtn.addEventListener("click", () => {
+    const filters = getCurrentFilters();
+    fetchProducts(filters);
+  });
+
+  resetFilterBtn.addEventListener("click", () => {
     document
-      .querySelectorAll('input[name="catVal"]:checked')
-      .forEach((el) => (el.checked = false));
-    document
-      .querySelectorAll('input[name="brandVal"]:checked')
+      .querySelectorAll(
+        'input[name="catVal"]:checked, input[name="brandVal"]:checked, input[name="status"]:checked'
+      )
       .forEach((el) => (el.checked = false));
     document.getElementById("min").value = "";
     document.getElementById("max").value = "";
-    document
-      .querySelectorAll('input[name="status"]:checked')
-      .forEach((el) => (el.checked = false));
-    document.getElementById("sort").value = "";
+    sortSelect.value = "";
     document.getElementById("search").value = "";
+    fetchProducts({});
   });
 
-  const sortDropdown = document.getElementById("sort");
+  sortSelect.addEventListener("change", () => {
+    const filters = getCurrentFilters();
+    fetchProducts(filters);
+  });
 
-  if (sortDropdown) {
-    sortDropdown.addEventListener("change", function () {
-      const selectedSort = sortDropdown.value;
-      const currentUrl = new URL(window.location.href);
-      if (selectedSort) {
-        currentUrl.searchParams.set("sort", selectedSort);
-      } else {
-        currentUrl.searchParams.delete("sort");
-      }
-      window.location.href = currentUrl.toString();
-    });
-  }
+  // Handle search form submit via AJAX
+  searchForm.addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevent the form from submitting normally
+    const filters = getCurrentFilters();
+    fetchProducts(filters);
+  });
+
+  // Initial fetch of products (optional, if you want to load products on page load)
+  fetchProducts(getCurrentFilters());
 });

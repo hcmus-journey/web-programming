@@ -1,29 +1,39 @@
 // routes/index.js
 import express from "express";
 import mainController from "../controllers/MainController.js";
+import adminRouter from "./AdminRouter.js";
 import userRouter from "./UserRouter.js";
 import shopRouter from "./ShopRouter.js";
 import productRouter from "./ProductRouter.js";
-import adminRouter from "./AdminRouter.js";
+import accountRouter from "./AccountRouter.js";
+import cartRouter from "./CartRouter.js";
+import orderRouter from "./OrderRouter.js";
+import PassportConfig from "../config/PassportConfig.js";
+import adminController from "../controllers/AdminController.js";
 
 const mainRouter = express.Router();
 
-mainRouter.get("/", mainController.showHomePage);
-mainRouter.get("", mainController.showHomePage);
-mainRouter.get("/cart", mainController.showCartPage);
-mainRouter.get("/checkout", mainController.showCheckoutPage);
-mainRouter.get("/about_us", mainController.showAboutUsPage);
-mainRouter.get("/contact_us", mainController.showContactPage);
-mainRouter.get("/account", mainController.showAccountPage);
-mainRouter.get("/profile", mainController.showProfilePage);
-mainRouter.get("/privacy", mainController.showPrivacyPage);
+const passportConfig = new PassportConfig();
+
+mainRouter.get("/", passportConfig.verifyRole(['USER']), mainController.showHomePage);
+mainRouter.get("", passportConfig.verifyRole(['USER']), mainController.showHomePage);
+mainRouter.get("/about_us", passportConfig.verifyRole(['USER']), mainController.showAboutUsPage);
+mainRouter.get("/contact_us", passportConfig.verifyRole(['USER']), mainController.showContactPage);
+mainRouter.get("/privacy", passportConfig.verifyRole(['USER']), mainController.showPrivacyPage);
+//mainRouter.get("/admin", passportConfig.verifyRole(['ADMIN']), adminController.showAdminPage);
 
 mainRouter.use("/", userRouter);
 
-mainRouter.use("/", shopRouter);
+mainRouter.use("/", passportConfig.verifyRole(['ADMIN']), adminRouter);
 
-mainRouter.use("/", productRouter);
+mainRouter.use("/", passportConfig.verifyRole(['USER']), shopRouter);
 
-mainRouter.use("/", adminRouter);
+mainRouter.use("/", passportConfig.verifyRole(['USER']), productRouter);
+
+mainRouter.use("/", passportConfig.verifyRole(['USER']), accountRouter);
+
+mainRouter.use("/", passportConfig.verifyRole(['USER']), orderRouter);
+
+mainRouter.use("/", passportConfig.verifyRole(['USER']), cartRouter);
 
 export default mainRouter;

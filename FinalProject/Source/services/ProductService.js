@@ -235,7 +235,7 @@ class ProductService {
   }
 
   // Tìm kiếm sản phẩm dựa trên tên và mô tả
-  async searchProducts(query, orderBy = "product_name", sort) {
+  async searchProducts(query, sort) {
     let orderClause = [];
     if (sort === "price-low-to-high") {
       orderClause = [["price", "ASC"]];

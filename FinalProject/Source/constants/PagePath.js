@@ -13,6 +13,9 @@ class PagePath {
   static ACCOUNT_PAGE_PATH = "pages/user/account";
   static PROFILE_PAGE_PATH = "pages/user/profile";
 
+  static ADMIN_PAGE_PATH = "pages/admin/admin";
+
+
   static PRIVACY_PAGE_PATH = "#";
 
   //admin

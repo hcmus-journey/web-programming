@@ -4,6 +4,7 @@ import productController from "../controllers/ProductController.js";
 
 const router = express.Router();
 
+
 // Get product details page
 router.get("/product", productController.showProductPage);
 

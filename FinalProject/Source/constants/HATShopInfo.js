@@ -4,4 +4,6 @@ export default class HATShopInfo {
     static HATSHOP_ADDRESS =
       "227 Nguyen Van Cu, Ward 4, District 5, Ho Chi Minh City, Vietnam";
     static HATSHOP_FANPAGE = "https://www.facebook.com/hat.shop";
+    static FREE_SHIPPING_THRESHOLD = 200;
+    static SHIPPING_FEE = 20;
 }

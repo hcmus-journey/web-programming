@@ -8,7 +8,7 @@
 <body>
   <%- include('../../layouts/header') %>
 
-    <%- include('../../layouts/navbar') %>
+    <%- include('../../layouts/navbar', {isLoggedIn: isLoggedIn}) %>
 
       <!-- about_us -->
       <div class="container py-16 flex flex-col md:flex-row items-center">
