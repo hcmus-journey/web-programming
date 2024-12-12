@@ -20,7 +20,6 @@ mainRouter.get("", passportConfig.verifyRole(['USER']), mainController.showHomeP
 mainRouter.get("/about_us", passportConfig.verifyRole(['USER']), mainController.showAboutUsPage);
 mainRouter.get("/contact_us", passportConfig.verifyRole(['USER']), mainController.showContactPage);
 mainRouter.get("/privacy", passportConfig.verifyRole(['USER']), mainController.showPrivacyPage);
-//mainRouter.get("/admin", passportConfig.verifyRole(['ADMIN']), adminController.showAdminPage);
 
 mainRouter.use("/", userRouter);
 
