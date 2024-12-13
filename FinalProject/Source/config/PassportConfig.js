@@ -57,7 +57,7 @@ class PassportConfig {
 
                 if (!allowedRoles.includes(userRole)) {
                     if (userRole == 'ADMIN') {
-                        return res.redirect('/dashboard'); 
+                        return res.redirect('/admin/dashboard'); 
                     }
                     else {
                         return res.redirect('/');
