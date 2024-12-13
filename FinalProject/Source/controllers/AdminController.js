@@ -28,19 +28,17 @@ class AdminController {
         name: req.body.name,
       };
       try {
-        const updatedProfile = await this.userService.updateUser(
+        this.userService.updateUser(
           req.user.user_id,
           userData
         );
+      res.json({ success: true, message: "Profile updated!" });
 
       } catch (error) {
         res.json({ success: false, message: error.message });
       }
     } else {
-      return res.json({
-        success: false,
-        message: "Please log in to edit your profile.",
-      });
+      res.redirect('/');
     }
   }
 }

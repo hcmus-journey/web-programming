@@ -2,13 +2,15 @@
 <html lang="en">
 
 <head>
-  <%- include('../../layouts/head', { title: 'HATShop - Account' }) %>
+  <%- include('../../layouts/head', { title: 'HATShop - Dashboard' }) %>
 </head>
 
 <body>
   <%- include('../../layouts/header') %>
 
     <%- include('../../layouts/navbar', {isLoggedIn: isLoggedIn}) %>
+
+    <%- include('../../layouts/notification') %>
 
       <!-- breadcrumb -->
       <div class="container py-4 flex items-center gap-3">
@@ -47,26 +49,8 @@
                 </span>
                 Profile information
               </a>
-              <a href="#" class="relative hover:text-primary block capitalize transition">
+              <a href="/change-password" class="relative hover:text-primary block capitalize transition">
                 Change password
-              </a>
-            </div>
-
-            <div class="space-y-2 lg:pl-8 pt-4">
-              <a href="#" class="relative hover:text-primary block font-medium capitalize transition">
-                <span class="hidden lg:block absolute -left-8 top-0 text-base">
-                  <i class="fa-solid fa-box-archive"></i>
-                </span>
-                Order history
-              </a>
-            </div>
-
-            <div class="space-y-2 lg:pl-8 pt-4">
-              <a href="/cart" class="relative hover:text-primary block font-medium capitalize transition">
-                <span class="hidden lg:block absolute -left-8 top-0 text-base">
-                  <i class="fa-solid fa-bag-shopping"></i>
-                </span>
-                My cart
               </a>
             </div>
 
@@ -86,7 +70,7 @@
         <div class="shadow rounded bg-white px-4 pt-6 pb-8 col-span-6 lg:col-span-8" id="profile">
           <div class="flex items-center justify-between mb-4">
             <h3 class="font-medium text-gray-800 text-lg">Admin Profile</h3>
-            <a href="#" class="text-primary" id="edit-btn">Edit</a>
+            <button class="text-primary" id="edit-btn">Edit</button>
           </div>
 
           <div class="space-y-1">
@@ -96,7 +80,7 @@
         </div>
 
         <div class="shadow rounded bg-white px-4 pt-6 pb-8 col-span-6 lg:col-span-8 hidden" id="edit-profile">
-          <form class="space-y-4 text-gray-800">
+          <div class="space-y-4 text-gray-800">
             <!-- Name -->
             <div>
               <label class="font-bold">Name:</label>
@@ -106,7 +90,7 @@
             </div>
             <!-- Submit Button -->
             <div>
-              <button type="submit" class="bg-primary w-2/5 border border-primary text-white px-8 py-3 font-medium 
+              <button class="bg-primary w-2/5 border border-primary text-white px-8 py-3 font-medium 
             rounded-md hover:bg-transparent hover:text-primary" id="apply-btn" onclick="edit()">
                 Apply
               </button>
@@ -115,14 +99,14 @@
                   Cancel
               </button>
             </div>
-          </form>
+          </div>
         </div>
         <!-- ./info -->
       </div>
       <!-- ./account wrapper -->
 
       <%- include('../../layouts/footer') %>
-      <script src="/public/js/Admin.js"></script>
+      <script type="module" src="/public/js/Admin.js"></script>
 </body>
 
 </html>
