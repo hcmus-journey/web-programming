@@ -15,6 +15,7 @@ class PagePath {
   static CHANGE_PASSWORD_PAGE_PATH = "pages/user/change-password";
 
   static ADMIN_PAGE_PATH = "pages/admin/admin";
+  static USER_LIST_PAGE_PATH = "pages/admin/users.ejs"
 
 
   static PRIVACY_PAGE_PATH = "#";

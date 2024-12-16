@@ -1,0 +1,25 @@
+<table class="table-fixed w-full border-collapse border border-gray-300">
+  <thead>
+    <tr class="bg-gray-800">
+      <th class="text-white px-4 py-4 text-left w-full">Name</th>
+      <th class="text-white px-4 py-4 text-left w-full">Email</th>
+      <th class="text-white px-4 py-4 text-left w-1/2">Role</th>
+      <th class="text-white px-4 py-4 text-left w-1/2">Status</th>
+      <th class="text-white px-4 py-4 text-left w-full">Registration Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.forEach(user => { %>
+      <tr class="hover:bg-gray-200">
+        <td class="px-4 py-4 break-words w-full"><%= user.name %></td>
+        <td class="px-4 py-4 break-words w-full"><%= user.email %></td>
+        <td class="px-4 py-4 w-1/2"><%= user.user_role %></td>
+        <td class="px-4 py-4 w-1/2"><%= user.status %></td>
+        <td class="px-4 py-4 break-words w-full"><%= new Date(user.created_at).toLocaleString('en-US', { timeZone: 'Asia/Bangkok', dateStyle: 'medium', timeStyle: 'short' }) %></td>
+      </tr>
+    <% }); %>
+  </tbody>
+</table>
+  
+  <script type="module" src="/public/js/UserList.js"></script>
+  
