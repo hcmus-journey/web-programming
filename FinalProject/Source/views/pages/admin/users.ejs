@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../layouts/head', { title: 'HATShop - User List' }) %>
+    <link rel="stylesheet" href="/public/css/shop.css" />
+</head>
+
+<body>
+  <!-- header -->
+  <header class="py-4 shadow-sm bg-white">
+    <div class="container flex items-center justify-between">
+      <a class="font-bold text-xl" href="/">
+        <span class="text-primary">HAT</span><span class="text-gray-800">Shop</span>
+      </a>
+      <!-- Search bar -->
+      <div class="inline-flex w-full max-w-xl relative mx-5">
+        <form method="GET" action="/admin/users" class="search-form w-full">
+          <!-- Icon -->
+          <label for="search" class="absolute left-4 top-2 transform text-lg text-gray-400">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            <span class="sr-only">Search</span>
+          </label>
+          <!-- Search Input -->
+          <input type="text" name="query" id="search" placeholder="Search users..."
+            class="w-full border border-primary pl-12 py-2 pr-3 rounded-md focus:ring-primary focus:border-primary"
+            value="<%= typeof query !== 'undefined' ? query : '' %>" aria-label="Search users" />
+          <!-- Hidden Inputs for Filters -->
+          <% if (selectedSort) { %>
+            <input type="hidden" name="sort" value="<%= selectedSort %>">
+          <% } %>
+        </form>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <a href="/admin/dashboard" class="text-center text-gray-700 hover:text-primary transition relative">
+          <div class="text-2xl">
+            <i class="fa-regular fa-user"></i>
+          </div>
+          <div class="text-xs leading-3">Dashboard</div>
+        </a>
+      </div>
+    </div>
+  </header>
+  <!-- ./header -->
+  <%- include('../../layouts/adminNavbar', {isLoggedIn: isLoggedIn}) %>
+
+    <%- include('../../layouts/notification') %>
+
+      <!-- breadcrumb -->
+      <div class="container py-4 flex items-center gap-3">
+        <a href="/" class="text-primary text-base">
+          <i class="fa-solid fa-house"></i>
+        </a>
+        <span class="text-sm text-gray-400">
+          <i class="fa-solid fa-chevron-right"></i>
+        </span>
+        <p class="text-gray-600 font-medium">User List</p>
+      </div>
+      <!-- ./breadcrumb -->
+
+      <!-- user -->
+      <div class="container gap-6 pt-4 pb-8 items-start">
+        <div class="flex flex-row justify-between"></div>
+        <div class="flex items-center">
+          <select name="sort" id="sort"
+            class="w-60 h-12 text-sm text-gray-600 py-3 px-4 border-gray-300 shadow-sm rounded focus:ring-primary focus:border-primary">
+            <option value="" <%=selectedSort==='' ? 'selected' : '' %>>Default sorting</option>
+            <option value="name-a-to-z" <%=selectedSort==='name-a-to-z' ? 'selected' : '' %>>Name A to Z</option>
+            <option value="name-z-to-a" <%=selectedSort==='name-z-to-a' ? 'selected' : '' %>>Name Z to A</option>
+            <option value="email-a-to-z" <%=selectedSort==='email-a-to-z' ? 'selected' : '' %>>Email A to Z</option>
+            <option value="email-z-to-a" <%=selectedSort==='email-z-to-a' ? 'selected' : '' %>>Email Z to A</option>
+            <option value="latest" <%=selectedSort==='latest' ? 'selected' : '' %>>Latest registered users</option>
+            <option value="oldest" <%=selectedSort==='oldest' ? 'selected' : '' %>>Oldest registered users</option>
+          </select>
+        </div>
+      </div>
+      <!-- ./user -->
+
+      <!-- User List -->
+      <div class="container my-10" id="userList">
+        <% if (users && users.length> 0) { %>
+          <%- include('../../layouts/userList' , {userList : users}) %>
+            <% } else { %>
+              <p>No users found.</p>
+              <% } %>
+      </div>
+      <!-- ./User List -->
+
+      <!-- Pagination Controls -->
+      <%- include('../../layouts/pagination', { currentPage: currentPage, totalPages: totalPages, }) %>
+
+        <!-- ./Pagination Controls -->
+        <div><%- include('../../layouts/footer') %></div>
+        <script src="/public/js/Users.js"></script>
+</body>
+
+</html>
