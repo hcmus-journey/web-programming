@@ -178,7 +178,7 @@ class AdminController {
       });
     } catch (error) {
       console.error("Error fetching products:", error);
-      res.render(pagePath.ADMIN_SHOP_PATH, {
+      res.render(PagePath.ADMIN_SHOP_PATH, {
         products: [],
         currentPage: 1,
         limit,
@@ -199,11 +199,11 @@ class AdminController {
   }
 
   showAddProduct(req, res) {
-    res.render(pagePath.ADD_PRODUCT_PATH);
+    res.render(PathPath.ADD_PRODUCT_PATH);
   }
 
   showEditProduct(req, res) {
-    res.render(pagePath.EDIT_PRODUCT_PATH);
+    res.render(PagePath.EDIT_PRODUCT_PATH);
   }
 
   async showAdminProduct(req, res) {
@@ -216,10 +216,10 @@ class AdminController {
 
       if (!product) {
         console.error("Product not found");
-        return res.render(pagePath.NOT_FOUND_PAGE_PATH);
+        return res.render(PagePath.NOT_FOUND_PAGE_PATH);
       }
 
-      res.render(pagePath.ADMIN_PRODUCT_PATH, {
+      res.render(PagePath.ADMIN_PRODUCT_PATH, {
         product,
         relatedProducts,
       });
