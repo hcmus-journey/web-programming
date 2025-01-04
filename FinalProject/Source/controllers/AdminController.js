@@ -17,8 +17,9 @@ class AdminController {
       return;
     }
     const user = req.user;
+    const chosenUser = null;
     res.render(PagePath.ADMIN_PAGE_PATH, {
-      user, 
+      user: user, 
       isLoggedIn: true,
       successMessage: req.flash('success'),
       errorMessage: req.flash('error'),
@@ -44,7 +45,7 @@ class AdminController {
       const paginatedUsers = filteredUsers.slice((page - 1) * limit, page * limit);
   
       if (Object.keys(req.query).length !== 0) {
-        const html = await ejs.renderFile("views/layouts/userList.ejs", { users: paginatedUsers });
+        const html = await ejs.renderFile("views/layouts/userList.ejs", { users: paginatedUsers, user: req.user });
         const pagination = await ejs.renderFile("views/layouts/pagination.ejs", { totalPages: totalFilteredPages, currentPage: page });
         return res.json({ html, pagination });
       }

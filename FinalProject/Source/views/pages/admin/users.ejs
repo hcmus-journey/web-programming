@@ -80,7 +80,7 @@
       <!-- User List -->
       <div class="container my-10" id="userList">
         <% if (users && users.length> 0) { %>
-          <%- include('../../layouts/userList' , {userList : users}) %>
+          <%- include('userList' , {userList : users, user : user}) %>
             <% } else { %>
               <p>No users found.</p>
               <% } %>
