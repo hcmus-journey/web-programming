@@ -1,7 +1,21 @@
 import pagePath from "../constants/PagePath.js";
 import ProductService from "../services/ProductService.js";
+import UserService from "../services/UserService.js";
+import { User } from "../models/User.js";
+import ejs from "ejs";
+
+
 
 class MainController {
+  constructor() {
+    this.userService = new UserService(User);
+
+    this.showHomePage = this.showHomePage.bind(this);
+    this.showAboutUsPage = this.showAboutUsPage.bind(this);
+    this.showContactPage = this.showContactPage.bind(this);
+    this.showPrivacyPage = this.showPrivacyPage.bind(this);
+  }
+
   async showHomePage(req, res) {
     let isLoggedIn = true;
     if (!req.isAuthenticated()) {
@@ -12,6 +26,7 @@ class MainController {
       const recommendedProducts = await ProductService.getRecommendedProducts();
 
       res.render(pagePath.HOME_PAGE_PATH ,{
+        user: req.user,
         topNewArrivals, 
         recommendedProducts,
         isLoggedIn: isLoggedIn
@@ -22,7 +37,7 @@ class MainController {
 
   }
 
-  showAboutUsPage(req, res) {
+  async showAboutUsPage(req, res) {
     let isLoggedIn = true;
     if (!req.isAuthenticated()) {
       isLoggedIn = false;
@@ -30,7 +45,7 @@ class MainController {
     res.render(pagePath.ABOUT_US_PAGE_PATH, {isLoggedIn: isLoggedIn});
   }
 
-  showContactPage(req, res) {
+  async showContactPage(req, res) {
     let isLoggedIn = true;
     if (!req.isAuthenticated()) {
       isLoggedIn = false;
@@ -38,7 +53,7 @@ class MainController {
     res.render(pagePath.CONTACT_PAGE_PATH, {isLoggedIn: isLoggedIn});
   }
 
-  showPrivacyPage(req, res) {
+  async showPrivacyPage(req, res) {
     let isLoggedIn = true;
     if (!req.isAuthenticated()) {
       isLoggedIn = false;

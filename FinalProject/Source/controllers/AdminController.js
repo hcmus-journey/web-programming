@@ -7,7 +7,7 @@ import ejs from "ejs";
 class AdminController {
   constructor() {
     this.userService = new UserService(User);
-    this.showPRofilePage = this.showProfilePage.bind(this);
+    this.showProfilePage = this.showProfilePage.bind(this);
     this.updateProfile = this.updateProfile.bind(this);
     this.showUserListPage = this.showUserListPage.bind(this);
     this.actionOnUser = this.actionOnUser.bind(this);
@@ -18,7 +18,6 @@ class AdminController {
       return;
     }
     const user = req.user;
-    const chosenUser = null;
     res.render(PagePath.ADMIN_PAGE_PATH, {
       user: user, 
       isLoggedIn: true,

@@ -3,7 +3,7 @@ import PagePath from "../constants/PagePath.js";
 class AccountController {
     showProfilePage(req, res) {
       if (req.isAuthenticated()) {
-        res.render(PagePath.PROFILE_PAGE_PATH), {isLoggedIn: true};
+        res.render(PagePath.PROFILE_PAGE_PATH, {isLoggedIn: true});
       }
       else {
         res.redirect('/login');

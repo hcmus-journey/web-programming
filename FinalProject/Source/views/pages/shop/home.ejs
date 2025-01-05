@@ -6,10 +6,18 @@
 </head>
 
 <body>
-  <%- include('../../layouts/header') %>
+  <% if (user && user.user_role == 'ADMIN') { %>
+    <%- include('../../layouts/adminHeader') %>
+  <% } else { %>
+    <%- include('../../layouts/header') %>
+  <% } %>
   <%- include('../../layouts/notification') %>
-
+    
+  <% if (user && user.user_role == 'ADMIN') { %>
+    <%- include('../../layouts/adminNavbar', {isLoggedIn: isLoggedIn}) %>
+  <% } else { %>
     <%- include('../../layouts/navbar', {isLoggedIn: isLoggedIn}) %>
+  <% } %>  
         <!-- banner -->
         <div class="bg-cover bg-no-repeat bg-center py-36"
           style="background-image: url('/public/assets/images/banner-bg.jpg')">
