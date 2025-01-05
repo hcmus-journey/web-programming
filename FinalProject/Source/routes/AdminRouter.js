@@ -9,7 +9,7 @@ router.get("/users", adminController.showUserListPage);
 
 router.put("/dashboard", adminController.updateProfile);
 
-router.get("/admin", adminController.showAdminPage);
+router.get("/shop", adminController.showAdminPage);
 router.get("/edit_product", adminController.showEditProduct);
 router.get("/add_product", adminController.showAddProduct);
 router.get("/admin_product", adminController.showAdminProduct);
