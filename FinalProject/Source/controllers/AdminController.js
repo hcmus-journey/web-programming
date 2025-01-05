@@ -2,6 +2,7 @@ import PagePath from "../constants/PagePath.js";
 import UserService from "../services/UserService.js";
 import { User } from "../models/User.js";
 import AdminService from "../services/AdminService.js";
+import ProductService from "../services/ProductService.js";
 import ejs from "ejs";
 
 class AdminController {
@@ -159,7 +160,10 @@ class AdminController {
         page * limit
       );
 
-      res.render(pagePath.ADMIN_SHOP_PATH, {
+      const user = req.user;
+      res.render(PagePath.ADMIN_SHOP_PATH, {
+        user,
+        isLoggedIn: true,
         products: paginatedProducts,
         currentPage: page,
         limit,
@@ -178,7 +182,10 @@ class AdminController {
       });
     } catch (error) {
       console.error("Error fetching products:", error);
+      const user = req.user;
       res.render(PagePath.ADMIN_SHOP_PATH, {
+        user,
+        isLoggedIn: true,
         products: [],
         currentPage: 1,
         limit,
@@ -219,7 +226,10 @@ class AdminController {
         return res.render(PagePath.NOT_FOUND_PAGE_PATH);
       }
 
+      const user = req.user;
       res.render(PagePath.ADMIN_PRODUCT_PATH, {
+        user,
+        isLoggedIn: true,
         product,
         relatedProducts,
       });
