@@ -9,6 +9,9 @@ router.get("/users", adminController.showUserListPage);
 
 router.put("/dashboard", adminController.updateProfile);
 
+router.put("/users", adminController.actionOnUser);
+
+
 
 
 export default router;

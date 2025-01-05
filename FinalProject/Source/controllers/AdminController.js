@@ -10,6 +10,7 @@ class AdminController {
     this.showPRofilePage = this.showProfilePage.bind(this);
     this.updateProfile = this.updateProfile.bind(this);
     this.showUserListPage = this.showUserListPage.bind(this);
+    this.actionOnUser = this.actionOnUser.bind(this);
   }
   async showProfilePage(req, res) {
     if (!req.isAuthenticated()) {
@@ -45,7 +46,7 @@ class AdminController {
       const paginatedUsers = filteredUsers.slice((page - 1) * limit, page * limit);
   
       if (Object.keys(req.query).length !== 0) {
-        const html = await ejs.renderFile("views/layouts/userList.ejs", { users: paginatedUsers, user: req.user });
+        const html = await ejs.renderFile("views/pages/admin/userList.ejs", { users: paginatedUsers, user: req.user });
         const pagination = await ejs.renderFile("views/layouts/pagination.ejs", { totalPages: totalFilteredPages, currentPage: page });
         return res.json({ html, pagination });
       }
@@ -78,6 +79,29 @@ class AdminController {
           userData
         );
       res.json({ success: true, message: "Profile updated!" });
+
+      } catch (error) {
+        res.json({ success: false, message: error.message });
+      }
+    } else {
+      res.redirect('/');
+    }
+  }
+
+  async actionOnUser(req, res) {
+    if (req.isAuthenticated()) {
+      const userActionData = {
+        status: req.body.status
+      };
+
+      try {
+        this.userService.updateUser(
+          req.body.id,
+          userActionData
+        );
+        const action = req.body.status == 'ACTIVE' ? 'unbanned' : 'banned';
+
+        res.json({ success: true, message: "User " + action + " successfully!" });
 
       } catch (error) {
         res.json({ success: false, message: error.message });
