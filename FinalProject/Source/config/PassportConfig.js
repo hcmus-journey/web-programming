@@ -27,6 +27,10 @@ class PassportConfig {
                 if (!isMatch) {
                     return done(null, false, { message: 'Sai mật khẩu' });
                 }
+
+                if (user.status == 'BANNED') {
+                    return done(null, false, {message: 'Tài khoản đã bị cấm'});
+                }
         
                 return done(null, user);
                 } catch (err) {
