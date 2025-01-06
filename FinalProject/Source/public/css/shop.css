@@ -22,25 +22,3 @@ button#applyFilter {
   line-height: 1.5;
   white-space: nowrap;
 }
-
-#productList {
-  max-height: 500px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  background-color: #fff;
-}
-
-#productList::-webkit-scrollbar {
-  width: 8px;
-}
-
-#productList::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
-}
-
-#productList::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}

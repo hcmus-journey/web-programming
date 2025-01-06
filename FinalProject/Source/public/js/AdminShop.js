@@ -1,14 +1,43 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const toggleCategories = document.getElementById("toggleCategories");
+  const categoriesList = document.getElementById("categoriesList");
+  const categoriesIcon = document.getElementById("categoriesIcon");
+
+  const toggleManufacturers = document.getElementById("toggleManufacturers");
+  const manufacturersList = document.getElementById("manufacturersList");
+  const manufacturersIcon = document.getElementById("manufacturersIcon");
+
+  // Toggle categories filter
+  toggleCategories.addEventListener("click", function () {
+    categoriesList.classList.toggle("hidden");
+    const isHidden = categoriesList.classList.contains("hidden");
+    categoriesIcon.innerHTML = isHidden
+      ? '<i class="fa-solid fa-plus"></i>'
+      : '<i class="fa-solid fa-minus"></i>';
+  });
+
+  // Toggle manufacturers filter
+  toggleManufacturers.addEventListener("click", function () {
+    manufacturersList.classList.toggle("hidden");
+    const isHidden = manufacturersList.classList.contains("hidden");
+    manufacturersIcon.innerHTML = isHidden
+      ? '<i class="fa-solid fa-plus"></i>'
+      : '<i class="fa-solid fa-minus"></i>';
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
   const filterSection = document.getElementById("filterSection");
   const filterToggle = document.getElementById("filterToggle");
   const filterClose = document.getElementById("filterClose");
   const applyFilterBtn = document.getElementById("applyFilter");
   const resetFilterBtn = document.getElementById("resetFilter");
   const sortSelect = document.getElementById("sort");
-  const productListContainer = document.getElementById("productListContainer");
+  const paginationContainer = document.querySelector(".pagination-controls");
   const searchForm = document.querySelector(".search-form");
 
-  // Function to get current filter values
+  let currentPage = 1; // Track the current page
+
   const getCurrentFilters = () => {
     const categories = Array.from(
       document.querySelectorAll('input[name="catVal"]:checked')
@@ -33,17 +62,39 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   };
 
-  // Function to fetch and update product list
-  const fetchProducts = (filters) => {
-    const params = new URLSearchParams(filters);
+  const fetchProducts = (filters, page = 1) => {
+    currentPage = page; // Update the current page
+    const params = new URLSearchParams({ ...filters, page });
     const url = `/shop?${params.toString()}`;
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        document.getElementById("productListContainer").innerHTML = data.html;
+        document.getElementById("productList").innerHTML = data.html;
+        paginationContainer.innerHTML = data.pagination;
       })
       .catch((error) => console.error("Error fetching products:", error));
   };
+
+  // Event listeners for pagination
+  paginationContainer.addEventListener("click", (e) => {
+    const target = e.target.closest("button");
+    if (!target) return;
+
+    const page = target.dataset.page;
+
+    if (page === "prev") {
+      if (currentPage > 1) {
+        fetchProducts(getCurrentFilters(), currentPage - 1);
+      }
+    } else if (page === "next") {
+      fetchProducts(getCurrentFilters(), currentPage + 1);
+    } else {
+      const pageNum = parseInt(page, 10);
+      if (!isNaN(pageNum)) {
+        fetchProducts(getCurrentFilters(), pageNum);
+      }
+    }
+  });
 
   // Filter and reset functionality
   filterToggle.addEventListener("click", () =>
@@ -77,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Handle search form submit via AJAX
-  searchForm?.addEventListener("submit", function (e) {
+  searchForm.addEventListener("submit", function (e) {
     e.preventDefault(); // Prevent the form from submitting normally
     const filters = getCurrentFilters();
     fetchProducts(filters);

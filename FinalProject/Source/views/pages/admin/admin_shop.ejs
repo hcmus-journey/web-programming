@@ -169,8 +169,42 @@
     </div>
   </div>
 
+  <!-- Search bar -->
+  <div class="inline-flex w-full max-w-xl relative mx-5">
+    <form method="GET" action="/shop" class="search-form w-full">
+      <!-- Icon -->
+      <label for="search" class="absolute left-4 top-2 transform text-lg text-gray-400">
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <span class="sr-only">Search</span>
+      </label>
+      <!-- Search Input -->
+      <input type="text" name="query" id="search" placeholder="Search products..."
+        class="w-full border border-primary pl-12 py-2 pr-3 rounded-md focus:ring-primary focus:border-primary"
+        value="<%= typeof query !== 'undefined' ? query : '' %>" aria-label="Search products" />
+      <!-- Hidden Inputs for Filters -->
+      <% if (selectedFilters.categories && selectedFilters.categories.length> 0) { %>
+        <input type="hidden" name="categories" value="<%= selectedFilters.categories.join(',') %>">
+        <% } %>
+          <% if (selectedFilters.manufacturers && selectedFilters.manufacturers.length> 0) { %>
+            <input type="hidden" name="manufacturers" value="<%= selectedFilters.manufacturers.join(',') %>">
+            <% } %>
+              <% if (selectedFilters.minPrice) { %>
+                <input type="hidden" name="minPrice" value="<%= selectedFilters.minPrice %>">
+                <% } %>
+                  <% if (selectedFilters.maxPrice) { %>
+                    <input type="hidden" name="maxPrice" value="<%= selectedFilters.maxPrice %>">
+                    <% } %>
+                      <% if (selectedFilters.status) { %>
+                        <input type="hidden" name="status" value="<%= selectedFilters.status %>">
+                        <% } %>
+                          <% if (selectedSort) { %>
+                            <input type="hidden" name="sort" value="<%= selectedSort %>">
+                            <% } %>
+    </form>
+  </div>
+  
   <!-- Product List -->
-  <div id="productList" class="mt-4">
+  <div id="productList">
     <% if (products && products.length > 0) { %>
       <%- include('../../layouts/admin_productList', { productList: products }) %>
     <% } else { %>
@@ -178,11 +212,31 @@
     <% } %>
   </div>
 
+  <!-- Pagination Controls -->
+  <div class="pagination-controls mt-5 container flex justify-center items-center gap-4">
+    <% if (currentPage > 1) { %>
+      <a href="?page=<%= currentPage - 1 %>" class="text-gray-600 hover:text-primary">
+        <i class="fa-solid fa-chevron-left"></i>
+      </a>
+    <% } %>
+    <% for (let i = 1; i <= totalPages; i++) { %>
+      <a href="?page=<%= i %>"
+        class="<%= i === currentPage ? 'text-primary' : 'text-gray-600 hover:text-primary' %>">
+        <%= i %>
+      </a>
+    <% } %>
+    <% if (currentPage < totalPages) { %>
+      <a href="?page=<%= currentPage + 1 %>" class="text-gray-600 hover:text-primary">
+        <i class="fa-solid fa-chevron-right"></i>
+      </a>
+    <% } %>
+  </div>
+
   <!-- Footer Section -->
   <%- include('../../layouts/footer') %>
 
   <!-- Scripts -->
-  <script src="/public/js/AdminShop.js"></script>
+  <script src="/public/js/Shop.js"></script>
 </body>
 
 </html>
