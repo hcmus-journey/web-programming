@@ -20,7 +20,7 @@ class PagePath {
   static PRIVACY_PAGE_PATH = "#";
 
   //admin
-  static ADMIN_SHOP_PATH = "pages/admin/shop";
+  static ADMIN_SHOP_PATH = "pages/admin/admin_shop";
   static ADMIN_PRODUCT_PATH = "pages/admin/admin_product";
   static EDIT_PRODUCT_PATH = "pages/admin/edit_product";
   static ADD_PRODUCT_PATH = "pages/admin/add_product";
