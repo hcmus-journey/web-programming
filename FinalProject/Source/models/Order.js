@@ -12,23 +12,23 @@ export const Order = sequelize.define('Order', {
     type: DataTypes.UUID,
     allowNull: false,
   },
-  total: {
-    type: DataTypes.DOUBLE,
-    allowNull: false,
-  },
-  payment_method: {
-    type: DataTypes.STRING(255),
-    allowNull: false,
-  },
   full_name: {
     type: DataTypes.STRING(255),
+    allowNull: false,
+  },
+  phone: {
+    type: DataTypes.STRING(20),
     allowNull: false,
   },
   shipping_address: {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
-  phone: {
+  total: {
+    type: DataTypes.DOUBLE,
+    allowNull: false,
+  },
+  payment_method: {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
@@ -41,9 +41,13 @@ export const Order = sequelize.define('Order', {
     defaultValue: DataTypes.NOW, 
     allowNull: false,
   },
-  status: {
-    type: DataTypes.STRING(8),
+  shipping_status: {
+    type: DataTypes.ENUM('SUSPEND','SHIPPING','SHIPPED'),
     allowNull: false,
+  },
+  payment_status: {
+    type: DataTypes.ENUM('PAID','NOT_PAID'),
+    allowNull: false
   }
 }, {
   tableName: 'orders', 
