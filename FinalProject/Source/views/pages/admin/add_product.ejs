@@ -6,8 +6,24 @@
 
   <body>
     <!-- Header Section -->
-    <%- include('../../layouts/adminHeader') %> <%-
+    <%- include('../../layouts/adminHeader') %> <a%-
     include('../../layouts/notification') %>
+
+    <!-- breadcrumb -->
+    <div class="container py-4 flex items-center gap-3">
+      <a href="/" class="text-primary text-base">
+        <i class="fa-solid fa-house"></i>
+      </a>
+      <span class="text-sm text-gray-400">
+        <i class="fa-solid fa-chevron-right"></i>
+      </span>
+      <a href="/admin/admin_shop" class="text-gray-600 font-medium">Shop</a>
+      <span class="text-sm text-gray-400">
+        <i class="fa-solid fa-chevron-right"></i>
+      </span>
+      <p class="text-gray-600 font-medium">New product</p>
+    </div>
+    <!-- ./breadcrumb -->
 
     <!-- Add New Product -->
     <div class="contain py-16">
