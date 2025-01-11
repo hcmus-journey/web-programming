@@ -206,11 +206,43 @@ class AdminController {
   }
 
   showAddProduct(req, res) {
-    res.render(PagePath.ADD_PRODUCT_PATH);
+    const user = req.user;
+    res.render(PagePath.ADD_PRODUCT_PATH, {
+      user,
+      isLoggedIn: true,
+    });
   }
 
-  showEditProduct(req, res) {
-    res.render(PagePath.EDIT_PRODUCT_PATH);
+  async showEditProduct(req, res) {
+    const productId = req.query.id;
+
+    if (!productId) {
+      console.error("No product ID provided");
+      return res.redirect(PagePath.ADMIN_SHOP_PATH);
+    }
+
+    try {
+      const product = await ProductService.getProductById(productId);
+      const categories = await ProductService.getAllCategories();
+      const manufacturers = await ProductService.getAllManufacturer();
+
+      if (!product) {
+        console.error("Product not found");
+        return res.redirect(PagePath.ADMIN_SHOP_PATH);
+      }
+
+      const user = req.user;
+      res.render(PagePath.EDIT_PRODUCT_PATH, {
+        user,
+        isLoggedIn: true,
+        product,
+        categories,
+        manufacturers,
+      });
+    } catch (error) {
+      console.error("Error fetching product:", error);
+      res.status(500).send(`Error loading product: ${error.message}`);
+    }
   }
 
   async showAdminProduct(req, res) {
