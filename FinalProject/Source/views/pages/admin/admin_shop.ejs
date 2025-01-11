@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <%- include('../../layouts/head', { title: 'HATShop - Dashboard' }) %>
+  <%- include('../../layouts/head', { title: 'HATShop - Shop' }) %>
   <link rel="stylesheet" href="/public/css/shop.css" />
 </head>
 
@@ -143,7 +143,7 @@
   <!-- End Filter Section -->
 
   <!-- Shop Section -->
-  <div class="container gap-6 pt-4 pb-16 items-start">
+  <div class="container gap-6 pt-4 pb-4 items-start">
     <div class="flex items-center">
       <select name="sort" id="sort"
         class="w-44 h-12 text-sm text-gray-600 py-3 px-4 border-gray-300 shadow-sm rounded focus:ring-primary focus:border-primary">
@@ -157,19 +157,7 @@
         <option value="latest" <%= selectedSort === 'latest' ? 'selected' : '' %>>Latest product</option>
       </select>
 
-      <div class="flex gap-2 ml-auto">
-        <a href="/new_product" id="newProduct"
-          class="flex items-center bg-primary text-white px-4 py-2 rounded h-12 hover:bg-transparent hover:text-primary">
-          <i class="fa-solid fa-plus mr-2"></i> New Product
-        </a>
-        <button id="filterToggle" class="bg-primary text-white px-4 py-2 rounded h-12">
-          <i class="fa-solid fa-filter"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Search bar -->
+      <!-- Search bar -->
   <div class="inline-flex w-full max-w-xl relative mx-5">
     <form method="GET" action="/shop" class="search-form w-full">
       <!-- Icon -->
@@ -202,6 +190,20 @@
                             <% } %>
     </form>
   </div>
+
+      <div class="flex gap-2 ml-auto">
+        <a href="/admin/add_product" id="newProduct"
+          class="flex items-center bg-primary text-white px-4 py-2 rounded h-12 hover:bg-transparent hover:text-primary">
+          <i class="fa-solid fa-plus mr-2"></i> New Product
+        </a>
+        <button id="filterToggle" class="bg-primary text-white px-4 py-2 rounded h-12">
+          <i class="fa-solid fa-filter"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  
   
   <!-- Product List -->
   <div id="productList">
