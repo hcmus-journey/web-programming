@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../../layouts/head', { title: 'HATShop - Add New Product' }) %>
+  </head>
+
+  <body>
+    <!-- Header Section -->
+    <%- include('../../layouts/adminHeader') %> <a%-
+    include('../../layouts/notification') %>
+
+    <!-- breadcrumb -->
+    <div class="container py-4 flex items-center gap-3">
+      <a href="/" class="text-primary text-base">
+        <i class="fa-solid fa-house"></i>
+      </a>
+      <span class="text-sm text-gray-400">
+        <i class="fa-solid fa-chevron-right"></i>
+      </span>
+      <a href="/admin/admin_shop" class="text-gray-600 font-medium">Shop</a>
+      <span class="text-sm text-gray-400">
+        <i class="fa-solid fa-chevron-right"></i>
+      </span>
+      <p class="text-gray-600 font-medium">New product</p>
+    </div>
+    <!-- ./breadcrumb -->
+
+    <!-- Add New Product -->
+    <div class="contain py-16">
+      <div class="max-w-3xl mx-auto shadow px-6 py-7 rounded overflow-hidden">
+        <h2 class="text-2xl uppercase font-medium mb-1">Add New Product</h2>
+        <p class="text-gray-600 mb-6 text-sm">Add details for a new product</p>
+        <form
+          action="/add_new_product"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <div class="space-y-4">
+            <!-- Product Name -->
+            <div>
+              <label for="name" class="text-gray-600 mb-2 block"
+                >Product Name</label
+              >
+              <input
+                type="text"
+                name="name"
+                id="name"
+                class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
+                placeholder="Enter product name"
+                required
+              />
+            </div>
+
+            <!-- Category -->
+            <div>
+              <label for="category" class="text-gray-600 mb-2 block"
+                >Category</label
+              >
+              <select
+                name="category"
+                id="category"
+                class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary"
+                onchange="toggleNewCategoryInput(this)"
+              >
+                <option value="">Select a category</option>
+                <option value="electronics">Electronics</option>
+                <option value="fashion">Fashion</option>
+                <option value="home">Home</option>
+                <option value="toys">Toys</option>
+                <option value="new">New Category</option>
+              </select>
+
+              <!-- Input for new category -->
+              <div id="newCategoryInput" class="mt-2 hidden">
+                <label for="newCategory" class="text-gray-600 mb-2 block"
+                  >New Category</label
+                >
+                <input
+                  type="text"
+                  name="newCategory"
+                  id="newCategory"
+                  placeholder="Enter new category name"
+                  class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary"
+                />
+              </div>
+            </div>
+
+            <!-- Quantity -->
+            <div>
+              <label for="quantity" class="text-gray-600 mb-2 block"
+                >Quantity</label
+              >
+              <input
+                type="number"
+                name="quantity"
+                id="quantity"
+                class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
+                placeholder="Enter quantity"
+                min="1"
+                required
+              />
+            </div>
+
+            <!-- Quantity -->
+            <div>
+              <label for="price" class="text-gray-600 mb-2 block">Price</label>
+              <input
+                type="number"
+                name="price"
+                id="price"
+                class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
+                placeholder="Enter price"
+                min="1"
+                required
+              />
+            </div>
+
+            <!-- Manufacturer -->
+            <div>
+              <label for="manufacturer" class="text-gray-600 mb-2 block"
+                >Manufacturer</label
+              >
+              <input
+                type="text"
+                name="manufacturer"
+                id="manufacturer"
+                class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
+                placeholder="Enter manufacturer name"
+                required
+              />
+            </div>
+
+            <!-- Detail -->
+            <div>
+              <label for="detail" class="text-gray-600 mb-2 block"
+                >Product Detail</label
+              >
+              <textarea
+                name="detail"
+                id="detail"
+                rows="4"
+                class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
+                placeholder="Enter product detail"
+                required
+              ></textarea>
+            </div>
+
+            <!-- Images -->
+            <div>
+              <label for="images" class="text-gray-600 mb-2 block"
+                >Product Images</label
+              >
+              <input
+                type="file"
+                name="images"
+                id="images"
+                multiple
+                accept="image/*"
+                class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
+                placeholder="Upload product images (max 10)"
+              />
+              <p class="text-sm text-gray-500 mt-2">
+                Maximum 10 images allowed.
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-6 flex justify-center">
+            <button
+              type="submit"
+              class="w-44 py-2 text-center text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium"
+            >
+              Add Product
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- ./Add New Product -->
+
+    <%- include('../../layouts/footer') %>
+  </body>
+</html>

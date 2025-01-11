@@ -17,10 +17,15 @@ class PagePath {
   static CHANGE_PASSWORD_PAGE_PATH = "pages/user/change-password";
 
   static ADMIN_PAGE_PATH = "pages/admin/admin";
-  static USER_LIST_PAGE_PATH = "pages/admin/users.ejs"
-
+  static USER_LIST_PAGE_PATH = "pages/admin/users.ejs";
 
   static PRIVACY_PAGE_PATH = "#";
+
+  //admin
+  static ADMIN_SHOP_PATH = "pages/admin/admin_shop";
+  static ADMIN_PRODUCT_PATH = "pages/admin/admin_product";
+  static EDIT_PRODUCT_PATH = "pages/admin/edit_product";
+  static ADD_PRODUCT_PATH = "pages/admin/add_product";
 }
 
 export default PagePath;

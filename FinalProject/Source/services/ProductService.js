@@ -137,23 +137,6 @@ class ProductService {
     }
   }
 
-  // Find products by category
-  async getProductsByCategory(categoryId) {
-    try {
-      return await Product.findAll({
-        where: { category_id: categoryId },
-        include: [
-          { model: ProductImage, as: "images" },
-          { model: ProductCategory, as: "category" },
-          { model: ProductManufacturer, as: "manufacturer" },
-          { model: ProductReview, as: "reviews" },
-        ],
-      });
-    } catch (error) {
-      throw new Error("Error fetching products by category: " + error.message);
-    }
-  }
-
   // Find products by manufacturer
   async getProductsByCategory(manufacturerId) {
     try {
