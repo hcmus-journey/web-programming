@@ -9,8 +9,36 @@
     <%- include('../../layouts/adminHeader') %> <%-
     include('../../layouts/notification') %>
 
+    <!-- breadcrumb -->
+    <nav class="container py-4 flex items-center gap-3" aria-label="breadcrumb">
+      <ol class="flex items-center gap-3">
+        <li>
+          <a href="/" class="text-primary text-base">
+            <i class="fa-solid fa-house"></i>
+          </a>
+        </li>
+        <li>
+          <span class="text-sm text-gray-400">
+            <i class="fa-solid fa-chevron-right"></i>
+          </span>
+        </li>
+        <li>
+          <a href="/admin/admin_shop" class="text-gray-600 font-medium">Shop</a>
+        </li>
+        <li>
+          <span class="text-sm text-gray-400">
+            <i class="fa-solid fa-chevron-right"></i>
+          </span>
+        </li>
+        <li>
+          <p class="text-gray-600 font-medium">Edit product</p>
+        </li>
+      </ol>
+    </nav>
+    <!-- ./breadcrumb -->
+
     <!-- Edit Product -->
-    <div class="contain py-16">
+    <div class="container py-16">
       <div class="max-w-3xl mx-auto shadow px-6 py-7 rounded overflow-hidden">
         <h2 class="text-2xl uppercase font-medium mb-1">Edit Product</h2>
         <p class="text-gray-600 mb-6 text-sm">Edit details of the product</p>
@@ -29,7 +57,7 @@
                 type="text"
                 name="name"
                 id="name"
-                value="Table table"
+                value="<%= product.product_name || '' %>"
                 class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
                 required
               />
@@ -45,10 +73,15 @@
                 id="category"
                 class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary"
               >
-                <option value="electronics" selected>Electronics</option>
-                <option value="fashion">Fashion</option>
-                <option value="home">Home</option>
-                <option value="toys">Toys</option>
+                <option value="<%= product.category.category_name %>" selected>
+                  <%= product.category.category_name %>
+                </option>
+                <% categories .filter(category => category.category_name !==
+                product.category.category_name) .forEach(category => { %>
+                <option value="<%= category.category_name %>">
+                  <%= category.category_name %>
+                </option>
+                <% }); %>
               </select>
             </div>
 
@@ -70,17 +103,29 @@
 
             <!-- Manufacturer -->
             <div>
-              <label for="manufacturer" class="text-gray-600 mb-2 block"
+              <label for="category" class="text-gray-600 mb-2 block"
                 >Manufacturer</label
               >
-              <input
-                type="text"
-                name="manufacturer"
-                id="manufacturer"
-                value="Made in VietNam"
-                class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
-                required
-              />
+              <select
+                name="category"
+                id="category"
+                class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary"
+              >
+                <option
+                  value="<%= product.manufacturer.manufacturer_name %>"
+                  selected
+                >
+                  <%= product.manufacturer.manufacturer_name %>
+                </option>
+                <% manufacturers .filter(manufacturer =>
+                manufacturer.manufacturer_name !==
+                product.manufacturer.manufacturer_name) .forEach(manufacturer =>
+                { %>
+                <option value="<%= manufacturer.manufacturer_name %>">
+                  <%= manufacturer.manufacturer_name %>
+                </option>
+                <% }); %>
+              </select>
             </div>
 
             <!-- Detail -->
@@ -95,7 +140,7 @@
                 class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
                 required
               >
-Sample product details go here.</textarea
+<%= product.detail %></textarea
               >
             </div>
 
