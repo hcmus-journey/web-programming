@@ -12,14 +12,14 @@
           </tr>
         </thead>
 
-        <!-- Nội dung bảng -->
+        <!-- Bảng -->
         <tbody class="text-gray-700 text-sm">
           <% productList.forEach(product => { %>
           <tr class="border-b border-gray-200 hover:bg-gray-100">
             <!-- Tên sản phẩm -->
             <td class="py-4 px-6 text-left">
               <a
-                href="/admin_product?id=<%= product.product_id %>"
+                href="/admin/admin_product?id=<%= product.product_id %>"
                 class="hover:text-primary font-medium"
               >
                 <%= product.product_name %>
@@ -32,10 +32,10 @@
             <!-- Số lượng -->
             <td class="py-4 px-6"><%= product.total_purchases %></td>
 
-            <!-- Hành động -->
+            <!-- Xem chi tiết -->
             <td class="py-4 px-6">
               <a
-                href="/admin_product?id=<%= product.product_id %>"
+                href="/admin/admin_product?id=<%= product.product_id %>"
                 title="Details"
                 class="text-blue-500 hover:text-blue-700"
               >

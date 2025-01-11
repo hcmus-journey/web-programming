@@ -206,7 +206,7 @@ class AdminController {
   }
 
   showAddProduct(req, res) {
-    res.render(PathPath.ADD_PRODUCT_PATH);
+    res.render(PagePath.ADD_PRODUCT_PATH);
   }
 
   showEditProduct(req, res) {

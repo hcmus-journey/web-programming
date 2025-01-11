@@ -1,36 +1,67 @@
 <!-- navbar -->
 <nav class="bg-gray-800">
-    <div class="container flex items-center justify-between lg:py-4">
-        <div class="w-16 py-4 bg-primary lg:hidden flex justify-center cursor-pointer relative" id="menu-toggle">
-            <span class="text-white">
-                <i class="fa-solid fa-bars"></i>
-            </span>
-            <div id="mobile-menu"
-                class="absolute w-32 left-0 top-full bg-gray-800 z-10 divide-y divide-gray-300 divide-dashed transition duration-300 hidden">
-                <a href="/" class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Home</a>
-                <a href="/shop" class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Shop</a>
-                <a href="/about_us" class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">About
-                    us</a>
-                <a href="/contact_us" class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200">Contact
-                    us</a>
-            </div>
-        </div>
-        <div class="flex items-center justify-end lg:justify-between flex-grow">
-            <div class="hidden lg:flex items-center space-x-6 capitalize">
-                <a href="/" class="text-gray-200 hover:text-white transition">Home</a>
-                <a href="/shop" class="text-gray-200 hover:text-white transition">Shop</a>
-                <a href="/about_us" class="text-gray-200 hover:text-white transition">About us</a>
-                <a href="/contact_us" class="text-gray-200 hover:text-white transition">Contact us</a>
-            </div>
-            <div id="auth-links">
-            <% if(!isLoggedIn) { %>
-                <a href="/login" class="text-gray-200 hover:text-white transition">Login</a>
-                <a href="/register" class="text-gray-200 hover:text-white transition">/Register</a>
-            <% } else { %>
-                <a href="/logout" class="text-gray-200 hover:text-white transition">Logout</a>
-            <% } %>
-            </div>
-        </div>
+  <div class="container flex items-center justify-between lg:py-4">
+    <div
+      class="w-16 py-4 bg-primary lg:hidden flex justify-center cursor-pointer relative"
+      id="menu-toggle"
+    >
+      <span class="text-white">
+        <i class="fa-solid fa-bars"></i>
+      </span>
+      <div
+        id="mobile-menu"
+        class="absolute w-32 left-0 top-full bg-gray-800 z-10 divide-y divide-gray-300 divide-dashed transition duration-300 hidden"
+      >
+        <a
+          href="/"
+          class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200"
+          >Home</a
+        >
+        <a
+          href="/shop"
+          class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200"
+          >Shop</a
+        >
+        <a
+          href="/about_us"
+          class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200"
+          >About us</a
+        >
+        <a
+          href="/contact_us"
+          class="block px-4 py-4 text-gray-200 hover:bg-primary hover:text-gray-200"
+          >Contact us</a
+        >
+      </div>
     </div>
+    <div class="flex items-center justify-end lg:justify-between flex-grow">
+      <div class="hidden lg:flex items-center space-x-6 capitalize">
+        <a href="/" class="text-gray-200 hover:text-white transition">Home</a>
+        <a href="/shop" class="text-gray-200 hover:text-white transition"
+          >Shop</a
+        >
+        <a href="/about_us" class="text-gray-200 hover:text-white transition"
+          >About us</a
+        >
+        <a href="/contact_us" class="text-gray-200 hover:text-white transition"
+          >Contact us</a
+        >
+      </div>
+      <div id="auth-links">
+        <% if(!isLoggedIn) { %>
+        <a href="/login" class="text-gray-200 hover:text-white transition"
+          >Login</a
+        >
+        <a href="/register" class="text-gray-200 hover:text-white transition"
+          >/Register</a
+        >
+        <% } else { %>
+        <a href="/logout" class="text-gray-200 hover:text-white transition"
+          >Logout</a
+        >
+        <% } %>
+      </div>
+    </div>
+  </div>
 </nav>
 <!-- ./navbar -->
