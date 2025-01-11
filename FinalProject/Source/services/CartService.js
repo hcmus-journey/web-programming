@@ -113,6 +113,18 @@ class CartService {
       throw new Error("Error removing product from cart");
     }
   }
+
+  async clearCart(userId) {
+    try {
+      await this.cartModel.destroy({
+        where: {
+          user_id: userId,
+        },
+      });
+    } catch (error) {
+      throw new Error("Error clearing cart");
+    }
+  }
 }
 
 export default CartService;

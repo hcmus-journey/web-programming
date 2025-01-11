@@ -3,6 +3,8 @@ class PagePath {
   static PRODUCT_PAGE_PATH = "pages/shop/product";
   static CART_PAGE_PATH = "pages/shop/cart";
   static CHECKOUT_PAGE_PATH = "pages/shop/checkout";
+  static USER_ORDER_DETAIL_PAGE_PATH = "pages/shop/orderDetail";
+  static ORDER_LIST_PAGE_PATH = "pages/shop/order";
   static ABOUT_US_PAGE_PATH = "pages/shop/about";
   static CONTACT_PAGE_PATH = "pages/shop/contact";
   static SHOP_PAGE_PATH = "pages/shop/shop";

@@ -29,23 +29,23 @@
       <div class="space-y-4">
         <div>
           <label for="full-name" class="text-gray-600">Full Name <span class="text-primary">*</span></label>
-          <input type="text" name="full-name" id="full-name" class="input-box" required />
+          <input type="text" name="full-name" id="full-name" class="input-box" required placeholder="Nguyen Van A"/>
         </div>
         <div>
           <label for="address" class="text-gray-600">Address <span class="text-primary">*</span></label>
-          <input type="text" name="address" id="address" class="input-box" required />
+          <input type="text" name="address" id="address" class="input-box" required placeholder="So 1, duong A, phuong C"/>
         </div>
         <div>
           <label for="city" class="text-gray-600">City <span class="text-primary">*</span></label>
-          <input type="text" name="city" id="city" class="input-box" required />
+          <input type="text" name="city" id="city" class="input-box" required placeholder="TP. Ho Chi Minh"/>
         </div>
         <div>
           <label for="region" class="text-gray-600">Country <span class="text-primary">*</span></label>
-          <input type="text" name="region" id="region" class="input-box" required />
+          <input type="text" name="region" id="region" class="input-box" required placeholder="Viet Nam"/>
         </div>
         <div>
           <label for="phone" class="text-gray-600">Phone number <span class="text-primary">*</span></label>
-          <input type="text" name="phone" id="phone" class="input-box" required />
+          <input type="text" name="phone" id="phone" class="input-box" required placeholder="0123456789"/>
         </div>
       </div>
     </div>
@@ -79,26 +79,28 @@
 
       <div class="flex justify-between mt-2">
         <p class="py-2 px-4 text-gray-800">Subtotal</p>
-        <p class="py-2 px-4 text-gray-800">$<%= subtotal.toFixed(2) %></p>
+        <p class="py-2 px-4 text-gray-800" id="subtotal">$<%= subtotal.toFixed(2) %></p>
       </div>
       <div class="flex justify-between">
         <p class="py-2 px-4 text-gray-800">Shipping Fee</p>
-        <p class="py-2 px-4 text-gray-800">$<%= shippingFee %></p>
+        <p class="py-2 px-4 text-gray-800" id="shipping-fee">$<%= shippingFee %></p>
       </div>
       <div class="flex justify-between">
         <p class="py-2 px-4 text-gray-800 font-medium">Total</p>
-        <p class="py-2 px-4 text-gray-800 font-medium">$<%= subtotal.toFixed(2) + shippingFee %></p>
+        <p class="py-2 px-4 text-gray-800 font-medium">$<%= total.toFixed(2) %></p>
       </div>
 
-      <a href="#"
-        class="block w-full py-3 mt-4 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition duration-200 font-medium">
+      <button type="submit"
+              class="block w-full py-3 mt-4 text-center text-white bg-primary border border-primary rounded-md hover:bg-transparent hover:text-primary transition duration-200 font-medium"
+              onclick="placeOrder()">
         Place Order
-      </a>
+      </button>
     </div>
   </div>
   <!-- ./wrapper -->
 
   <%- include('../../layouts/footer') %>
+  <script type="module" src="/public/js/Order.js"></script>
 </body>
 
 </html>

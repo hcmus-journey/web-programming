@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/dbconfig.js';
+import { OrderDetail } from './OrderDetail.js'
 
 export const Order = sequelize.define('Order', {
   order_id: {
@@ -53,4 +54,9 @@ export const Order = sequelize.define('Order', {
   tableName: 'orders', 
   underscored: true,   
   timestamps: false     
+});
+
+Order.hasMany(OrderDetail, {
+  foreignKey: 'order_id',
+  as: 'orderDetail',
 });

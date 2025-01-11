@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../layouts/head', { title: 'HATShop - User List' }) %>
+    <link rel="stylesheet" href="/public/css/shop.css" />
+</head>
+
+<body>
+  <!-- header -->
+  <header class="py-4 shadow-sm bg-white">
+    <div class="container flex items-center justify-between">
+      <a class="font-bold text-xl" href="/">
+        <span class="text-primary">HAT</span><span class="text-gray-800">Shop</span>
+      </a>
+
+      <div class="flex items-center space-x-4">
+        <a href="/admin/dashboard" class="text-center text-gray-700 hover:text-primary transition relative">
+          <div class="text-2xl">
+            <i class="fa-regular fa-user"></i>
+          </div>
+          <div class="text-xs leading-3">Dashboard</div>
+        </a>
+      </div>
+    </div>
+  </header>
+  <!-- ./header -->
+  <%- include('../../layouts/adminNavbar', {isLoggedIn: isLoggedIn}) %>
+
+    <%- include('../../layouts/notification') %>
+
+      <!-- breadcrumb -->
+      <div class="container py-4 flex items-center gap-3">
+        <a href="/" class="text-primary text-base">
+          <i class="fa-solid fa-house"></i>
+        </a>
+        <span class="text-sm text-gray-400">
+          <i class="fa-solid fa-chevron-right"></i>
+        </span>
+        <p class="text-gray-600 font-medium">Order History</p>
+      </div>
+      <!-- ./breadcrumb -->
+
+      <!-- sort order -->
+      <div class="container gap-6 pt-4 pb-8 items-start">
+        <div class="flex flex-row justify-between"></div>
+        <div class="flex items-center">
+          <select name="sort" id="sort"
+            class="w-60 h-12 text-sm text-gray-600 py-3 px-4 border-gray-300 shadow-sm rounded focus:ring-primary focus:border-primary">
+            <option value="" <%=selectedSort==='' ? 'selected' : '' %>>Default sorting</option>
+            <option value="latest" <%=selectedSort==='latest' ? 'selected' : '' %>>Latest placed orders</option>
+            <option value="oldest" <%=selectedSort==='oldest' ? 'selected' : '' %>>Oldest placed orders</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Order History -->
+      <div class="container my-5" id="userList">
+        <% if (orders && orders.length> 0) { %>
+          <%- include('orderList' , {orders : orders}) %>
+            <% } else { %>
+              <p>No orders found.</p>
+              <% } %>
+      </div>
+      <!-- ./User List -->
+
+      <!-- Pagination Controls -->
+      <%- include('../../layouts/pagination', { currentPage: currentPage, totalPages: totalPages, }) %>
+
+        <!-- ./Pagination Controls -->
+        <div><%- include('../../layouts/footer') %></div>
+        <script src="/public/js/Order.js"></script>
+</body>
+
+</html>

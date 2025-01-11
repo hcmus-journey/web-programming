@@ -1,10 +1,6 @@
 // services/ProductService.js
 import { User } from "../models/User.js";
 import { Product } from "../models/Product.js";
-import { ProductImage } from "../models/ProductImage.js";
-import { ProductCategory } from "../models/ProductCategory.js";
-import { ProductManufacturer } from "../models/ProductManufacturer.js";
-import { ProductReview } from "../models/ProductReview.js";
 import { Op } from "sequelize";
 
 class AdminService {

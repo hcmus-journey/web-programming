@@ -23,10 +23,6 @@ function openModal(button) {
 
   const userStatus = document.getElementById(statusId);
 
-  console.log(statusId);
-
-  console.log(userStatus.textContent);
-
   modal.classList.toggle("hidden");
   
   action.textContent = userStatus.textContent == 'ACTIVE' ? 'ban' : 'unban';
@@ -57,8 +53,6 @@ function action() {
     id: user.user_id,
     status: user.status
   }
-
-  console.log(user);
 
   fetch("/admin/users", {
     method: "PUT",
