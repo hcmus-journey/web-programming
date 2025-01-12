@@ -20,7 +20,7 @@ class AdminController {
     }
     const user = req.user;
     res.render(PagePath.ADMIN_PAGE_PATH, {
-      user: user, 
+      user: user,
       isLoggedIn: true,
       successMessage: req.flash("success"),
       errorMessage: req.flash("error"),
@@ -49,8 +49,14 @@ class AdminController {
       );
 
       if (Object.keys(req.query).length !== 0) {
-        const html = await ejs.renderFile("views/pages/admin/userList.ejs", { users: paginatedUsers, user: req.user });
-        const pagination = await ejs.renderFile("views/layouts/pagination.ejs", { totalPages: totalFilteredPages, currentPage: page });
+        const html = await ejs.renderFile("views/pages/admin/userList.ejs", {
+          users: paginatedUsers,
+          user: req.user,
+        });
+        const pagination = await ejs.renderFile(
+          "views/layouts/pagination.ejs",
+          { totalPages: totalFilteredPages, currentPage: page }
+        );
         return res.json({ html, pagination });
       }
 
@@ -269,23 +275,22 @@ class AdminController {
   async actionOnUser(req, res) {
     if (req.isAuthenticated()) {
       const userActionData = {
-        status: req.body.status
+        status: req.body.status,
       };
 
       try {
-        this.userService.updateUser(
-          req.body.id,
-          userActionData
-        );
-        const action = req.body.status == 'ACTIVE' ? 'unbanned' : 'banned';
+        this.userService.updateUser(req.body.id, userActionData);
+        const action = req.body.status == "ACTIVE" ? "unbanned" : "banned";
 
-        res.json({ success: true, message: "User " + action + " successfully!" });
-
+        res.json({
+          success: true,
+          message: "User " + action + " successfully!",
+        });
       } catch (error) {
         res.json({ success: false, message: error.message });
       }
     } else {
-      res.redirect('/');
+      res.redirect("/");
     }
   }
 }
