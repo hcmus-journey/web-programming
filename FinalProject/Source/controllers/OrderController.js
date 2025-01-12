@@ -106,9 +106,10 @@ class OrderController {
     const page = parseInt(req.query.page) || 1;
     const limit = 5;
     const sort = req.query.sort || "";
+    const userId = req.user.user_id;
   
     try {
-      const orders = await this.orderService.searchOrders(sort);
+      const orders = await this.orderService.searchOrders(userId, sort);
       const filteredOrders = orders;
   
       const totalFilteredPages = Math.ceil(filteredOrders.length / limit);

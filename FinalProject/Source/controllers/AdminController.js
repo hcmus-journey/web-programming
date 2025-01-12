@@ -3,11 +3,15 @@ import UserService from "../services/UserService.js";
 import { User } from "../models/User.js";
 import AdminService from "../services/AdminService.js";
 import ProductService from "../services/ProductService.js";
+import OrderService from "../services/OrderService.js";
+import { Order } from "../models/Order.js";
+import { OrderDetail } from "../models/OrderDetail.js";
 import ejs from "ejs";
 
 class AdminController {
   constructor() {
     this.userService = new UserService(User);
+    this.orderService = new OrderService(Order, OrderDetail);
     this.showProfilePage = this.showProfilePage.bind(this);
     this.updateProfile = this.updateProfile.bind(this);
     this.showUserListPage = this.showUserListPage.bind(this);
@@ -65,8 +69,8 @@ class AdminController {
         selectedFilters: {},
       });
     } catch (error) {
-      console.error("Error fetching products:", error);
-      res.status(500).send("Error loading products");
+      console.error("Error fetching users:", error);
+      res.json({ success: false, message: error.message });
     }
   }
 
@@ -296,10 +300,26 @@ class AdminController {
       return;
     }
 
-    res.render(PagePath.DASHBOARD_PAGE_PATH, {
-      isLoggedIn: true,
-      timeRange: req.timeRange ? req.timeRange : "day",
-    });
+    const timeRange = req.query.timeRange || "day";
+
+    try {
+      const revenueData = await this.orderService.getOrdersByTimeRange(timeRange);
+
+      if (Object.keys(req.query).length !== 0) {
+        const html = await ejs.renderFile("views/pages/admin/dashboardReport.ejs", { revenueData, timeRange });
+        const revenue= JSON.stringify(revenueData);
+        return res.json({ html, revenue });
+      }
+
+      res.render(PagePath.DASHBOARD_PAGE_PATH, {
+        revenueData, 
+        timeRange,
+        isLoggedIn: true
+      });
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      res.json({ success: false, message: error.message });
+    }
   }
 }
 

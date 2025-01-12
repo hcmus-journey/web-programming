@@ -29,6 +29,7 @@ export const OrderDetail = sequelize.define('OrderDetail', {
   underscored: true,
   timestamps: false,
 });
+
 OrderDetail.belongsTo(Product, {
     foreignKey: "product_id",
     as: "product",

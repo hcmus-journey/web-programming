@@ -56,11 +56,8 @@
 
       <!-- Order History -->
       <div class="container my-5" id="orderList">
-        <% if (orders && orders.length> 0) { %>
-          <%- include('orderList' , {orders : orders}) %>
-            <% } else { %>
-              <p>No orders found.</p>
-              <% } %>
+        <%- include('orderList' , {orders : orders}) %>
+        
       </div>
       <!-- ./User List -->
 

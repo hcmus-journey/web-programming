@@ -1,0 +1,39 @@
+    <!-- Total Revenue Section -->
+    <div class="p-4 lg:col-span-5">
+        <h2 class="text-lg font-bold">Total Revenue</h2>
+        <canvas id="totalRevenueChart" class="mt-4"></canvas>
+    </div>
+
+    <!-- Top Products Section -->
+    <div class="p-4 lg:col-span-3">
+        <h2 class="text-lg font-bold">Top Revenue by Product</h2>
+        <% if (revenueData.top && revenueData.top.length> 0) { %>
+            <table class="w-full mt-2 border-collapse border border-gray-300">
+                <thead>
+                    <tr class="border-b border-gray-300">
+                        <th class="text-primary border p-2">#</th>
+                        <th class="text-primary border p-2">Product</th>
+                        <th class="text-primary border p-2">Revenue</th>
+                    </tr>
+                </thead>
+                <tbody id="topProducts">
+                    <% revenueData.top.forEach((product, index)=> { %>
+                        <tr class="hover:bg-gray-200">
+                            <td class="border p-2">
+                                <%= index + 1 %>
+                            </td>
+                            <td class="border p-2">
+                                <%= product.product_name %>
+                            </td>
+                            <td class="border p-2">
+                                <%= product.revenue %>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+            <% } else { %>
+                <p>No insight found.</p>
+                <% } %>
+    </div>
+
