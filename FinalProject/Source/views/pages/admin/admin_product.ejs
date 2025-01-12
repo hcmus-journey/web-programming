@@ -7,6 +7,7 @@
   <body>
     <!-- Header Section -->
     <%- include('../../layouts/adminHeader') %> <%-
+    include('../../layouts/adminNavbar', {isLoggedIn: isLoggedIn}) %> <%-
     include('../../layouts/notification') %>
 
     <!-- breadcrumb -->
@@ -62,9 +63,9 @@
         <h2 class="text-xl font-medium uppercase mb-2">
           <%= product.product_name %>
         </h2>
-        <div class="space-y-2">
+        <div class="space-y-2 mt-4">
           <p class="text-gray-800 font-medium space-x-2">
-            <span>Availability: </span>
+            <span>Status: </span>
             <span class="text-green-600">
               <%= product.quantity> 0 ? 'In Stock' : 'Out of Stock' %>
             </span>
@@ -81,66 +82,29 @@
               <%= product.category.category_name %>
             </span>
           </p>
-        </div>
-        <div class="flex items-baseline mb-1 space-x-2 font-roboto mt-4">
-          <p class="text-xl text-primary font-semibold">
-            <%= `$${product.price.toFixed(2)}` %>
+          <p class="space-x-2">
+            <span class="text-gray-800 font-medium">Quantity: </span>
+            <span class="text-gray-600"> <%= product.quantity %> </span>
           </p>
-        </div>
-        <div class="mt-4">
-          <p class="text-gray-800 font-medium space-x-2 mb-2">Quantity</p>
-          <div
-            class="flex border border-gray-300 text-gray-600 divide-x divide-gray-300 w-max"
-          >
-            <div
-              class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none"
+          <p class="space-x-2">
+            <span class="text-gray-800 font-medium">Price: </span>
+            <span class="text-xl text-primary font-semibold">
+              <%= `$${product.price.toFixed(2)}` %>
+            </span>
+          </p>
+          <div class="pt-5">
+            <h3
+              class="border-b border-gray-200 font-roboto text-gray-800 pb-3 font-medium"
             >
-              -
-            </div>
-            <div class="h-8 w-8 text-base flex items-center justify-center">
-              4
-            </div>
-            <div
-              class="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none"
-            >
-              +
-            </div>
+              Product details
+            </h3>
+            <p class="text-gray-600 pt-4"><%= product.detail %></p>
           </div>
-        </div>
-        <div class="mt-6 flex gap-3 pb-5 pt-5">
-          <a
-            href="#"
-            class="bg-primary border border-primary text-white px-8 py-2 font-medium rounded uppercase flex items-center gap-2 hover:bg-transparent hover:text-primary transition"
-          >
-            <i class="fa-solid fa-bag-shopping"></i> Add to cart
-          </a>
         </div>
       </div>
     </div>
     <!-- ./product-detail -->
 
-    <!-- description -->
-    <div class="container pt-5">
-      <h3
-        class="border-b border-gray-200 font-roboto text-gray-800 pb-3 font-medium"
-      >
-        Product details
-      </h3>
-      <p class="text-gray-600 pt-4"><%= product.detail %></p>
-    </div>
-    <!-- ./description -->
-
-    <!-- related product -->
-    <div class="container pt-5">
-      <h2 class="text-2xl font-medium text-gray-800 uppercase mb-6">
-        Related products
-      </h2>
-      <div class="grid grid-cols-4 gap-6">
-        <%- include('../../layouts/productList' , {productList :
-        relatedProducts}) %>
-      </div>
-    </div>
-    <!-- ./related product -->
     <%- include('../../layouts/footer') %>
     <script src="/public/js/Product.js"></script>
   </body>
