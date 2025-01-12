@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../layouts/head', { title: 'HATShop - Home decoration' }) %>
+</head>
+
+<body>
+  <%- include('../../layouts/adminHeader') %>
+  <%- include('../../layouts/notification') %>
+  <%- include('../../layouts/adminNavbar', {isLoggedIn: isLoggedIn}) %>
+   
+  <div class="container mx-auto p-4">
+    <div class="flex justify-between items-center mb-4">
+      <select id="timeRange" class="border rounded px-2 py-1 w-24">
+        <option value="day">Day</option>
+        <option value="week">Week</option>
+        <option value="month">Month</option>
+      </select>
+    </div>
+      <!-- Total Revenue Section -->
+      <div class="p-4">
+        <h2 class="text-lg font-bold">Total Revenue</h2>
+        <canvas id="totalRevenueChart" class="mt-4"></canvas>
+      </div> 
+  
+      <!-- Top Products Section -->
+      <div class="p-4">
+        <h2 class="text-lg font-bold">Top Revenue by Product</h2>
+        <table class="w-full mt-2 border-collapse border border-gray-300">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="border p-2">#</th>
+              <th class="border p-2">Product</th>
+              <th class="border p-2">Revenue</th>
+            </tr>
+          </thead>
+          <tbody id="topProducts">
+            <!-- Dynamic Rows -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  <%- include('../../layouts/footer') %>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/public/js/Dashboard.js"></script>
+</body>
+
+</html>

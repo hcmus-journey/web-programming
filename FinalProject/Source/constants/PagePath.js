@@ -16,8 +16,9 @@ class PagePath {
   static PROFILE_PAGE_PATH = "pages/user/profile";
   static CHANGE_PASSWORD_PAGE_PATH = "pages/user/change-password";
 
-  static ADMIN_PAGE_PATH = "pages/admin/admin";
-  static USER_LIST_PAGE_PATH = "pages/admin/users.ejs";
+  static ADMIN_ACCOUNT_PAGE_PATH = "pages/admin/account";
+  static USER_LIST_PAGE_PATH = "pages/admin/users";
+  static DASHBOARD_PAGE_PATH = "pages/admin/dashboard";
 
   static PRIVACY_PAGE_PATH = "#";
 

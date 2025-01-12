@@ -1,4 +1,5 @@
 import { Product } from "../models/Product.js";
+import { Op } from "sequelize";
 
 class OrderService {
   constructor(orderModel, orderDetailModel) {
@@ -120,38 +121,42 @@ class OrderService {
     }
   }
 
-  async searchOrders(query, sort) {
-      let orderClause = [];
+  async searchOrders(sort) {
+    let orderClause = [];
 
-      if (sort === "latest") {
-        orderClause = [["created_at", "DESC"]];
-      } else {
-        orderClause = [["created_at", "ASC"]];
-      }
-  
-      try {
-        query = query?.trim();
-  
-        const whereClause = query
-          ? {
-              [Op.or]: [
-                { name: { [Op.iLike]: `%${query}%` } },
-                { email: { [Op.iLike]: `%${query}%` } },
-              ],
-            }
-          : {};
-  
-        const users = await this.orderModel.findAll({
-          where: whereClause,
-          order: orderClause, // Sắp xếp kết quả
-        });
-  
-        return users;
-      } catch (error) {
-        console.error("Error searching users:", error.message);
-        throw new Error("Failed to search users.");
-      }
+    if (sort === "latest") {
+      orderClause = [["created_at", "DESC"]];
+    } else {
+      orderClause = [["created_at", "ASC"]];
     }
+
+    try {
+      let query = "";
+
+      const whereClause = query
+        ? {
+            [Op.or]: [
+              { name: { [Op.iLike]: `%${query}%` } },
+              { email: { [Op.iLike]: `%${query}%` } },
+            ],
+          }
+        : {};
+
+      const orders = await this.orderModel.findAll({
+        where: whereClause,
+        order: orderClause,
+      });
+
+      return orders;
+    } catch (error) {
+      console.error("Error searching users:", error.message);
+      throw new Error("Failed to search users.");
+    }
+  }
+
+  async getOrdersByTimeRange(range) {
+    
+  }
 }
 
 export default OrderService;

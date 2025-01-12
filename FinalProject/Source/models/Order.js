@@ -39,7 +39,6 @@ export const Order = sequelize.define('Order', {
   },
   created_at: {
     type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW, 
     allowNull: false,
   },
   shipping_status: {

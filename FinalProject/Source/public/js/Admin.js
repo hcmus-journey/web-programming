@@ -28,7 +28,7 @@ function edit() {
   const profile = document.getElementById("profile");
   const editProfile = document.getElementById("edit-profile");
 
-  fetch("/admin/dashboard", {
+  fetch("/admin/account", {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),

@@ -3,11 +3,11 @@ import adminController from "../controllers/AdminController.js";
 
 const router = express.Router();
 
-router.get("/dashboard", adminController.showProfilePage);
+router.get("/account", adminController.showProfilePage);
 
 router.get("/users", adminController.showUserListPage);
 
-router.put("/dashboard", adminController.updateProfile);
+router.put("/account", adminController.updateProfile);
 
 router.put("/users", adminController.actionOnUser);
 

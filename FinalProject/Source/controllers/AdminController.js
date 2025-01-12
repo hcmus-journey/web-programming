@@ -19,7 +19,7 @@ class AdminController {
       return;
     }
     const user = req.user;
-    res.render(PagePath.ADMIN_PAGE_PATH, {
+    res.render(PagePath.ADMIN_ACCOUNT_PAGE_PATH, {
       user: user, 
       isLoggedIn: true,
       successMessage: req.flash("success"),
@@ -82,9 +82,10 @@ class AdminController {
         res.json({ success: false, message: error.message });
       }
     } else {
-      res.redirect("/");
+      res.redirect("/login");
     }
   }
+
   async showAdminPage(req, res) {
     const page = parseInt(req.query.page) || 1;
     const limit = 9;
@@ -285,8 +286,20 @@ class AdminController {
         res.json({ success: false, message: error.message });
       }
     } else {
-      res.redirect('/');
+      res.redirect('/login');
     }
+  }
+
+  async showDashboard(req, res) {
+    if (!req.isAuthenticated()) {
+      res.redirect("/login");
+      return;
+    }
+
+    res.render(PagePath.DASHBOARD_PAGE_PATH, {
+      isLoggedIn: true,
+      timeRange: req.timeRange ? req.timeRange : "day",
+    });
   }
 }
 

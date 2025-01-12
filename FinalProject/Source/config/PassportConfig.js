@@ -60,12 +60,7 @@ class PassportConfig {
                 const userRole = req.user.user_role; // Assuming role is stored in req.user
 
                 if (!allowedRoles.includes(userRole)) {
-                    if (userRole == 'ADMIN') {
-                        return res.redirect('/admin/dashboard'); 
-                    }
-                    else {
-                        return res.redirect('/');
-                    }
+                    return res.redirect('/');
                 }
             }
 

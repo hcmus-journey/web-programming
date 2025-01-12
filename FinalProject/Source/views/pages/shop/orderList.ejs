@@ -1,21 +1,21 @@
 <table class="table-fixed w-full border-collapse border border-gray-300">
     <thead class="border-b border-gray-300">
-      <tr class=" ">
-        <th class="text-primary px-4 py-4 text-left w-full">No.</th>
-        <th class="text-primary px-4 py-4 text-left w-full">Date</th>
+      <tr class="">
+        <th class="text-primary px-4 py-4 text-left w-full">Order code</th>
+        <th class="text-primary px-4 py-4 text-left w-1/2">Date</th>
         <th class="text-primary px-4 py-4 text-left w-1/3">Total</th>
         <th class="text-primary px-4 py-4 text-left w-1/3">Shipping</th>
-        <th class="text-primary px-4 py-4 text-left w-full">Payment</th>
+        <th class="text-primary px-4 py-4 text-left w-1/3">Payment</th>
       </tr>
     </thead>
     <tbody>
       <% orders.forEach((eachOrder, index)=> { %>
-        <tr class="hover:bg-gray-200 ">
-          <td class="px-4 py-4 break-words w-full"><%= index + 1 %></td>
-          <td class="px-4 py-4 break-words w-full"><%= new Date(eachOrder.created_at).toLocaleString('en-US', { timeZone: 'Asia/Bangkok' , dateStyle: 'medium' ,timeStyle: 'short' }) %></td>
-          <td class="px-4 py-4 w-1/3"><%= eachOrder.total %></td>
+        <tr class="hover:bg-gray-200" onclick="openOrderDetail('<%= eachOrder.order_id %>')">
+          <td class="px-4 py-4 break-words w-full"><%= eachOrder.order_id %></td>
+            <td class="px-4 py-4 break-words w-1/2"><%= new Date(eachOrder.created_at).toLocaleString('en-US', { timeZone: 'Etc/GMT-7', dateStyle: 'medium', timeStyle: 'short' }) %></td>
+          <td class="px-4 py-4 w-1/3"><%= eachOrder.total.toFixed(2) %></td>
           <td class="px-4 py-4 w-1/3" id='<%= "status" + index %>'><%= eachOrder.shipping_status %></td>
-          <td class="px-4 py-4 break-words w-full"><%= eachOrder.payment_status %></td>
+          <td class="px-4 py-4 break-words w-1/3"><%= eachOrder.payment_status == 'NOT_PAID' ? 'UNPAID' : 'PAID' %></td>
         </tr>
         <% }); %>
     </tbody>

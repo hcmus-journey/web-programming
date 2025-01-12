@@ -31,12 +31,10 @@ export const User = sequelize.define('User', {
   created_at: {
     type: DataTypes.DATE,
     allowNull: false,
-    defaultValue: DataTypes.NOW,
   },
   updated_at: {
     type: DataTypes.DATE,
     allowNull: false,
-    defaultValue: DataTypes.NOW,
   },
   status: {
     type: DataTypes.ENUM('BANNED', 'ACTIVE'),

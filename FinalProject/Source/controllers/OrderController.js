@@ -6,6 +6,7 @@ import { Order } from "../models/Order.js";
 import { OrderDetail } from "../models/OrderDetail.js";
 import OrderService from "../services/OrderService.js";
 import HATShopInfo from "../constants/HATShopInfo.js";
+import ejs from "ejs";
 
 class OrderController {
   constructor() {
@@ -55,6 +56,7 @@ class OrderController {
         shipping_fee: req.body.shippingFee,
         shipping_status: "SUSPEND",
         payment_status: "NOT_PAID",
+        created_at: new Date(),
       };
       const orderProducts = cart.map((item) => {
         return {
@@ -84,7 +86,8 @@ class OrderController {
   async showOrderDetail(req, res) {
     if (req.isAuthenticated()) {
       try {
-        const order = await this.orderService.getOrderById(req.params.orderId);
+        const order = await this.orderService.getOrderById(req.params.orderId); 
+
         res.render(PagePath.USER_ORDER_DETAIL_PAGE_PATH, { isLoggedIn: true, order: order });
       } catch (error) {
         res.status(500).send("Error loading order");
@@ -102,11 +105,10 @@ class OrderController {
 
     const page = parseInt(req.query.page) || 1;
     const limit = 5;
-    const query = req.query.query || "";
     const sort = req.query.sort || "";
   
     try {
-      const orders = await this.orderService.searchOrders(query, sort);
+      const orders = await this.orderService.searchOrders(sort);
       const filteredOrders = orders;
   
       const totalFilteredPages = Math.ceil(filteredOrders.length / limit);
