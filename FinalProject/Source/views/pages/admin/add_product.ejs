@@ -6,7 +6,8 @@
 
   <body>
     <!-- Header Section -->
-    <%- include('../../layouts/adminHeader') %> <a%-
+    <%- include('../../layouts/adminHeader') %> <%-
+    include('../../layouts/adminNavbar', {isLoggedIn: isLoggedIn}) %> <%-
     include('../../layouts/notification') %>
 
     <!-- breadcrumb -->
