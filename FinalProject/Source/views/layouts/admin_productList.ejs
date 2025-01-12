@@ -6,8 +6,11 @@
         <thead class="bg-primary text-white uppercase text-sm">
           <tr>
             <th class="py-4 px-6 text-left">Product</th>
+            <th class="py-4 px-6">Manufacture</th>
+            <th class="py-4 px-6">Category</th>
             <th class="py-4 px-6">Price</th>
             <th class="py-4 px-6">Quantity</th>
+            <th class="py-4 px-6">Status</th>
             <th class="py-4 px-6">Details</th>
           </tr>
         </thead>
@@ -26,11 +29,24 @@
               </a>
             </td>
 
+            <!-- Nhà sản xuất -->
+            <td class="py-4 px-6">
+              <%= product.manufacturer.manufacturer_name %>
+            </td>
+
+            <!-- Loại sản phẩm -->
+            <td class="py-4 px-6"><%= product.category.category_name %></td>
+
             <!-- Giá tiền -->
             <td class="py-4 px-6">$<%= product.price.toFixed(2) %></td>
 
             <!-- Số lượng -->
             <td class="py-4 px-6"><%= product.total_purchases %></td>
+
+            <!-- Tình trạng -->
+            <td class="py-4 px-6">
+              <%= product.quantity> 0 ? 'In Stock' : 'Sold out' %>
+            </td>
 
             <!-- Xem chi tiết -->
             <td class="py-4 px-6">
