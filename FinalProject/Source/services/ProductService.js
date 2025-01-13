@@ -273,6 +273,43 @@ class ProductService {
       throw new Error("Error fetching manufacturers: " + error.message);
     }
   }
+
+  async updateProductById(productId, updateData) {
+    const { images, ...productData } = updateData; // Tách ảnh và các dữ liệu khác
+
+    try {
+      // Kiểm tra sản phẩm có tồn tại không
+      const product = await this.getProductById(productId);
+      if (!product) throw new Error("Product not found");
+
+      // Cập nhật thông tin sản phẩm
+      if (Object.keys(productData).length > 0) {
+        await Product.update(productData, {
+          where: { product_id: productId },
+        });
+      }
+
+      // Xử lý cập nhật danh sách ảnh
+      if (images && Array.isArray(images)) {
+        // Xóa các ảnh cũ
+        await ProductImage.destroy({
+          where: { product_id: productId },
+        });
+
+        // Thêm các ảnh mới
+        const newImages = images.map((imageUrl) => ({
+          product_id: productId,
+          image_url: imageUrl,
+        }));
+        await ProductImage.bulkCreate(newImages);
+      }
+
+      // Lấy lại thông tin sản phẩm sau khi cập nhật
+      return await this.getProductById(productId);
+    } catch (error) {
+      throw new Error("Error updating product by ID: " + error.message);
+    }
+  }
 }
 
 export default new ProductService();

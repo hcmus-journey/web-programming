@@ -7,6 +7,8 @@ import OrderService from "../services/OrderService.js";
 import { Order } from "../models/Order.js";
 import { OrderDetail } from "../models/OrderDetail.js";
 import ejs from "ejs";
+import { v4 as uuidv4 } from "uuid"; // Import hàm tạo UUID
+import uploadImageToS3 from "../utils/uploadToS3.js"; // Hàm upload ảnh
 
 class AdminController {
   constructor() {
@@ -53,8 +55,14 @@ class AdminController {
       );
 
       if (Object.keys(req.query).length !== 0) {
-        const html = await ejs.renderFile("views/pages/admin/userList.ejs", { users: paginatedUsers, user: req.user });
-        const pagination = await ejs.renderFile("views/layouts/pagination.ejs", { totalPages: totalFilteredPages, currentPage: page });
+        const html = await ejs.renderFile("views/pages/admin/userList.ejs", {
+          users: paginatedUsers,
+          user: req.user,
+        });
+        const pagination = await ejs.renderFile(
+          "views/layouts/pagination.ejs",
+          { totalPages: totalFilteredPages, currentPage: page }
+        );
         return res.json({ html, pagination });
       }
 
@@ -206,12 +214,100 @@ class AdminController {
     }
   }
 
-  showAddProduct(req, res) {
+  async showAddProduct(req, res) {
+    try {
+      const user = req.user;
+      const categories = await ProductService.getAllCategories();
+      const manufacturers = await ProductService.getAllManufacturer();
+
+      res.render(PagePath.ADD_PRODUCT_PATH, {
+        user,
+        isLoggedIn: true,
+        categories,
+        manufacturers,
+      });
+    } catch (error) {
+      console.error("Error fetching category and manufacturer:", error);
+      res
+        .status(500)
+        .send(`Error loading category and manufacturer: ${error.message}`);
+    }
+  }
+
+  async addNewProduct(req, res) {
+    const { product_name, category, quantity, price, manufacturer, detail } =
+      req.body;
     const user = req.user;
-    res.render(PagePath.ADD_PRODUCT_PATH, {
-      user,
-      isLoggedIn: true,
-    });
+    const categories = await ProductService.getAllCategories(); // Lấy toàn bộ Category
+    const manufacturers = await ProductService.getAllManufacturer(); // Lấy toàn bộ Manufacturer
+
+    // Kiểm tra dữ liệu đầu vào
+    if (!product_name || !category || !quantity || !price || !manufacturer) {
+      return res.status(400).json({ error: "Missing required fields!" });
+    }
+
+    try {
+      // Kiểm tra và lấy category_id từ bảng Category
+      const categoryRecord = categories.find(
+        (cat) => cat.category_name === category
+      );
+      if (!categoryRecord) {
+        throw new Error("Category không tồn tại!");
+      }
+
+      // Kiểm tra và lấy manufacturer_id từ bảng Manufacturer
+      const manufacturerRecord = manufacturers.find(
+        (manu) => manu.manufacturer_name === manufacturer
+      );
+      if (!manufacturerRecord) {
+        throw new Error("Manufacturer không tồn tại!");
+      }
+
+      // Tải ảnh lên S3
+      const imageUrls = [];
+      if (req.files) {
+        for (const file of req.files) {
+          const imageUrl = await uploadImageToS3(file);
+          imageUrls.push(imageUrl);
+        }
+      }
+
+      const product_id = uuidv4(); // Tạo UUID cho product_id
+      // Tạo đối tượng sản phẩm mới
+      const newProduct = {
+        product_id: product_id,
+        product_name: product_name,
+        category_id: categoryRecord.category_id, // Sử dụng ID từ category
+        quantity: parseInt(quantity), // Chuyển đổi sang số nguyên
+        price: parseFloat(price), // Chuyển đổi sang số thập phân
+        manufacturer_id: manufacturerRecord.manufacturer_id, // Sử dụng ID từ manufacturer
+        detail: detail,
+        images: imageUrls, // Danh sách URL ảnh
+      };
+
+      // Gọi service để lưu sản phẩm
+      await ProductService.createProduct(newProduct);
+
+      // Chuyển hướng về trang quản lý sản phẩm
+      res.render(PagePath.ADD_PRODUCT_PATH, {
+        user,
+        isLoggedIn: true,
+        categories,
+        manufacturers,
+        successMessage: "Thêm sản phẩm thành công!", // Thêm thông báo thành công
+      });
+    } catch (error) {
+      console.error("Error adding product:", error.message);
+
+      // Render lại trang thêm sản phẩm với thông báo lỗi
+      res.render(PagePath.ADD_PRODUCT_PATH, {
+        user,
+        isLoggedIn: true,
+        categories,
+        manufacturers,
+        error: error.message || "Đã có lỗi xảy ra!",
+      });
+    }
   }
 
   async showEditProduct(req, res) {
@@ -246,6 +342,27 @@ class AdminController {
     }
   }
 
+  async updateProduct(req, res) {
+    try {
+      const productId = req.params.id;
+      const updateData = req.body;
+
+      // Gọi hàm cập nhật
+      const updatedProduct = await ProductService.updateProductById(
+        productId,
+        updateData
+      );
+
+      res.status(200).json({
+        message: "Product updated successfully",
+        data: updatedProduct,
+      });
+    } catch (error) {
+      console.error("Error updating product:", error.message);
+      res.status(500).json({ error: error.message });
+    }
+  }
+
   async showAdminProduct(req, res) {
     const productId = req.query.id;
     try {
@@ -274,18 +391,17 @@ class AdminController {
   async actionOnUser(req, res) {
     if (req.isAuthenticated()) {
       const userActionData = {
-        status: req.body.status
+        status: req.body.status,
       };
 
       try {
-        this.userService.updateUser(
-          req.body.id,
-          userActionData
-        );
-        const action = req.body.status == 'ACTIVE' ? 'unbanned' : 'banned';
+        this.userService.updateUser(req.body.id, userActionData);
+        const action = req.body.status == "ACTIVE" ? "unbanned" : "banned";
 
-        res.json({ success: true, message: "User " + action + " successfully!" });
-
+        res.json({
+          success: true,
+          message: "User " + action + " successfully!",
+        });
       } catch (error) {
         res.json({ success: false, message: error.message });
       }
