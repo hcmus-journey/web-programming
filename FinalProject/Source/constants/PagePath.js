@@ -26,6 +26,8 @@ class PagePath {
   static ADMIN_PRODUCT_PATH = "pages/admin/admin_product";
   static EDIT_PRODUCT_PATH = "pages/admin/edit_product";
   static ADD_PRODUCT_PATH = "pages/admin/add_product";
+  static ADD_MANUFACTURER_PATH = "pages/admin/add_manufacturer";
+  static ADD_CATEGORY_PATH = "pages/admin/add_category";
 }
 
 export default PagePath;
