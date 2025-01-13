@@ -10,7 +10,7 @@
   <!-- Header Section -->
   <%- include('../../layouts/adminHeader') %>
   <%- include('../../layouts/adminNavbar', {isLoggedIn: isLoggedIn}) %>
-  <%- include('../../layouts/notification') %>
+  <div%- include('../../layouts/notification') %>
 
   <!-- breadcrumb -->
   <div class="container py-4 flex items-center gap-3">
@@ -26,6 +26,7 @@
 
   <!-- Filter Section -->
   <div class="bg-white px-4 pb-6 shadow rounded" id="filterSection">
+    <div>
     <div class="flex justify-between items-center py-3">
       <h3 class="text-xl text-gray-800 uppercase font-medium">Filters</h3>
       <button id="filterClose" class="text-gray-600 hover:text-primary">
@@ -33,7 +34,8 @@
       </button>
     </div>
     <div class="divide-y divide-gray-200 space-y-5">
-      <!-- Categories Filter -->
+      <form id="filterForm">
+        <!-- Categories Filter -->
       <div>
         <h3 class="text-lg text-gray-800 my-3 font-medium cursor-pointer flex items-center justify-between"
           id="toggleCategories">
@@ -129,6 +131,8 @@
           </div>
         </div>
       </div>
+      </form>
+      </div>
     </div>
 
     <!-- Buttons -->
@@ -136,12 +140,13 @@
       <button id="resetFilter" class="bg-gray-200 text-gray-600 px-4 py-2 rounded hover:bg-gray-300">
         Reset Filters
       </button>
-      <button id="applyFilter" class="bg-primary text-white px-4 py-2 ml-4 rounded hover:bg-primary-dark">
+      <button id="applyFilter" type="submit" form="filterForm" class="bg-primary text-white px-4 py-2 ml-4 rounded hover:bg-primary-dark">
         Apply Filters
       </button>
     </div>
   </div>
   <!-- End Filter Section -->
+   
 
   <!-- Shop Section -->
   <div class="container gap-6 pt-4 pb-4 items-start">
@@ -160,7 +165,7 @@
 
       <!-- Search bar -->
   <div class="inline-flex w-full max-w-xl relative mx-5">
-    <form method="GET" action="/shop" class="search-form w-full">
+    <form method="GET" action="/admin/admin_shop" class="search-form w-full">
       <!-- Icon -->
       <label for="search" class="absolute left-4 top-2 transform text-lg text-gray-400">
         <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
@@ -192,19 +197,32 @@
     </form>
   </div>
 
-      <div class="flex gap-2 ml-auto">
-        <a href="/admin/add_product" id="newProduct"
-          class="flex items-center bg-primary text-white px-4 py-2 rounded h-12 hover:bg-transparent hover:text-primary">
-          <i class="fa-solid fa-plus mr-2"></i> New Product
-        </a>
-        <button id="filterToggle" class="bg-primary text-white px-4 py-2 rounded h-12">
-          <i class="fa-solid fa-filter"></i>
-        </button>
-      </div>
+  <div class="flex gap-2 ml-auto">
+    <!-- Add Manufacturer Button -->
+    <a href="/admin/add_manufacturer" id="newManufacturer"
+      class="flex items-center bg-primary text-white px-4 py-2 rounded h-12 hover:bg-transparent hover:text-primary">
+      <i class="fa-solid fa-plus mr-2"></i> Manufacturer
+    </a>
+  
+    <!-- Add Category Button -->
+    <a href="/admin/add_category" id="newCategory"
+      class="flex items-center bg-primary text-white px-4 py-2 rounded h-12 hover:bg-transparent hover:text-primary">
+      <i class="fa-solid fa-plus mr-2"></i> Category
+    </a>
+  
+    <!-- New Product Button -->
+    <a href="/admin/add_product" id="newProduct"
+      class="flex items-center bg-primary text-white px-4 py-2 rounded h-12 hover:bg-transparent hover:text-primary">
+      <i class="fa-solid fa-plus mr-2"></i>Product
+    </a>
+    
+    <button id="filterToggle" class="bg-primary text-white px-4 py-2 rounded h-12">
+      <i class="fa-solid fa-filter"></i>
+    </button>
+  </div>
+  
     </div>
   </div>
-
-  
   
   <!-- Product List -->
   <div id="productList">
@@ -214,32 +232,15 @@
       <p>No products found.</p>
     <% } %>
   </div>
-
+  
   <!-- Pagination Controls -->
-  <div class="pagination-controls mt-5 container flex justify-center items-center gap-4">
-    <% if (currentPage > 1) { %>
-      <a href="?page=<%= currentPage - 1 %>" class="text-gray-600 hover:text-primary">
-        <i class="fa-solid fa-chevron-left"></i>
-      </a>
-    <% } %>
-    <% for (let i = 1; i <= totalPages; i++) { %>
-      <a href="?page=<%= i %>"
-        class="<%= i === currentPage ? 'text-primary' : 'text-gray-600 hover:text-primary' %>">
-        <%= i %>
-      </a>
-    <% } %>
-    <% if (currentPage < totalPages) { %>
-      <a href="?page=<%= currentPage + 1 %>" class="text-gray-600 hover:text-primary">
-        <i class="fa-solid fa-chevron-right"></i>
-      </a>
-    <% } %>
-  </div>
+  <%- include('../../layouts/pagination', { currentPage: currentPage, totalPages: totalPages, }) %>
 
   <!-- Footer Section -->
   <%- include('../../layouts/footer') %>
 
   <!-- Scripts -->
-  <script src="/public/js/Shop.js"></script>
+  <script src="/public/js/AdminShop.js"></script>
 </body>
 
 </html>

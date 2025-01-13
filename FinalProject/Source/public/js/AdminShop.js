@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const fetchProducts = (filters, page = 1) => {
     currentPage = page; // Update the current page
     const params = new URLSearchParams({ ...filters, page });
-    const url = `/shop?${params.toString()}`;
+    const url = `/admin/admin_shop?${params.toString()}`;
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
