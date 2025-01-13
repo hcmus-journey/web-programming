@@ -16,7 +16,7 @@ router.put("/users", adminController.actionOnUser);
 router.get("/admin_shop", adminController.showAdminPage);
 router.get("/admin_product", adminController.showAdminProduct);
 router.get("/edit_product", adminController.showEditProduct); // Trang chỉnh sửa sản phẩm
-router.post("/edit_product", adminController.updateProduct); // Xử lý cập nhật sản phẩm
+router.post("/edit_product", upload.array("images", 10), adminController.updateProduct); // Xử lý cập nhật sản phẩm
 router.get("/add_product", adminController.showAddProduct); // Trang thêm sản phẩm
 router.post(
   "/add_new_product",

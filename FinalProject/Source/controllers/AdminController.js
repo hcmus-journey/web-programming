@@ -26,7 +26,7 @@ class AdminController {
     }
     const user = req.user;
     res.render(PagePath.ADMIN_ACCOUNT_PAGE_PATH, {
-      user: user, 
+      user: user,
       isLoggedIn: true,
       successMessage: req.flash("success"),
       errorMessage: req.flash("error"),
@@ -289,7 +289,7 @@ class AdminController {
 
       // Gọi service để lưu sản phẩm
       await ProductService.createProduct(newProduct);
-      
+
       await ProductService.createProductImages(productImages);
 
       // Chuyển hướng về trang quản lý sản phẩm
@@ -341,23 +341,83 @@ class AdminController {
   }
 
   async updateProduct(req, res) {
+    const {
+      product_id,
+      product_name,
+      category,
+      quantity,
+      price,
+      manufacturer,
+      detail,
+    } = req.body;
+    const user = req.user;
+    const categories = await ProductService.getAllCategories(); // Lấy toàn bộ Category
+    const manufacturers = await ProductService.getAllManufacturer(); // Lấy toàn bộ Manufacturer
+
+    // Kiểm tra dữ liệu đầu vào
+    if (!product_name || !category || !quantity || !price || !manufacturer) {
+      return res.status(400).json({ error: "Missing required fields!" });
+    }
+
     try {
-      const productId = req.params.id;
-      const updateData = req.body;
-
-      // Gọi hàm cập nhật
-      const updatedProduct = await ProductService.updateProductById(
-        productId,
-        updateData
+      // Kiểm tra và lấy category_id từ bảng Category
+      const categoryRecord = categories.find(
+        (cat) => cat.category_name === category
       );
+      if (!categoryRecord) {
+        throw new Error("Category không tồn tại!");
+      }
 
-      res.status(200).json({
-        message: "Product updated successfully",
-        data: updatedProduct,
-      });
+      // Kiểm tra và lấy manufacturer_id từ bảng Manufacturer
+      const manufacturerRecord = manufacturers.find(
+        (manu) => manu.manufacturer_name === manufacturer
+      );
+      if (!manufacturerRecord) {
+        throw new Error("Manufacturer không tồn tại!");
+      }
+
+      // Tải ảnh lên S3
+      const imageUrls = [];
+      for (let i = 0; i < req.files.length; i++) {
+        const imageUrl = await uploadImageToS3(req.files[i]);
+        imageUrls.push(imageUrl);
+      }
+      // Tạo đối tượng sản phẩm mới
+      const productImages = imageUrls.map((url) => ({
+        img_id: uuidv4(),
+        product_id: product_id,
+        img_src: url,
+      }));
+      const product = {
+        product_id: product_id,
+        product_name: product_name,
+        category_id: categoryRecord.category_id, // Sử dụng ID từ category
+        quantity: parseInt(quantity), // Chuyển đổi sang số nguyên
+        price: parseFloat(price), // Chuyển đổi sang số thập phân
+        manufacturer_id: manufacturerRecord.manufacturer_id, // Sử dụng ID từ manufacturer
+        detail: detail,
+      };
+
+      // Gọi service để lưu sản phẩm
+      await ProductService.updateProduct(product_id, product);
+
+      if (imageUrls.length > 0) {
+        await ProductService.updateProductImages(product_id, productImages);
+      }
+
+      // Chuyển hướng về trang quản lý sản phẩm
+      res.redirect("/admin/admin_shop");
     } catch (error) {
-      console.error("Error updating product:", error.message);
-      res.status(500).json({ error: error.message });
+      console.error("Error adding product:", error.message);
+
+      // Render lại trang thêm sản phẩm với thông báo lỗi
+      res.render(PagePath.ADD_PRODUCT_PATH, {
+        user,
+        isLoggedIn: true,
+        categories,
+        manufacturers,
+        error: error.message || "Đã có lỗi xảy ra!",
+      });
     }
   }
 
@@ -404,7 +464,7 @@ class AdminController {
         res.json({ success: false, message: error.message });
       }
     } else {
-      res.redirect('/login');
+      res.redirect("/login");
     }
   }
 
@@ -417,18 +477,23 @@ class AdminController {
     const timeRange = req.query.timeRange || "day";
 
     try {
-      const revenueData = await this.orderService.getOrdersByTimeRange(timeRange);
+      const revenueData = await this.orderService.getOrdersByTimeRange(
+        timeRange
+      );
 
       if (Object.keys(req.query).length !== 0) {
-        const html = await ejs.renderFile("views/pages/admin/dashboardReport.ejs", { revenueData, timeRange });
-        const revenue= JSON.stringify(revenueData);
+        const html = await ejs.renderFile(
+          "views/pages/admin/dashboardReport.ejs",
+          { revenueData, timeRange }
+        );
+        const revenue = JSON.stringify(revenueData);
         return res.json({ html, revenue });
       }
 
       res.render(PagePath.DASHBOARD_PAGE_PATH, {
-        revenueData, 
+        revenueData,
         timeRange,
-        isLoggedIn: true
+        isLoggedIn: true,
       });
     } catch (error) {
       console.error("Error fetching users:", error);
