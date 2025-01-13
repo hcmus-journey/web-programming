@@ -76,9 +76,19 @@ class ProductService {
   // Create a new product
   async createProduct(productData) {
     try {
-      return await Product.create(productData);
+      return await Product.create(productData, {
+        include: [{ model: ProductImage, as: "images" }],
+      });
     } catch (error) {
       throw new Error("Error creating product: " + error.message);
+    }
+  }
+
+  async createProductImages(images) {
+    try {
+      return await ProductImage.bulkCreate(images);
+    } catch (error) {
+      throw new Error("Error creating product images: " + error.message);
     }
   }
 

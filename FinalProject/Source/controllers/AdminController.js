@@ -265,15 +265,18 @@ class AdminController {
 
       // Tải ảnh lên S3
       const imageUrls = [];
-      if (req.files) {
-        for (const file of req.files) {
-          const imageUrl = await uploadImageToS3(file);
-          imageUrls.push(imageUrl);
-        }
+      for (let i = 0; i < req.files.length; i++) {
+        const imageUrl = await uploadImageToS3(req.files[i]);
+        imageUrls.push(imageUrl);
       }
 
       const product_id = uuidv4(); // Tạo UUID cho product_id
       // Tạo đối tượng sản phẩm mới
+      const productImages = imageUrls.map((url) => ({
+        img_id: uuidv4(),
+        product_id: product_id,
+        img_src: url,
+      }));
       const newProduct = {
         product_id: product_id,
         product_name: product_name,
@@ -282,20 +285,15 @@ class AdminController {
         price: parseFloat(price), // Chuyển đổi sang số thập phân
         manufacturer_id: manufacturerRecord.manufacturer_id, // Sử dụng ID từ manufacturer
         detail: detail,
-        images: imageUrls, // Danh sách URL ảnh
       };
 
       // Gọi service để lưu sản phẩm
       await ProductService.createProduct(newProduct);
+      
+      await ProductService.createProductImages(productImages);
 
       // Chuyển hướng về trang quản lý sản phẩm
-      res.render(PagePath.ADD_PRODUCT_PATH, {
-        user,
-        isLoggedIn: true,
-        categories,
-        manufacturers,
-        successMessage: "Thêm sản phẩm thành công!", // Thêm thông báo thành công
-      });
+      res.redirect("/admin/admin_shop");
     } catch (error) {
       console.error("Error adding product:", error.message);
 

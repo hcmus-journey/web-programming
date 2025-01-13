@@ -38,6 +38,7 @@ export const Product = sequelize.define(
     status: {
       type: DataTypes.TEXT,
       allowNull: true,
+      defaultValue: "IN_STOCK",
     },
     total_purchases: {
       type: DataTypes.BIGINT,

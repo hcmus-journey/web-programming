@@ -31,7 +31,7 @@
       <div class="max-w-3xl mx-auto shadow px-6 py-7 rounded overflow-hidden">
         <h2 class="text-2xl uppercase font-medium mb-1">Add New Product</h2>
         <p class="text-gray-600 mb-6 text-sm">Add details for a new product</p>
-        <form action="/admin/add_new_product" method="post">
+        <form action="/admin/add_new_product" method="post" enctype="multipart/form-data">
           <div class="space-y-4">
             <!-- Product Name -->
             <div>
@@ -141,7 +141,7 @@
               <label for="images" class="text-gray-600 mb-2 block"
                 >Product Images</label
               >
-              <input
+                <input
                 type="file"
                 name="images"
                 id="images"
@@ -149,10 +149,7 @@
                 accept="image/*"
                 class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
                 placeholder="Upload product images (max 10)"
-              />
-              <p class="text-sm text-gray-500 mt-2">
-                Maximum 10 images allowed.
-              </p>
+                />
             </div>
           </div>
 

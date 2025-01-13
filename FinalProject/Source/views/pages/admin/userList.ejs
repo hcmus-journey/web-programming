@@ -31,15 +31,15 @@
   </tbody>
 </table>
 
-<div id="modal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
-  <div class="bg-white rounded-lg shadow-lg shadow-primary max-w-md md:w-24 sm:w-full p-6 bord border border-primary">
+<div id="modal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center w-full" >
+  <div class="bg-white rounded-lg shadow-lg shadow-primary max-w-md sm:w-full p-6 bord border border-primary">
     <h2 class="text-xl font-bold text-primary mb-4 text-center">Confirm Action</h2>
     <p class="justify-start">Are you sure you want to <span id="action-field"></span> <span id="username-field"></span>?</p>
-    <div class="pt-4 flex justify-end">
+    <div class="pt-4 flex justify-between">
       <button type="button" class="px-4 bg-gray-300 hover:bg-gray-400 text-primary rounded-lg" onclick="closeModal()">
         Cancel
       </button>
-      <button type="submit" class="px-4 bg-blue-500 hover:bg-blue-600 text-primary rounded-lg" onclick="action()">
+      <button type="submit" class="px-4 bg-primary hover:bg-blue-600 text-white rounded-lg" onclick="action()">
         Confirm
       </button>
     </div>
