@@ -7,4 +7,6 @@ const passportConfig = new PassportConfig();
 // Get product details page
 router.get("/product", passportConfig.verifyRole(["USER"]), productController.showProductPage);
 
+router.post("/product/:productId/review", passportConfig.verifyRole(["USER"]), productController.postReview);
+
 export default router;

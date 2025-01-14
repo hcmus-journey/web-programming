@@ -4,6 +4,7 @@ import { ProductImage } from "../models/ProductImage.js";
 import { ProductCategory } from "../models/ProductCategory.js";
 import { ProductManufacturer } from "../models/ProductManufacturer.js";
 import { ProductReview } from "../models/ProductReview.js";
+import { User } from "../models/User.js";
 import { Op } from "sequelize";
 
 class ProductService {
@@ -26,7 +27,11 @@ class ProductService {
           { model: ProductImage, as: "images" },
           { model: ProductCategory, as: "category" },
           { model: ProductManufacturer, as: "manufacturer" },
-          { model: ProductReview, as: "reviews" },
+          {
+            model: ProductReview,
+            as: "reviews",
+            include: [{ model: User, as: "user" }],
+          },
         ],
         limit,
         offset,
@@ -63,7 +68,11 @@ class ProductService {
           { model: ProductImage, as: "images" },
           { model: ProductCategory, as: "category" },
           { model: ProductManufacturer, as: "manufacturer" },
-          { model: ProductReview, as: "reviews" },
+          {
+            model: ProductReview,
+            as: "reviews",
+            include: [{ model: User, as: "user" }],
+          },
         ],
       });
       if (!product) throw new Error("Product not found");
@@ -302,12 +311,51 @@ class ProductService {
     }
   }
 
+  async updateManufacturer(manufacturerId, updateData) {
+    try {
+      const [updated] = await ProductManufacturer.update(updateData, {
+        where: { manufacturer_id: manufacturerId },
+      });
+
+      if (!updated) throw new Error("Manufacturer not found!");
+      return await this.getManufacturerById(manufacturerId);
+    } catch (error) {
+      throw new Error("Error updating manufacturer: " + error.message);
+    }
+  }
+
   // Create a new category
   async createCategory(categoryData) {
     try {
       return await ProductCategory.create(categoryData);
     } catch (error) {
       throw new Error("Error creating category: " + error.message);
+    }
+  }
+
+  async createProductReview(productId, userId, detail, rating) {
+    try {
+      return await ProductReview.create({
+        product_id: productId,
+        user_id: userId,
+        detail,
+        rating,
+      });
+    } catch (error) {
+      throw new Error("Error creating product review: " + error.message);
+    }
+  }
+  
+  async updateCategory(categoryId, updateData) {
+    try {
+      const [updated] = await ProductCategory.update(updateData, {
+        where: { category_id: categoryId },
+      });
+
+      if (!updated) throw new Error("Category not found!");
+      return await this.getCategoryById(categoryId);
+    } catch (error) {
+      throw new Error("Error updating category: " + error.message);
     }
   }
 }
