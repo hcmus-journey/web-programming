@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../../layouts/head', { title: 'HATShop - Add New Product' }) %>
+  </head>
+
+  <body>
+    <!-- Header Section -->
+    <%- include('../../layouts/adminHeader') %> <%-
+    include('../../layouts/adminNavbar', { isLoggedIn: isLoggedIn }) %> <%-
+    include('../../layouts/notification') %>
+
+    <!-- breadcrumb -->
+    <div class="container py-4 flex items-center gap-3">
+      <a href="/" class="text-primary text-base">
+        <i class="fa-solid fa-house"></i>
+      </a>
+      <span class="text-sm text-gray-400">
+        <i class="fa-solid fa-chevron-right"></i>
+      </span>
+      <a href="/admin/admin_shop" class="text-gray-600 font-medium">Shop</a>
+      <span class="text-sm text-gray-400">
+        <i class="fa-solid fa-chevron-right"></i>
+      </span>
+      <p class="text-gray-600 font-medium">New manufacturer</p>
+    </div>
+    <!-- ./breadcrumb -->
+
+    <!-- Add New Manufacturer -->
+    <div class="contain py-16">
+      <div class="max-w-3xl mx-auto shadow px-6 py-7 rounded overflow-hidden">
+        <h2 class="text-2xl uppercase font-medium mb-1">
+          Add New Manufacturer
+        </h2>
+        <p class="text-gray-600 mb-6 text-sm">
+          Add details for a new manufacturer
+        </p>
+        <form action="/admin/add_new_manufacturer" method="post">
+          <div class="space-y-4">
+            <!-- Manufacturer Name -->
+            <div>
+              <label for="name" class="text-gray-600 mb-2 block"
+                >Manufacturer Name</label
+              >
+              <input
+                type="text"
+                name="manufacturer_name"
+                id="manufacturer_name"
+                class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400"
+                placeholder="Enter manufacturer name"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="mt-6 flex justify-center">
+            <button
+              type="submit"
+              class="w-44 py-2 text-center text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium"
+            >
+              Add Manufacturer
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- ./Add New Product -->
+
+    <%- include('../../layouts/footer') %>
+  </body>
+</html>

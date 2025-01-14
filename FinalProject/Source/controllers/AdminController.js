@@ -109,88 +109,72 @@ class AdminController {
   }
 
   async showAdminPage(req, res) {
+    const user = req.user;
     const page = parseInt(req.query.page) || 1;
     const limit = 9;
-    const query = req.query.query || ""; // Lấy từ khóa tìm kiếm
+    const query = req.query.query || "";
     const brandVal = req.query.manufacturers
       ? req.query.manufacturers.split(",")
       : [];
     const catVal = req.query.categories ? req.query.categories.split(",") : [];
-    const sort = req.query.sort || ""; // Lấy giá trị sort
-    const minPrice =
-      req.query.minPrice !== undefined
-        ? parseFloat(req.query.minPrice)
-        : undefined;
-    const maxPrice =
-      req.query.maxPrice !== undefined
-        ? parseFloat(req.query.maxPrice)
-        : undefined;
+    const sort = req.query.sort || "";
+    const minPrice = req.query.minPrice
+      ? parseFloat(req.query.minPrice)
+      : undefined;
+    const maxPrice = req.query.maxPrice
+      ? parseFloat(req.query.maxPrice)
+      : undefined;
     const status = req.query.status || undefined;
 
     try {
-      // Lọc theo Category & Manufacturer
-      const categories = await ProductService.getAllCategories(); // Lấy toàn bộ Category
-      const manufacturers = await ProductService.getAllManufacturer(); // Lấy toàn bộ Manufacturer
+      const products = await ProductService.searchProducts(query, sort);
+      const filteredProducts = products
+        .filter(
+          (product) =>
+            catVal.length === 0 ||
+            catVal.includes(product.category_id.toString())
+        )
+        .filter(
+          (product) =>
+            brandVal.length === 0 ||
+            brandVal.includes(product.manufacturer_id.toString())
+        )
+        .filter((product) => isNaN(minPrice) || product.price >= minPrice)
+        .filter((product) => isNaN(maxPrice) || product.price <= maxPrice)
+        .filter((product) => !status || product.status === status);
 
-      // Tìm kiếm theo tên sản phẩm
-      const products = await ProductService.searchProducts(
-        query,
-        "product_name",
-        sort
-      );
-
-      // Lọc sản phẩm theo các tiêu chí
-      let filteredProducts = products;
-
-      if (catVal.length > 0) {
-        filteredProducts = filteredProducts.filter((product) =>
-          catVal.includes(product.category_id.toString())
-        );
-      }
-
-      if (brandVal.length > 0) {
-        filteredProducts = filteredProducts.filter((product) =>
-          brandVal.includes(product.manufacturer_id.toString())
-        );
-      }
-
-      if (!isNaN(minPrice)) {
-        filteredProducts = filteredProducts.filter(
-          (product) => product.price >= minPrice
-        );
-      }
-
-      if (!isNaN(maxPrice)) {
-        filteredProducts = filteredProducts.filter(
-          (product) => product.price <= maxPrice
-        );
-      }
-
-      if (status !== undefined) {
-        filteredProducts = filteredProducts.filter(
-          (product) => product.status === status
-        );
-      }
-
-      // Phân trang
       const totalFilteredPages = Math.ceil(filteredProducts.length / limit);
       const paginatedProducts = filteredProducts.slice(
         (page - 1) * limit,
         page * limit
       );
 
-      const user = req.user;
+      if (Object.keys(req.query).length !== 0) {
+        const html = await ejs.renderFile(
+          "views/layouts/admin_productList.ejs",
+          {
+            productList: paginatedProducts,
+          }
+        );
+        const pagination = await ejs.renderFile(
+          "views/layouts/pagination.ejs",
+          { totalPages: totalFilteredPages, currentPage: page }
+        );
+        return res.json({ html, pagination });
+      }
+
+      const categories = await ProductService.getAllCategories();
+      const manufacturers = await ProductService.getAllManufacturer();
+
       res.render(PagePath.ADMIN_SHOP_PATH, {
-        user,
-        isLoggedIn: true,
         products: paginatedProducts,
-        currentPage: page,
-        limit,
         totalPages: totalFilteredPages,
-        query,
+        currentPage: page,
+        selectedSort: sort,
         categories: categories,
         manufacturers: manufacturers,
-        selectedSort: sort,
+        user,
+        isLoggedIn: true,
         selectedFilters: {
           categories: catVal,
           manufacturers: brandVal,
@@ -201,26 +185,7 @@ class AdminController {
       });
     } catch (error) {
       console.error("Error fetching products:", error);
-      const user = req.user;
-      res.render(PagePath.ADMIN_SHOP_PATH, {
-        user,
-        isLoggedIn: true,
-        products: [],
-        currentPage: 1,
-        limit,
-        totalPages: 1,
-        query: "",
-        categories: [],
-        manufacturers: [],
-        selectedSort: sort,
-        selectedFilters: {
-          categories: [],
-          manufacturers: [],
-          minPrice: undefined,
-          maxPrice: undefined,
-          status: undefined,
-        },
-      });
+      res.status(500).send("Error loading products");
     }
   }
 
@@ -580,6 +545,98 @@ class AdminController {
     } catch (error) {
       console.error("Error updating order:", error);
       res.json({ success: false, message: "Failed to update order" });
+    }
+  }
+
+  async showAddManufacturer(req, res) {
+    try {
+      const user = req.user;
+
+      res.render(PagePath.ADD_MANUFACTURER_PATH, {
+        user,
+        isLoggedIn: true,
+      });
+    } catch (error) {
+      console.error("Error fetching manufacturer:", error);
+      res.status(500).send(`Error loading manufacturer: ${error.message}`);
+    }
+  }
+
+  async addNewManufacturer(req, res) {
+    const user = req.user;
+    const { manufacturer_name } = req.body;
+    try {
+      const manufacturer_id = uuidv4(); // Tạo UUID cho  manufacturer_id
+      // Tạo đối tượng Manufacturer mới
+      const newManufacturer = {
+        manufacturer_id: manufacturer_id,
+        manufacturer_name: manufacturer_name,
+      };
+
+      // Gọi service để lưu
+      await ProductService.createManufacturer(newManufacturer);
+
+      // Chuyển hướng
+      res.render(PagePath.ADD_MANUFACTURER_PATH, {
+        user,
+        isLoggedIn: true,
+        successMessage: "Thêm NSX thành công!", // Thêm thông báo thành công
+      });
+    } catch (error) {
+      console.error("Error adding manufacturer:", error.message);
+
+      // Render lại trang thêm NSX với thông báo lỗi
+      res.render(PagePath.ADD_MANUFACTURER_PATH, {
+        user,
+        isLoggedIn: true,
+        error: error.message || "Đã có lỗi xảy ra!",
+      });
+    }
+  }
+
+  async showAddCategory(req, res) {
+    try {
+      const user = req.user;
+
+      res.render(PagePath.ADD_CATEGORY_PATH, {
+        user,
+        isLoggedIn: true,
+      });
+    } catch (error) {
+      console.error("Error fetching category:", error);
+      res.status(500).send(`Error loading category: ${error.message}`);
+    }
+  }
+
+  async addNewCategory(req, res) {
+    const user = req.user;
+    const { category_name } = req.body;
+    try {
+      const category_id = uuidv4(); // Tạo UUID cho  category_id
+      // Tạo đối tượng category mới
+      const newCategory = {
+        category_id: category_id,
+        category_name: category_name,
+      };
+
+      // Gọi service để lưu
+      await ProductService.createCategory(newCategory);
+
+      // Chuyển hướng
+      res.render(PagePath.ADD_CATEGORY_PATH, {
+        user,
+        isLoggedIn: true,
+        successMessage: "Thêm phân loại thành công!", // Thêm thông báo thành công
+      });
+    } catch (error) {
+      console.error("Error adding category:", error.message);
+
+      // Render lại trang thêm category với thông báo lỗi
+      res.render(PagePath.ADD_CATEGORY_PATH, {
+        user,
+        isLoggedIn: true,
+        error: error.message || "Đã có lỗi xảy ra!",
+      });
     }
   }
 }

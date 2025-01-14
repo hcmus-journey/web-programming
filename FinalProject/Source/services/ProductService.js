@@ -293,7 +293,23 @@ class ProductService {
     }
   }
 
+  // Create a new manufacturer
+  async createManufacturer(manufacturerData) {
+    try {
+      return await ProductManufacturer.create(manufacturerData);
+    } catch (error) {
+      throw new Error("Error creating manufacturer: " + error.message);
+    }
+  }
 
+  // Create a new category
+  async createCategory(categoryData) {
+    try {
+      return await ProductCategory.create(categoryData);
+    } catch (error) {
+      throw new Error("Error creating category: " + error.message);
+    }
+  }
 }
 
 export default new ProductService();
