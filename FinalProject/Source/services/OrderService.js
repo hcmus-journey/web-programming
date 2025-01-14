@@ -21,7 +21,12 @@ class OrderService {
           price: product.price,
           quantity: product.quantity,
         });
-      });
+        await Product.update({ quantity: sequelize.literal(`quantity - ${product.quantity}`) }, {
+          where: {
+            product_id: product.product_id,
+            }, 
+          });
+        });
 
       return order
     } catch (error) {
@@ -353,11 +358,47 @@ class OrderService {
       if (!updated) {
         throw new Error("Order not found");
       }
+
+      if(shippingStatus === "SHIPPED" && paymentStatus === "PAID") {
+        const order = await this.orderModel.findByPk(
+          orderId,
+          {
+            include: {
+              model: this.orderDetailModel,
+              as: "orderDetail",
+            },
+          }
+        );
+        order.orderDetail.forEach(async (product) => {
+          await Product.update({ total_purchases: sequelize.literal(`total_purchases + ${product.quantity}`) }, {
+            where: {
+              product_id: product.product_id,
+              }, 
+            });
+          });
+      }
+
+      if(shippingStatus === "CANCELLED") {
+        const order = await this.orderModel.findByPk(orderId,
+          {
+            include: {
+              model: this.orderDetailModel,
+              as: "orderDetail",
+            },
+          });
+        order.orderDetail.forEach(async (product) => {
+          await Product.update({ quantity: sequelize.literal(`quantity + ${product.quantity}`) }, {
+            where: {
+              product_id: product.product_id,
+              }, 
+            });
+          });
+      }
+      
     } catch (error) {
       throw new Error("Error updating order status");
     }
   }
-
 }
 
 export default OrderService;

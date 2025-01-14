@@ -42,7 +42,7 @@ export const Order = sequelize.define('Order', {
     allowNull: false,
   },
   shipping_status: {
-    type: DataTypes.ENUM('SUSPEND','SHIPPING','SHIPPED'),
+    type: DataTypes.ENUM('SUSPEND','SHIPPING','SHIPPED', 'CANCELLED'),
     allowNull: false,
   },
   payment_status: {

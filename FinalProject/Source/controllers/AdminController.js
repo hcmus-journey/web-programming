@@ -109,6 +109,10 @@ class AdminController {
   }
 
   async showAdminPage(req, res) {
+    if (!req.isAuthenticated()) {
+      res.redirect("/login");
+      return;
+    }
     const user = req.user;
     const page = parseInt(req.query.page) || 1;
     const limit = 9;
@@ -190,6 +194,10 @@ class AdminController {
   }
 
   async showAddProduct(req, res) {
+    if (!req.isAuthenticated()) {
+      res.redirect("/login");
+      return;
+    }
     try {
       const user = req.user;
       const categories = await ProductService.getAllCategories();
@@ -284,6 +292,10 @@ class AdminController {
   }
 
   async showEditProduct(req, res) {
+    if (!req.isAuthenticated()) {
+      res.redirect("/login");
+      return;
+    }
     const productId = req.query.id;
 
     if (!productId) {
@@ -397,6 +409,10 @@ class AdminController {
   }
 
   async showAdminProduct(req, res) {
+    if (!req.isAuthenticated()) {
+      res.redirect("/login");
+      return;
+    }
     const productId = req.query.id;
     try {
       const product = await ProductService.getProductById(productId);
@@ -563,6 +579,10 @@ class AdminController {
   }
 
   async showAddManufacturer(req, res) {
+    if (!req.isAuthenticated()) {
+      res.redirect("/login");
+      return;
+    }
     try {
       const user = req.user;
       const manufacturers = await ProductService.getAllManufacturer();
@@ -628,6 +648,10 @@ class AdminController {
   }
 
   async showAddCategory(req, res) {
+    if (!req.isAuthenticated()) {
+      res.redirect("/login");
+      return;
+    }
     try {
       const user = req.user;
       const categories = await ProductService.getAllCategories(); // Lấy danh sách Category
