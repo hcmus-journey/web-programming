@@ -1,5 +1,6 @@
 import express from "express";
 import adminController from "../controllers/AdminController.js";
+import accountController from "../controllers/AccountController.js";
 import upload from "../middlewares/upload.js"; // Middleware Multer
 
 const router = express.Router();
@@ -8,7 +9,7 @@ router.get("/account", adminController.showProfilePage);
 
 router.get("/users", adminController.showUserListPage);
 
-router.put("/account", adminController.updateProfile);
+router.put("/account", accountController.updateProfile);
 
 router.put("/users", adminController.actionOnUser);
 

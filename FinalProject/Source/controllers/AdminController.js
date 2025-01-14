@@ -15,7 +15,6 @@ class AdminController {
     this.userService = new UserService(User);
     this.orderService = new OrderService(Order, OrderDetail);
     this.showProfilePage = this.showProfilePage.bind(this);
-    this.updateProfile = this.updateProfile.bind(this);
     this.showUserListPage = this.showUserListPage.bind(this);
     this.actionOnUser = this.actionOnUser.bind(this);
     this.showAdminPage = this.showAdminPage.bind(this);
@@ -89,22 +88,6 @@ class AdminController {
     } catch (error) {
       console.error("Error fetching users:", error);
       res.json({ success: false, message: error.message });
-    }
-  }
-
-  async updateProfile(req, res) {
-    if (req.isAuthenticated()) {
-      const userData = {
-        name: req.body.name,
-      };
-      try {
-        this.userService.updateUser(req.user.user_id, userData);
-        res.json({ success: true, message: "Profile updated!" });
-      } catch (error) {
-        res.json({ success: false, message: error.message });
-      }
-    } else {
-      res.redirect("/login");
     }
   }
 

@@ -30,8 +30,8 @@
         <div class="col-span-5 lg:col-span-3">
           <div class="px-4 py-3 shadow flex items-center gap-4">
             <div class="flex-shrink-0">
-              <img src="/public/assets/images/user/default-avatar.jpg" alt="profile"
-                class="rounded-full w-14 h-14 border border-gray-200 p-1 object-cover" />
+              <img src="<%= user.image_url ? user.image_url : '/public/assets/images/user/default-avatar.jpg' %>" alt="profile"
+                class="rounded-full w-14 h-14 border border-gray-200 p-1 object-cover avatar" />
             </div>
             <div class="flex-grow">
               <p class="text-gray-600">Hello,</p>
@@ -43,7 +43,7 @@
 
           <div class="mt-4 bg-white shadow rounded p-4 divide-y divide-gray-200 space-y-4 text-gray-600">
             <div class="space-y-1 lg:pl-8">
-              <a href="#" class="relative text-primary block font-medium capitalize transition">
+              <a href="/admin/account" class="relative text-primary block font-medium capitalize transition">
                 <span class="hidden lg:block absolute -left-8 top-0 text-base">
                   <i class="fa-regular fa-address-card"></i>
                 </span>
@@ -67,7 +67,7 @@
         <!-- ./sidebar -->
 
         <!-- info -->
-        <div class="shadow rounded bg-white px-4 pt-6 pb-8 col-span-6 lg:col-span-8" id="profile">
+        <div class="shadow rounded bg-white px-4 pt-6 pb-8 col-span-6 lg:col-span-8" id="profile" data-role="admin">
           <div class="flex items-center justify-between mb-4">
             <h3 class="font-medium text-gray-800 text-lg">Admin Profile</h3>
             <button class="text-primary" id="edit-btn">Edit</button>
@@ -80,33 +80,14 @@
         </div>
 
         <div class="shadow rounded bg-white px-4 pt-6 pb-8 col-span-6 lg:col-span-8 hidden" id="edit-profile">
-          <div class="space-y-4 text-gray-800">
-            <!-- Name -->
-            <div>
-              <label class="font-bold">Name:</label>
-              <input type="text" id="userName" class="p-3 border border-gray-300 rounded w-3/4" 
-                placeholder="Your Name" value="<%= user.name %>"
-                required />
-            </div>
-            <!-- Submit Button -->
-            <div>
-              <button class="bg-primary w-2/5 border border-primary text-white px-8 py-3 font-medium 
-            rounded-md hover:bg-transparent hover:text-primary" id="apply-btn" onclick="edit()">
-                Apply
-              </button>
-              <button type="cancel" class="bg-white w-2/5 border border-primary text-primary px-8 py-3 font-medium 
-              rounded-md hover:bg-transparent hover:text-primary" id="cancel-btn">
-                  Cancel
-              </button>
-            </div>
-          </div>
+          <%- include('../../layouts/accountEdit') %>
         </div>
         <!-- ./info -->
       </div>
       <!-- ./account wrapper -->
 
       <%- include('../../layouts/footer') %>
-      <script type="module" src="/public/js/Admin.js"></script>
+      <script type="module" src="/public/js/Account.js"></script>
 </body>
 
 </html>
