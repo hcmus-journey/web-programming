@@ -28,7 +28,11 @@ function edit() {
   const profile = document.getElementById("profile");
   const editProfile = document.getElementById("edit-profile");
 
-  fetch("/admin/account", {
+  const role = profile.getAttribute("data-role");
+
+  const url = role == 'admin' ? "/admin/account" : "/account";
+
+  fetch(url, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),

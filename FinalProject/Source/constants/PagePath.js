@@ -13,7 +13,6 @@ class PagePath {
   static LOGIN_PAGE_PATH = "pages/user/login";
   static REGISTER_PAGE_PATH = "pages/user/register";
   static ACCOUNT_PAGE_PATH = "pages/user/account";
-  static PROFILE_PAGE_PATH = "pages/user/profile";
   static CHANGE_PASSWORD_PAGE_PATH = "pages/user/change-password";
 
   static ADMIN_ACCOUNT_PAGE_PATH = "pages/admin/account";
