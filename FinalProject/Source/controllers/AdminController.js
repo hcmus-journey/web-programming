@@ -18,6 +18,16 @@ class AdminController {
     this.updateProfile = this.updateProfile.bind(this);
     this.showUserListPage = this.showUserListPage.bind(this);
     this.actionOnUser = this.actionOnUser.bind(this);
+    this.showAdminPage = this.showAdminPage.bind(this);
+    this.showAddProduct = this.showAddProduct.bind(this);
+    this.addNewProduct = this.addNewProduct.bind(this);
+    this.showEditProduct = this.showEditProduct.bind(this);
+    this.updateProduct = this.updateProduct.bind(this);
+    this.showAdminProduct = this.showAdminProduct.bind(this);
+    this.showDashboard = this.showDashboard.bind(this);
+    this.showOrderDetail = this.showOrderDetail.bind(this);
+    this.showOrderListPage = this.showOrderListPage.bind(this);
+    this.updateOrder = this.updateOrder.bind(this);
   }
   async showProfilePage(req, res) {
     if (!req.isAuthenticated()) {
@@ -498,6 +508,78 @@ class AdminController {
     } catch (error) {
       console.error("Error fetching users:", error);
       res.json({ success: false, message: error.message });
+    }
+  }
+
+  async showOrderDetail(req, res) {
+    if (req.isAuthenticated()) {
+      try {
+        const order = await this.orderService.getOrderById(req.params.orderId); 
+
+        res.render(PagePath.ADMIN_ORDER_DETAIL_PATH, { isLoggedIn: true, order: order });
+      } catch (error) {
+        res.status(500).send("Error loading order");
+      }
+    } else {
+      res.redirect("/login");
+    }
+  }
+
+  async showOrderListPage(req, res) {
+    if (!req.isAuthenticated()) {
+      res.redirect('/login');
+      return;
+    }
+
+    const page = parseInt(req.query.page) || 1;
+    const limit = 5;
+    const sort = req.query.sort || "";
+    const userId = req.user.user_id;
+  
+    try {
+      const orders = await this.orderService.searchOrders("all", sort);
+      const filteredOrders = orders;
+  
+      const totalFilteredPages = Math.ceil(filteredOrders.length / limit);
+      const paginatedOrders = filteredOrders.slice((page - 1) * limit, page * limit);
+  
+      if (Object.keys(req.query).length !== 0) {
+        const html = await ejs.renderFile("views/pages/admin/orderList.ejs", { orders: paginatedOrders });
+        const pagination = await ejs.renderFile("views/layouts/pagination.ejs", { totalPages: totalFilteredPages, currentPage: page });
+        return res.json({ html, pagination });
+      }
+
+      res.render(PagePath.ADMIN_ORDER_LIST_PATH, {
+        orders: paginatedOrders,
+        totalPages: totalFilteredPages,
+        currentPage: page,
+        selectedSort: sort,
+        isLoggedIn: true,
+        selectedFilters: {},
+      });
+
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      res.status(500).send("Error loading products");
+    }
+  }
+
+  async updateOrder(req, res) {
+    if (!req.isAuthenticated()) {
+      res.redirect('/login');
+      return;
+    }
+
+    const orderId = req.params.orderId;
+    const shippingStatus = req.body.shippingStatus;
+    const paymentStatus = req.body.paymentStatus;
+
+    try {
+      await this.orderService.updateOrderStatus(orderId, shippingStatus, paymentStatus);
+      res.json({ success: true, message: "Order updated successfully!" });
+    } catch (error) {
+      console.error("Error updating order:", error);
+      res.json({ success: false, message: "Failed to update order" });
     }
   }
 }

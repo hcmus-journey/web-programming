@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../layouts/head', { title: 'HATShop - Order Information' }) %>
+</head>
+
+<body>
+  <!-- header -->
+  <header class="py-4 shadow-sm bg-white">
+    <div class="container flex items-center justify-between">
+      <a class="font-bold text-xl" href="/">
+        <span class="text-primary">HAT</span><span class="text-gray-800">Shop</span>
+      </a>
+
+      <div class="flex items-center space-x-4">
+        <a href="/admin/account" class="text-center text-gray-700 hover:text-primary transition relative">
+          <div class="text-2xl">
+            <i class="fa-regular fa-user"></i>
+          </div>
+          <div class="text-xs leading-3">Account</div>
+        </a>
+      </div>
+    </div>
+  </header>
+  <!-- ./header -->
+
+  <%- include('../../layouts/adminNavbar', {isLoggedIn: isLoggedIn}) %>
+  <%- include('../../layouts/notification') %>
+    <!-- breadcrumb -->
+    <div class="container py-4 flex items-center gap-3">
+      <a href="/" class="text-primary text-base">
+        <i class="fa-solid fa-house"></i>
+      </a>
+      <span class="text-sm text-gray-400">
+        <i class="fa-solid fa-chevron-right"></i>
+      </span>
+      <p class="text-gray-600 font-medium">Order Information</p>
+    </div>
+    <!-- ./breadcrumb -->
+
+    <!-- wrapper -->
+    <div class="container grid lg:grid-cols-12 items-start pb-16 pt-4 gap-6">
+      <div class="lg:col-span-6 border border-gray-200 p-4 rounded">
+        <h3 class="text-lg font-medium capitalize mb-4 text-primary">Delivery Information</h3>
+        <div class="space-y-4">
+          <p><span class="font-semibold">Full Name:</span>
+            <%= order.full_name %>
+          </p>
+          <p><span class="font-semibold">Address:</span>
+            <%= order.shipping_address %>
+          </p>
+          <p><span class="font-semibold">Phone number:</span>
+            <%= order.phone %>
+          </p>
+          <p><span class="font-semibold">Payment Method:</span>
+            <%= order.payment_method %>
+          </p>
+          <p><span class="font-semibold">Order Date:</span>
+            <%= new Date(order.created_at).toLocaleString('en-US', { timeZone: 'Asia/Bangkok' , dateStyle: 'medium'
+              ,timeStyle: 'short' }) %>
+          </p>
+          <p><span class="font-semibold">Shipping status:</span>
+            <select id="shippingStatus" onchange="showSaveButton()">
+              <option value="SUSPEND" <%=order.shipping_status==='SUSPEND' ? 'selected' : '' %>>SUSPEND</option>
+              <option value="SHIPPED" <%=order.shipping_status==='SHIPPED' ? 'selected' : '' %>>SHIPPED</option>
+              <option value="SHIPPING" <%=order.shipping_status==='SHIPPING' ? 'selected' : '' %>>SHIPPING</option>
+            </select>
+          </p>
+          <p><span class="font-semibold">Payment status:</span>
+            <select id="paymentStatus" onchange="showSaveButton()">
+              <option value="NOT_PAID" <%=order.payment_status==='NOT_PAID' ? 'selected' : '' %>>UNPAID</option>
+              <option value="PAID" <%=order.payment_status==='PAID' ? 'selected' : '' %>>PAID</option>
+            </select>
+          </p>
+            <button id="saveButton" class="rounded text-white bg-primary px-5 py-2 hidden"
+            onclick="saveChanges('<%= order.order_id %>', document.getElementById('shippingStatus').value, document.getElementById('paymentStatus').value)">Save</button>
+        </div>
+      </div>
+
+      <div class="lg:col-span-6 border border-gray-200 p-6 rounded-lg shadow-md">
+        <h4 class="text-lg font-medium capitalize mb-4 text-primary">Order Detail</h4>
+        <div class="w-full max-w-4xl">
+          <table class="w-full table-auto text-gray-800">
+            <thead>
+              <tr>
+                <th class="py-2 px-4 border-b font-medium text-left">No.</th>
+                <th class="py-2 px-4 border-b font-medium text-left">Product</th>
+                <th class="py-2 px-4 border-b font-medium text-left">Quantity</th>
+                <th class="py-2 px-4 border-b font-medium text-left">Price</th>
+                <th class="py-2 px-4 border-b font-medium text-right">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% order.orderDetail.forEach((item, index)=> { %>
+                <tr>
+                  <td class="py-2 px-4 border-b">
+                    <%= index + 1 %>
+                  </td>
+                  <td class="py-2 px-4 border-b">
+                    <%= item.product.product_name %>
+                  </td>
+                  <td class="py-2 px-4 border-b">
+                    <%= item.quantity %>
+                  </td>
+                  <td class="py-2 px-4 border-b text-right">$<%= item.price.toFixed(2) %>
+                  </td>
+                  <td class="py-2 px-4 border-b text-right">$<%= (item.quantity * item.price).toFixed(2) %>
+                  </td>
+                </tr>
+                <% }); %>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="flex justify-between mt-2">
+          <p class="py-2 px-4 text-gray-800">Subtotal</p>
+          <p class="py-2 px-4 text-gray-800">$<%= (order.total - order.shipping_fee).toFixed(2) %>
+          </p>
+        </div>
+        <div class="flex justify-between">
+          <p class="py-2 px-4 text-gray-800">Shipping Fee</p>
+          <p class="py-2 px-4 text-gray-800">$<%= order.shipping_fee %>
+          </p>
+        </div>
+        <div class="flex justify-between">
+          <p class="py-2 px-4 text-gray-800 font-medium">Total</p>
+          <p class="py-2 px-4 text-gray-800 font-medium">$<%= order.total.toFixed(2) %>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- ./wrapper -->
+
+    <%- include('../../layouts/footer') %>
+      <script type="module" src="/public/js/OrderDetail.js"></script>
+</body>
+
+</html>

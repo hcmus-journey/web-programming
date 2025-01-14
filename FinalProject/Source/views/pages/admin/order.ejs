@@ -15,7 +15,7 @@
       </a>
 
       <div class="flex items-center space-x-4">
-        <a href="/account" class="text-center text-gray-700 hover:text-primary transition relative">
+        <a href="/admin/account" class="text-center text-gray-700 hover:text-primary transition relative">
           <div class="text-2xl">
             <i class="fa-regular fa-user"></i>
           </div>
@@ -25,7 +25,7 @@
     </div>
   </header>
   <!-- ./header -->
-  <%- include('../../layouts/navbar', {isLoggedIn: isLoggedIn}) %>
+  <%- include('../../layouts/adminNavbar', {isLoggedIn: isLoggedIn}) %>
 
     <%- include('../../layouts/notification') %>
 
@@ -66,7 +66,7 @@
 
         <!-- ./Pagination Controls -->
         <div><%- include('../../layouts/footer') %></div>
-        <script type="module" src="/public/js/Order.js"></script>
+        <script type="module" src="/public/js/AdminOrder.js"></script>
 </body>
 
 </html>

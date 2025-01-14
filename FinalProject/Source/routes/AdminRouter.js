@@ -24,4 +24,9 @@ router.post(
   adminController.addNewProduct
 ); // Xử lý thêm sản phẩm
 
+// Quản lý đơn hàng
+router.get("/orders", adminController.showOrderListPage);
+router.get("/orders/:orderId", adminController.showOrderDetail);
+router.post("/orders/:orderId", adminController.updateOrder);
+
 export default router;

@@ -149,6 +149,10 @@ class OrderService {
           user_id: userId
         };
 
+        if(userId === "all") {
+          delete whereClause.user_id;
+        }
+
       const orders = await this.orderModel.findAll({
         where: whereClause,
         order: orderClause,
@@ -333,6 +337,27 @@ class OrderService {
         return month_result
     }
   }
+
+  async updateOrderStatus(orderId, shippingStatus, paymentStatus) {
+    try {
+      const [updated] = await this.orderModel.update(
+        {
+          shipping_status: shippingStatus,
+          payment_status: paymentStatus,
+        },
+        {
+          where: { order_id: orderId },
+        }
+      );
+
+      if (!updated) {
+        throw new Error("Order not found");
+      }
+    } catch (error) {
+      throw new Error("Error updating order status");
+    }
+  }
+
 }
 
 export default OrderService;

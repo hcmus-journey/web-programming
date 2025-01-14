@@ -27,6 +27,10 @@ class PagePath {
   static ADMIN_PRODUCT_PATH = "pages/admin/admin_product";
   static EDIT_PRODUCT_PATH = "pages/admin/edit_product";
   static ADD_PRODUCT_PATH = "pages/admin/add_product";
+
+  // admin - order
+  static ADMIN_ORDER_LIST_PATH = "pages/admin/order";
+  static ADMIN_ORDER_DETAIL_PATH = "pages/admin/orderDetail";
 }
 
 export default PagePath;
