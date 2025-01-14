@@ -479,9 +479,12 @@ class AdminController {
   async showOrderDetail(req, res) {
     if (req.isAuthenticated()) {
       try {
-        const order = await this.orderService.getOrderById(req.params.orderId); 
+        const order = await this.orderService.getOrderById(req.params.orderId);
 
-        res.render(PagePath.ADMIN_ORDER_DETAIL_PATH, { isLoggedIn: true, order: order });
+        res.render(PagePath.ADMIN_ORDER_DETAIL_PATH, {
+          isLoggedIn: true,
+          order: order,
+        });
       } catch (error) {
         res.status(500).send("Error loading order");
       }
@@ -492,7 +495,7 @@ class AdminController {
 
   async showOrderListPage(req, res) {
     if (!req.isAuthenticated()) {
-      res.redirect('/login');
+      res.redirect("/login");
       return;
     }
 
@@ -500,17 +503,25 @@ class AdminController {
     const limit = 5;
     const sort = req.query.sort || "";
     const userId = req.user.user_id;
-  
+
     try {
       const orders = await this.orderService.searchOrders("all", sort);
       const filteredOrders = orders;
-  
+
       const totalFilteredPages = Math.ceil(filteredOrders.length / limit);
-      const paginatedOrders = filteredOrders.slice((page - 1) * limit, page * limit);
-  
+      const paginatedOrders = filteredOrders.slice(
+        (page - 1) * limit,
+        page * limit
+      );
+
       if (Object.keys(req.query).length !== 0) {
-        const html = await ejs.renderFile("views/pages/admin/orderList.ejs", { orders: paginatedOrders });
-        const pagination = await ejs.renderFile("views/layouts/pagination.ejs", { totalPages: totalFilteredPages, currentPage: page });
+        const html = await ejs.renderFile("views/pages/admin/orderList.ejs", {
+          orders: paginatedOrders,
+        });
+        const pagination = await ejs.renderFile(
+          "views/layouts/pagination.ejs",
+          { totalPages: totalFilteredPages, currentPage: page }
+        );
         return res.json({ html, pagination });
       }
 
@@ -522,7 +533,6 @@ class AdminController {
         isLoggedIn: true,
         selectedFilters: {},
       });
-
     } catch (error) {
       console.error("Error fetching products:", error);
       res.status(500).send("Error loading products");
@@ -531,7 +541,7 @@ class AdminController {
 
   async updateOrder(req, res) {
     if (!req.isAuthenticated()) {
-      res.redirect('/login');
+      res.redirect("/login");
       return;
     }
 
@@ -540,7 +550,11 @@ class AdminController {
     const paymentStatus = req.body.paymentStatus;
 
     try {
-      await this.orderService.updateOrderStatus(orderId, shippingStatus, paymentStatus);
+      await this.orderService.updateOrderStatus(
+        orderId,
+        shippingStatus,
+        paymentStatus
+      );
       res.json({ success: true, message: "Order updated successfully!" });
     } catch (error) {
       console.error("Error updating order:", error);
@@ -551,10 +565,12 @@ class AdminController {
   async showAddManufacturer(req, res) {
     try {
       const user = req.user;
+      const manufacturers = await ProductService.getAllManufacturer();
 
       res.render(PagePath.ADD_MANUFACTURER_PATH, {
         user,
         isLoggedIn: true,
+        manufacturers,
       });
     } catch (error) {
       console.error("Error fetching manufacturer:", error);
@@ -562,34 +578,61 @@ class AdminController {
     }
   }
 
-  async addNewManufacturer(req, res) {
+  async manageManufacturer(req, res) {
     const user = req.user;
-    const { manufacturer_name } = req.body;
+    const manufacturers = await ProductService.getAllManufacturer(); // Lấy danh sách manufacturers
+    const { selected_manufacturer, manufacturer_name, action } = req.body;
+
     try {
-      const manufacturer_id = uuidv4(); // Tạo UUID cho  manufacturer_id
-      // Tạo đối tượng Manufacturer mới
-      const newManufacturer = {
-        manufacturer_id: manufacturer_id,
-        manufacturer_name: manufacturer_name,
-      };
+      if (action === "add") {
+        // Thêm nhà sản xuất mới
+        const manufacturer_id = uuidv4();
+        const newManufacturer = {
+          manufacturer_id: manufacturer_id,
+          manufacturer_name: manufacturer_name,
+        };
 
-      // Gọi service để lưu
-      await ProductService.createManufacturer(newManufacturer);
+        await ProductService.createManufacturer(newManufacturer);
 
-      // Chuyển hướng
-      res.render(PagePath.ADD_MANUFACTURER_PATH, {
-        user,
-        isLoggedIn: true,
-        successMessage: "Thêm NSX thành công!", // Thêm thông báo thành công
-      });
+        return res.render(PagePath.ADD_MANUFACTURER_PATH, {
+          user,
+          isLoggedIn: true,
+          manufacturers: await ProductService.getAllManufacturer(), // Cập nhật danh sách manufacturers
+          successMessage: "Manufacturer added successfully!",
+        });
+      } else if (action === "edit") {
+        // Tìm manufacturer đã chọn
+        const manufacturerRecord = manufacturers.find(
+          (manu) => manu.manufacturer_name === selected_manufacturer
+        );
+
+        if (!manufacturerRecord) {
+          throw new Error("The selected manufacturer does not exist!");
+        }
+
+        // Gửi yêu cầu cập nhật
+        await ProductService.updateManufacturer(
+          manufacturerRecord.manufacturer_id,
+          {
+            manufacturer_name: manufacturer_name,
+          }
+        );
+
+        return res.render(PagePath.ADD_MANUFACTURER_PATH, {
+          user,
+          isLoggedIn: true,
+          manufacturers: await ProductService.getAllManufacturer(),
+          successMessage: "Manufacturer updated successfully!",
+        });
+      }
     } catch (error) {
-      console.error("Error adding manufacturer:", error.message);
+      console.error("Error managing manufacturer:", error.message);
 
-      // Render lại trang thêm NSX với thông báo lỗi
       res.render(PagePath.ADD_MANUFACTURER_PATH, {
         user,
         isLoggedIn: true,
-        error: error.message || "Đã có lỗi xảy ra!",
+        manufacturers,
+        error: error.message || "An error occurred!",
       });
     }
   }
@@ -597,10 +640,12 @@ class AdminController {
   async showAddCategory(req, res) {
     try {
       const user = req.user;
+      const categories = await ProductService.getAllCategories(); // Lấy danh sách Category
 
       res.render(PagePath.ADD_CATEGORY_PATH, {
         user,
         isLoggedIn: true,
+        categories,
       });
     } catch (error) {
       console.error("Error fetching category:", error);
@@ -608,34 +653,58 @@ class AdminController {
     }
   }
 
-  async addNewCategory(req, res) {
+  async manageCategory(req, res) {
     const user = req.user;
-    const { category_name } = req.body;
+    const categories = await ProductService.getAllCategories(); // Lấy danh sách Category
+    const { selected_category, category_name, action } = req.body;
+
     try {
-      const category_id = uuidv4(); // Tạo UUID cho  category_id
-      // Tạo đối tượng category mới
-      const newCategory = {
-        category_id: category_id,
-        category_name: category_name,
-      };
+      if (action === "add") {
+        // Thêm nhà sản xuất mới
+        const category_id = uuidv4();
+        const newCategory = {
+          category_id: category_id,
+          category_name: category_name,
+        };
 
-      // Gọi service để lưu
-      await ProductService.createCategory(newCategory);
+        await ProductService.createCategory(newCategory);
 
-      // Chuyển hướng
-      res.render(PagePath.ADD_CATEGORY_PATH, {
-        user,
-        isLoggedIn: true,
-        successMessage: "Thêm phân loại thành công!", // Thêm thông báo thành công
-      });
+        return res.render(PagePath.ADD_CATEGORY_PATH, {
+          user,
+          isLoggedIn: true,
+          categories: await ProductService.getAllCategories(), // Cập nhật danh sách Category
+          successMessage: "Category added successfully!",
+        });
+      } else if (action === "edit") {
+        // Tìm Category đã chọn
+        const categoryRecord = categories.find(
+          (cate) => cate.category_name === selected_category
+        );
+
+        if (!categoryRecord) {
+          throw new Error("The selected category does not exist!");
+        }
+
+        // Gửi yêu cầu cập nhật
+        await ProductService.updateCategory(categoryRecord.category_id, {
+          category_name: category_name,
+        });
+
+        return res.render(PagePath.ADD_CATEGORY_PATH, {
+          user,
+          isLoggedIn: true,
+          categories: await ProductService.getAllCategories(),
+          successMessage: "Category updated successfully!",
+        });
+      }
     } catch (error) {
-      console.error("Error adding category:", error.message);
+      console.error("Error managing category:", error.message);
 
-      // Render lại trang thêm category với thông báo lỗi
       res.render(PagePath.ADD_CATEGORY_PATH, {
         user,
         isLoggedIn: true,
-        error: error.message || "Đã có lỗi xảy ra!",
+        categories,
+        error: error.message || "An error occurred!",
       });
     }
   }

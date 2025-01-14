@@ -27,7 +27,11 @@ class ProductService {
           { model: ProductImage, as: "images" },
           { model: ProductCategory, as: "category" },
           { model: ProductManufacturer, as: "manufacturer" },
-          { model: ProductReview, as: "reviews", include: [{ model: User, as: "user" }] },
+          {
+            model: ProductReview,
+            as: "reviews",
+            include: [{ model: User, as: "user" }],
+          },
         ],
         limit,
         offset,
@@ -64,7 +68,11 @@ class ProductService {
           { model: ProductImage, as: "images" },
           { model: ProductCategory, as: "category" },
           { model: ProductManufacturer, as: "manufacturer" },
-          { model: ProductReview, as: "reviews", include: [{ model: User, as: "user" }] },
+          {
+            model: ProductReview,
+            as: "reviews",
+            include: [{ model: User, as: "user" }],
+          },
         ],
       });
       if (!product) throw new Error("Product not found");
@@ -303,6 +311,19 @@ class ProductService {
     }
   }
 
+  async updateManufacturer(manufacturerId, updateData) {
+    try {
+      const [updated] = await ProductManufacturer.update(updateData, {
+        where: { manufacturer_id: manufacturerId },
+      });
+
+      if (!updated) throw new Error("Manufacturer not found!");
+      return await this.getManufacturerById(manufacturerId);
+    } catch (error) {
+      throw new Error("Error updating manufacturer: " + error.message);
+    }
+  }
+
   // Create a new category
   async createCategory(categoryData) {
     try {
@@ -322,6 +343,19 @@ class ProductService {
       });
     } catch (error) {
       throw new Error("Error creating product review: " + error.message);
+    }
+  }
+  
+  async updateCategory(categoryId, updateData) {
+    try {
+      const [updated] = await ProductCategory.update(updateData, {
+        where: { category_id: categoryId },
+      });
+
+      if (!updated) throw new Error("Category not found!");
+      return await this.getCategoryById(categoryId);
+    } catch (error) {
+      throw new Error("Error updating category: " + error.message);
     }
   }
 }
