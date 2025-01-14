@@ -57,6 +57,7 @@ async function edit() {
       return response.json(); // Only parse JSON if the response is successful
     })
     .then((data) => {
+      console.log(data);
       profile.classList.toggle("hidden");
       editProfile.classList.toggle("hidden");
       if (data.success) {
@@ -69,10 +70,12 @@ async function edit() {
         let avatarFields = document.querySelectorAll(".avatar")
 
         for (let field of avatarFields) {
-          field.setAttribute("src", data.fileUrl);
+          field.src = data.fileUrl;
         }
 
         displayNotification(data.message, "success"); // Show success notification
+        
+        
       } else {
         displayNotification(data.message, "error"); // Show error notification
       }
