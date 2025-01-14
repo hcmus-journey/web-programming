@@ -30,8 +30,8 @@
         <div class="col-span-5 lg:col-span-3">
           <div class="px-4 py-3 shadow flex items-center gap-4">
             <div class="flex-shrink-0">
-              <img src="/public/assets/images/user/default-avatar.jpg" alt="profile"
-                class="rounded-full w-14 h-14 border border-gray-200 p-1 object-cover" />
+              <img src="<%= user.image_url ? user.image_url : '/public/assets/images/user/default-avatar.jpg' %>" alt="profile"
+                class="rounded-full w-14 h-14 border border-gray-200 p-1 object-cover avatar" />
             </div>
             <div class="flex-grow">
               <p class="text-gray-600">Hello,</p>

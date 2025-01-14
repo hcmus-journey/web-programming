@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const closeProfile = document.getElementById("cancel-btn")
   const profile = document.getElementById("profile");
   const editProfile = document.getElementById("edit-profile");
+  const fileButton = document.getElementById("file-btn");
+  const file = document.getElementById("avatar");
+
 
   // Toggle categories filter
   openProfile.addEventListener("click", function () {
@@ -19,14 +22,25 @@ document.addEventListener("DOMContentLoaded", function () {
     profile.classList.toggle("hidden");
     editProfile.classList.toggle("hidden");
   });
+
+  file.addEventListener("change", function () {
+    fileButton.innerText = file.files[0].name;
+  });
 });
 
-function edit() {
+async function edit() {
   const userName = document.getElementById('userName');
   const name = userName.value;
-  const data = { name };
   const profile = document.getElementById("profile");
   const editProfile = document.getElementById("edit-profile");
+  const avatar = document.getElementById("avatar");
+
+  const file = avatar.files[0];
+
+  const formData = new FormData();
+  formData.append('name', name); // Append the name field
+
+  formData.append('image', file); // Append the file field, if provided
 
   const role = profile.getAttribute("data-role");
 
@@ -34,8 +48,7 @@ function edit() {
 
   fetch(url, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
+    body: formData,
   })
     .then((response) => {
       if (!response.ok) {
@@ -51,6 +64,12 @@ function edit() {
 
         for (let field of nameFields) {
           field.textContent = name;
+        }
+
+        let avatarFields = document.querySelectorAll(".avatar")
+
+        for (let field of avatarFields) {
+          field.setAttribute("src", data.fileUrl);
         }
 
         displayNotification(data.message, "success"); // Show success notification
