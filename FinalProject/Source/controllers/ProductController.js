@@ -30,6 +30,20 @@ class ProductController {
       console.error("Error fetching product:", error);
     }
   }
+
+  async postReview(req, res) {
+    const productId = req.params.productId;
+    const userId = req.user.user_id;
+    const { detail, rating } = req.body;
+    try {
+      await ProductService.createProductReview(productId, userId, detail, rating);
+      res.redirect(`/product?id=${productId}`);
+
+    } catch (error) {
+      console.error("Error creating review:", error);
+      res.redirect(`/product?id=${productId}`);
+    }
+  }
 }
 
 export default new ProductController();

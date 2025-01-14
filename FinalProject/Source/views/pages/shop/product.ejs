@@ -49,7 +49,7 @@
               <p class="text-gray-800 font-medium space-x-2">
                 <span>Availability: </span>
                 <span class="text-green-600">
-                  <%= product.quantity> 0 ? 'In Stock: ' + product.quantity  : 'Out of Stock' %>
+                  <%= product.quantity> 0 ? 'In Stock: ' + product.quantity : 'Out of Stock' %>
                 </span>
               </p>
               <p class="space-x-2">
@@ -96,14 +96,73 @@
 
         <!-- description -->
         <div class="container pt-5">
-          <h3 class="border-b border-gray-200 font-roboto text-gray-800 pb-3 font-medium">
+          <h2 class="border-b border-gray-200 font-roboto text-gray-800 pb-3 font-medium text-lg">
             Product details
-          </h3>
+          </h2>
           <p class="text-gray-600 pt-4">
             <%= product.detail %>
           </p>
         </div>
         <!-- ./description -->
+
+        <!-- Reviews -->
+        <div class="container pt-5">
+          <h2 class="border-b border-gray-200 font-roboto text-gray-800 pb-3 font-medium text-lg">
+            Reviews
+          </h2>
+          <div class="space-y-4 pt-4">
+            <% product.reviews.forEach(function(review) { %>
+              <div class="border border-gray-200 p-4 rounded-lg">
+                <div class="flex items-center space-x-4">
+                  <img
+                    src="<%= review.user.image_url ? review.user.image_url : '/public/assets/images/user/default-avatar.jpg' %>"
+                    alt="User avatar" class="w-10 h-10 rounded-full">
+                  <div>
+                    <h4 class="text-gray-800 font-medium">
+                      <%= review.user.name %>
+                    </h4>
+                    <p class="text-sm text-gray-600">
+                      <%= new Date(review.created_at).toDateString() %>
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-center mt-2">
+                  <% for (let i=0; i < 5; i++) { %>
+                    <i class="fa-solid fa-star <%= i < review.rating ? 'text-yellow-500' : 'text-gray-300' %>"></i>
+                    <% } %>
+                </div>
+                <div class="mt-2">
+                  <p class="text-gray-600">
+                    <%= review.detail %>
+                  </p>
+                </div>
+              </div>
+              <% }); %>
+          </div>
+
+
+          <% if (isLoggedIn) { %>
+            <div class="mt-6">
+              <h3 class="text-lg font-medium text-gray-800">Leave a Review</h3>
+              <form action="/product/<%= product.product_id %>/review" method="POST" class="mt-4">
+                <label for="rating" class="block text-gray-600 mb-2">Rating</label>
+                <select name="rating" id="rating" class="w-full border border-gray-300 rounded px-3 py-2 mb-4">
+                  <option value="1">1 Star</option>
+                  <option value="2">2 Stars</option>
+                  <option value="3">3 Stars</option>
+                  <option value="4">4 Stars</option>
+                  <option value="5">5 Stars</option>
+                </select>
+                <label for="detail" class="block text-gray-600 mb-2">Review</label>
+                <textarea name="detail" id="detail" rows="4"
+                  class="w-full border border-gray-300 rounded px-3 py-2"></textarea>
+                <button type="submit"
+                  class="bg-primary border border-primary text-white px-8 py-2 font-medium rounded uppercase hover:bg-transparent hover:text-primary transition">Submit
+                  Review</button>
+              </form>
+            </div>
+            <% } %>
+        </div>
 
         <!-- related product -->
         <div class="container pt-5">

@@ -39,7 +39,11 @@ export const User = sequelize.define('User', {
   status: {
     type: DataTypes.ENUM('BANNED', 'ACTIVE'),
     allowNull: false,
-  }
+  },
+  image_url: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 }, {
   tableName: 'users', 
   underscored: true,    
