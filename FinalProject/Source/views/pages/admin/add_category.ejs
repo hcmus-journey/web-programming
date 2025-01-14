@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <%- include('../../layouts/head', { title: 'HATShop - Add New Product' }) %>
+    <%- include('../../layouts/head', { title: 'HATShop - Manage Category' }) %>
   </head>
-
   <body>
-    <!-- Header Section -->
     <%- include('../../layouts/adminHeader') %> <%-
     include('../../layouts/adminNavbar', { isLoggedIn: isLoggedIn }) %> <%-
     include('../../layouts/notification') %>
 
-    <!-- breadcrumb -->
+    <!-- Breadcrumb -->
     <div class="container py-4 flex items-center gap-3">
       <a href="/" class="text-primary text-base">
         <i class="fa-solid fa-house"></i>
@@ -22,20 +20,42 @@
       <span class="text-sm text-gray-400">
         <i class="fa-solid fa-chevron-right"></i>
       </span>
-      <p class="text-gray-600 font-medium">New category</p>
+      <p class="text-gray-600 font-medium">Manage Category</p>
     </div>
-    <!-- ./breadcrumb -->
 
-    <!-- Add New category -->
+    <!-- Add/Edit Category -->
     <div class="contain py-16">
       <div class="max-w-3xl mx-auto shadow px-6 py-7 rounded overflow-hidden">
-        <h2 class="text-2xl uppercase font-medium mb-1">Add New Category</h2>
-        <p class="text-gray-600 mb-6 text-sm">Add details for a new category</p>
-        <form action="/admin/add_new_category" method="post">
+        <h2 class="text-2xl uppercase font-medium mb-1">Manage Category</h2>
+        <p class="text-gray-600 mb-6 text-sm">Add or edit category details.</p>
+
+        <!-- Category Dropdown -->
+        <form action="/admin/manage_category" method="post">
           <div class="space-y-4">
-            <!-- Category Name -->
             <div>
-              <label for="name" class="text-gray-600 mb-2 block"
+              <label for="category" class="text-gray-600 mb-2 block"
+                >Select Category</label
+              >
+              <select
+                name="selected_category"
+                id="category"
+                class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary"
+                onchange="toggleInput(this)"
+                required
+              >
+                <option value="" disabled selected>Select a category</option>
+                <% categories.forEach((category) => { %>
+                <option value="<%= category.category_name %>">
+                  <%= category.category_name %>
+                </option>
+                <% }); %>
+                <option value="add_new">Add new category</option>
+              </select>
+            </div>
+
+            <!-- Category Name Input -->
+            <div>
+              <label for="category_name" class="text-gray-600 mb-2 block"
                 >Category Name</label
               >
               <input
@@ -47,21 +67,39 @@
                 required
               />
             </div>
-          </div>
 
-          <div class="mt-6 flex justify-center">
-            <button
-              type="submit"
-              class="w-44 py-2 text-center text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium"
-            >
-              Add Category
-            </button>
+            <!-- Hidden Field for Add/Edit -->
+            <input type="hidden" name="action" id="action" value="add" />
+
+            <div class="mt-6 flex justify-center">
+              <button
+                type="submit"
+                class="w-44 py-2 text-center text-white bg-primary border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium"
+              >
+                Save
+              </button>
+            </div>
           </div>
         </form>
       </div>
     </div>
-    <!-- ./Add New Product -->
 
     <%- include('../../layouts/footer') %>
+    <script>
+      function toggleInput(select) {
+        const actionInput = document.getElementById("action");
+        const nameInput = document.getElementById("category_name");
+
+        if (select.value === "add_new") {
+          actionInput.value = "add";
+          nameInput.value = ""; // Xóa giá trị cũ
+          nameInput.placeholder = "Enter new category name";
+        } else {
+          actionInput.value = "edit";
+          nameInput.value = select.value; // Điền tên của category đã chọn
+          nameInput.placeholder = "Enter new name for the selected category";
+        }
+      }
+    </script>
   </body>
 </html>
