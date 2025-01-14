@@ -34,9 +34,9 @@ router.get("/orders/:orderId", adminController.showOrderDetail);
 router.post("/orders/:orderId", adminController.updateOrder);
 
 // Quản lý danh mục và nhà sản xuất
-router.get("/add_manufacturer", adminController.showAddManufacturer);
+router.get("/manage_manufacturer", adminController.showAddManufacturer);
 router.post("/manage_manufacturer", adminController.manageManufacturer);
-router.get("/add_category", adminController.showAddCategory);
+router.get("/manage_category", adminController.showAddCategory);
 router.post("/manage_category", adminController.manageCategory);
 
 export default router;

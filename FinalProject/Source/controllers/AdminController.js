@@ -618,22 +618,12 @@ class AdminController {
           }
         );
 
-        return res.render(PagePath.ADD_MANUFACTURER_PATH, {
-          user,
-          isLoggedIn: true,
-          manufacturers: await ProductService.getAllManufacturer(),
-          successMessage: "Manufacturer updated successfully!",
-        });
+        return res.redirect("/admin/manage_manufacturer");
       }
     } catch (error) {
       console.error("Error managing manufacturer:", error.message);
 
-      res.render(PagePath.ADD_MANUFACTURER_PATH, {
-        user,
-        isLoggedIn: true,
-        manufacturers,
-        error: error.message || "An error occurred!",
-      });
+      return res.redirect("/admin/manage_manufacturer");
     }
   }
 
@@ -690,22 +680,12 @@ class AdminController {
           category_name: category_name,
         });
 
-        return res.render(PagePath.ADD_CATEGORY_PATH, {
-          user,
-          isLoggedIn: true,
-          categories: await ProductService.getAllCategories(),
-          successMessage: "Category updated successfully!",
-        });
+        return res.redirect("/admin/manage_category");
       }
     } catch (error) {
       console.error("Error managing category:", error.message);
 
-      res.render(PagePath.ADD_CATEGORY_PATH, {
-        user,
-        isLoggedIn: true,
-        categories,
-        error: error.message || "An error occurred!",
-      });
+      return res.redirect("/admin/manage_category");
     }
   }
 }
