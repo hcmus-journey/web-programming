@@ -9,7 +9,7 @@ router.get("/account", adminController.showProfilePage);
 
 router.get("/users", adminController.showUserListPage);
 
-router.put("/account", accountController.updateProfile);
+router.put("/account", upload.single("image"), accountController.updateProfile);
 
 router.put("/users", adminController.actionOnUser);
 
