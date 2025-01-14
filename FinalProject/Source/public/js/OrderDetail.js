@@ -23,6 +23,7 @@ async function saveChanges(orderId, shippingStatus, paymentStatus) {
     }).then((data) => {
         if (data.success) {
             displayNotification("Changes saved successfully", "success");
+            window.location.href = `/admin/orders`;
         } else {
             displayNotification(data.message, "error");
         }
